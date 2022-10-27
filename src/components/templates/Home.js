@@ -1,6 +1,11 @@
+import NavBar from "../organisms/NavBar";
+
 function Home() {
     return (
-        <p>WIP</p>
+        <div>
+            <NavBar />
+            <p>WIP</p>
+        </div>
     )
 }
 

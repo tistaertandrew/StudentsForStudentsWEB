@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.title {
+    position: absolute;
+    top: 20%;
+    left: 42%;
+    font-size: 1.5em;
+    font-weight: bold;
+}
