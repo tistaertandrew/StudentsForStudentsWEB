@@ -1,4 +1,7 @@
 {
   "Home": "/",
-  "Authentication": "/Authentication"
+  "Authentication": "/Authentication",
+  "About": "/About",
+  "Contact": "/Contact",
+  "User": "/User"
 }

@@ -1,12 +1,9 @@
 import NavBar from "../organisms/NavBar";
 
-function Home() {
+export default function Authentication() {
     return (
         <div>
-            <NavBar />
-            <p>WIP</p>
+            <NavBar/>
         </div>
     )
 }
-
-export default Home

@@ -1,43 +1,29 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import {useState} from "react";
-import UserBar from "../molecules/UserBar";
-import SearchBar from "../molecules/SearchBar";
-import Title from "../molecules/Title";
-import Menu from "../molecules/Menu";
-import AuthBar from "../molecules/AuthBar";
+import {useState} from 'react';
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import NavButton from "../molecules/NavButton";
+import TitleNavButton from "../molecules/TitleNavButton";
+import routes from '../../routes.json'
 
 export default function NavBar() {
-    const [auth, setAuth] = useState(true)
+    const [auth, setAuth] = useState(false)
 
-    if (auth) {
-        return (
-            <Box>
-                <AppBar className={'static'}>
-                    <Toolbar className={'bg-black'}>
-                        <Menu />
-                        <Title />
-                        <Box sx={{flexGrow: 1}}/>
-                        <SearchBar />
-                        <UserBar />
-                    </Toolbar>
-                </AppBar>
-            </Box>
-        )
-    } else {
-        return (
-            <Box>
-                <AppBar className={'static'}>
-                    <Toolbar className={'bg-black'}>
-                        <Menu />
-                        <Title />
-                        <Box sx={{flexGrow: 1}}/>
-                        <AuthBar />
-                    </Toolbar>
-                </AppBar>
-            </Box>
-        )
+    const isConnected = () => {
+        return auth ?
+            <NavButton route={routes.User} label={<AccountCircle className={'icon'}/>}/> :
+            <NavButton route={routes.Authentication} label={'SE CONNECTER'}/>
     }
+
+    return (
+        <nav className={'navbar'}>
+            <ul className={'left'}>
+                <TitleNavButton route={routes.Home} label={'STUDENTS FOR STUDENTS'}/>
+            </ul>
+            <ul className={'right'}>
+                <NavButton route={routes.About} label={'A PROPOS'}/>
+                <NavButton route={routes.Contact} label={'CONTACT'}/>
+                {isConnected()}
+            </ul>
+        </nav>
+    )
 }

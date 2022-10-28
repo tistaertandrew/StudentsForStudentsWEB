@@ -8,11 +8,57 @@
     overflow-x: hidden;
 }
 
-.title {
+.navbar {
+    background-color: #5D7052;
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar .left {
     position: absolute;
-    top: 7%;
-    left: 41.6%;
-    font-size: 2.2em;
+    left: 0;
+}
+
+.navbar .left .title {
+    font-size: 1.5em;
     font-weight: bold;
-    font-family: "Times New Roman", serif;
+    font-family: system-ui;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+.navbar .right {
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar .right .nav-button {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: white;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+.title:hover, .nav-button:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+
+.navbar .icon {
+    transform: scale(1.5);
 }
