@@ -27,7 +27,7 @@ export default function Authentication() {
         return (
             <div className={'full-height'}>
                 <NavBar/>
-                <SignUp handleSubmit={handleSubmit} handleType={() => setType(true)} handleChange={handleChange}/>
+                <SignUp handleSubmit={handleSubmit} handleType={() => setType(true)} handleChange={handleChange} />
             </div>
         )
     }
