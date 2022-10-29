@@ -1,18 +1,17 @@
 import {TextField} from "@mui/material";
 
-export default function HalfInputForm({id, label}) {
-    return (
+export default function HiddenInputForm({id, value}) {
+    return(
         <TextField
-            sx={{margin: '7.5px'}}
+            sx={{margin: '5px', display: 'none'}}
             required
             variant={"filled"}
-            margin={'normal'}
-            type={id}
+            type={'text'}
             id={id}
-            label={label}
             name={id}
+            value={value}
             autoComplete={id}
-            className={'half-input-auth'}
+            label={'Hidden input'}
             autoFocus
         />
     )

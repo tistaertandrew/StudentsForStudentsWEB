@@ -7,18 +7,18 @@ import DisplayProvider from "../molecules/DisplayProvider";
 import HalfInputForm from "../molecules/HalfInputForm";
 import HalfSelectInputForm from "../molecules/HalfSelectInputForm";
 
-export default function SignUp({handleSubmit, handleType, handleChange}) {
+export default function SignUp({handleSubmit, handleType, handleChange, hiddenValue, disablePassword}) {
     return (
         <div>
             <div className={'rectangle-auth-creation'}>
                 <p className={'word-auth'}>OU</p>
-                <DisplayForm handleSubmit={handleSubmit} inputs={[
+                <DisplayForm handleSubmit={handleSubmit} hiddenInput={hiddenValue} disablePassword={disablePassword} inputs={[
                     <HalfInputForm id={'lastname'} label={'Nom de famille'}/>,
                     <HalfInputForm id={'firstname'} label={'Prénom'}/>,
                     <InputForm id={'email'} label={'Adresse mail'}/>,
                     <HalfSelectInputForm id={'section'} label={'Section'} handleChange={handleChange}
                                          inputs={['Economique', 'Technique']}/>,
-                    <HalfSelectInputForm id={'cursus'} label={'cursus'} handleChange={handleChange}
+                    <HalfSelectInputForm id={'cursus'} label={'Cursus'} handleChange={handleChange}
                                          inputs={['Sécurité des systèmes', 'Développement d\'applications']}/>,
                     <InputForm id={'password'} label={'Mot de passe'}/>,
                     <input type={'submit'} className={'btn-auth'} value={'CREER MON COMPTE'}/>
@@ -33,8 +33,6 @@ export default function SignUp({handleSubmit, handleType, handleChange}) {
                                      alt={'google'}/>,
                     <DisplayProvider imageUrl={"https://img.icons8.com/color/48/000000/facebook-new.png"}
                                      alt={'facebook'}/>,
-                    <DisplayProvider imageUrl={"https://img.icons8.com/color/48/000000/microsoft.png"}
-                                     alt={'microsoft'}/>,
                 ]}/>
             </div>
         </div>

@@ -26,8 +26,6 @@ export default function SignIn({handleSubmit, handleType}) {
                                      alt={'google'}/>,
                     <DisplayProvider imageUrl={"https://img.icons8.com/color/48/000000/facebook-new.png"}
                                      alt={'facebook'}/>,
-                    <DisplayProvider imageUrl={"https://img.icons8.com/color/48/000000/microsoft.png"}
-                                     alt={'microsoft'}/>,
                 ]}/>
             </div>
         </div>
