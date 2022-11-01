@@ -3,9 +3,9 @@ import {TextField} from "@mui/material";
 export default function HalfInputForm({id, label}) {
     return (
         <TextField
-            sx={{margin: '7.5px'}}
+            sx={{margin: '1%'}}
             required
-            variant={"filled"}
+            variant={"standard"}
             margin={'normal'}
             type={id}
             id={id}

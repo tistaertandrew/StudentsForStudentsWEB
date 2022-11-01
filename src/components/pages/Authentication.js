@@ -18,16 +18,16 @@ export default function Authentication() {
 
     if (type) {
         return (
-            <div className={'full-height'}>
+            <div>
                 <NavBar/>
                 <SignIn handleSubmit={handleSubmit} handleType={() => setType(false)}/>
             </div>
         )
     } else {
         return (
-            <div className={'full-height'}>
+            <div>
                 <NavBar/>
-                <SignUp handleSubmit={handleSubmit} handleType={() => setType(true)} handleChange={handleChange} />
+                <SignUp handleSubmit={handleSubmit} handleType={() => setType(true)} handleChange={handleChange}/>
             </div>
         )
     }

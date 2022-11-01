@@ -3,9 +3,9 @@ import {TextField} from "@mui/material";
 export default function InputForm({id, label}) {
     return (
         <TextField
-            sx={{margin: '5px'}}
+            sx={{margin: '1%'}}
             required
-            variant={"filled"}
+            variant={"standard"}
             type={id}
             id={id}
             label={label}

@@ -2,10 +2,10 @@ import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 export default function HalfSelectInputForm({id, label, handleChange, inputs}) {
     return (
-        <FormControl className={'half-input-auth'} sx={{margin: '7.5px'}}>
+        <FormControl className={'half-input-auth'} sx={{margin: '1%'}}>
             <InputLabel>{label}</InputLabel>
             <Select
-                variant={'outlined'}
+                variant={'standard'}
                 id={id}
                 label={label}
                 onChange={handleChange}
