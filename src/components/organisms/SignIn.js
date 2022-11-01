@@ -3,15 +3,20 @@ import InputForm from "../molecules/InputForm";
 import RedirectLink from "../molecules/RedirectLink";
 import DisplayForm from "./DisplayForm";
 import DisplayProviders from "./DisplayProviders";
-import DisplayProvider from "../molecules/DisplayProvider";
 import LeftImage from '../../assets/images/peace.png'
-import GoogleProviderImg from '../../assets/icons/icons8-logo-google-100.png'
-import FacebookProviderImg from '../../assets/icons/icons8-facebook-nouveau-100.png'
+import config from '../../config.json'
+import DisplayGoogleProvider from "../molecules/DisplayGoogleProvider";
 
 export default function SignIn({handleSubmit, handleType}) {
-    const ProviderResponse = (response) => {
+    const onSuccess = (response) => {
         console.log(response)
+        /*let data = JSON.stringify({credentials: response.tokenId})
+        fetch("https://localhost:7091/Authentication/Google", {method: 'POST', body: data, headers: {'Content-Type': 'application/json'}})
+            .then(resp => resp.json())
+            .then(data => console.log(data))*/
     }
+
+    const onError = () => console.log('login failed')
 
     return (
         <div className={'auth-grid'}>
@@ -31,11 +36,9 @@ export default function SignIn({handleSubmit, handleType}) {
                 <RedirectLink message={'Pas de compte ?'} label={'Inscrivez-vous !'} handleType={handleType}/>
                 <p className={'word-auth'}>OU</p>
                 <DisplayProviders providers={[
-                    <DisplayProvider imageUrl={GoogleProviderImg}
-                                     alt={'google'}/>,
-                    <DisplayProvider imageUrl={FacebookProviderImg}
-                                     alt={'facebook'}/>,
+                    <DisplayGoogleProvider clientId={config.GoogleClientID} onSuccess={onSuccess} onError={onError}/>
                 ]}/>
+
             </div>
         </div>
     )
