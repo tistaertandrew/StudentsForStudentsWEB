@@ -4,10 +4,9 @@ import RedirectLink from "../molecules/RedirectLink";
 import DisplayForm from "./DisplayForm";
 import DisplayProviders from "./DisplayProviders";
 import DisplayProvider from "../molecules/DisplayProvider";
-import LeftImage from '../../assets/images/students.png'
+import LeftImage from '../../assets/images/peace.png'
 import GoogleProviderImg from '../../assets/icons/icons8-logo-google-100.png'
 import FacebookProviderImg from '../../assets/icons/icons8-facebook-nouveau-100.png'
-import {GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google";
 
 export default function SignIn({handleSubmit, handleType}) {
     const ProviderResponse = (response) => {
