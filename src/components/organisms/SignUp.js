@@ -10,14 +10,7 @@ import config from "../../config.json";
 import DisplayGoogleProvider from "../molecules/DisplayGoogleProvider";
 
 export default function SignUp({handleSubmit, handleType, handleChange, hiddenValue, disablePassword}) {
-    const onSuccess = (response) => {
-        console.log(response)
-        /*let data = JSON.stringify({credentials: response.tokenId})
-        fetch("https://localhost:7091/Authentication/Google", {method: 'POST', body: data, headers: {'Content-Type': 'application/json'}})
-            .then(resp => resp.json())
-            .then(data => console.log(data))*/
-    }
-
+    const onSuccess = (response) => console.log('login succeed')
     const onError = () => console.log('login failed')
 
     return (
