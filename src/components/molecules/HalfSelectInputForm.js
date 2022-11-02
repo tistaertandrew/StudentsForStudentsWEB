@@ -10,11 +10,12 @@ export default function HalfSelectInputForm({id, label, handleChange, inputs}) {
                 label={label}
                 onChange={handleChange}
                 name={id}
+                disabled={inputs.length === 0}
                 autoComplete={id}
             >
                 {inputs.map(input =>
-                    <MenuItem value={input} key={input}>
-                        {input}
+                    <MenuItem value={input.id} key={input.id}>
+                        {input.label}
                     </MenuItem>)}
             </Select>
         </FormControl>

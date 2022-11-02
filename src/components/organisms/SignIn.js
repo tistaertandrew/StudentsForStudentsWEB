@@ -6,8 +6,10 @@ import DisplayProviders from "./DisplayProviders";
 import LeftImage from '../../assets/images/peace.png'
 import config from '../../config.json'
 import DisplayGoogleProvider from "../molecules/DisplayGoogleProvider";
+import {authStore} from "../../stores/AuthStore";
+import {observer} from "mobx-react";
 
-export default function SignIn({handleSubmit, handleType}) {
+function SignIn({handleSubmit}) {
     const onSuccess = (response) => console.log('login succeed')
     const onError = () => console.log('login failed')
 
@@ -26,13 +28,15 @@ export default function SignIn({handleSubmit, handleType}) {
                     <InputForm id={'password'} label={'Mot de passe'}/>,
                     <input type={'submit'} className={'btn-auth'} value={'SE CONNECTER'}/>
                 ]}/>
-                <RedirectLink message={'Pas de compte ?'} label={'Inscrivez-vous !'} handleType={handleType}/>
+                <RedirectLink message={'Pas de compte ?'} label={'Inscrivez-vous !'}
+                              handleMode={() => authStore.onModeChange()}/>
                 <p className={'word-auth'}>OU</p>
                 <DisplayProviders providers={[
                     <DisplayGoogleProvider clientId={config.GoogleClientID} onSuccess={onSuccess} onError={onError}/>
                 ]}/>
-
             </div>
         </div>
     )
 }
+
+export const ObservedSignIn = observer(SignIn)

@@ -1,34 +1,32 @@
 import NavBar from "../organisms/NavBar";
-import SignIn from "../organisms/SignIn";
-import {useState} from "react";
-import SignUp from "../organisms/SignUp";
+import {ObservedSignIn} from "../organisms/SignIn";
+import {authStore} from "../../stores/AuthStore";
+import {observer} from "mobx-react";
+import {ObservedSignUp} from "../organisms/SignUp";
 
-export default function Authentication() {
-    const [type, setType] = useState(true)
-    const [value, setValue] = useState(undefined)
+function Authentication() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
         let data = new FormData(event.currentTarget)
         console.log([...data.values()])
     }
-    const handleChange = (event) => {
-        setValue(event.target.value)
-    }
 
-    if (type) {
+    if (authStore.mode) {
         return (
             <div>
                 <NavBar/>
-                <SignIn handleSubmit={handleSubmit} handleType={() => setType(false)}/>
+                <ObservedSignIn handleSubmit={handleSubmit}/>
             </div>
         )
     } else {
         return (
             <div>
                 <NavBar/>
-                <SignUp handleSubmit={handleSubmit} handleType={() => setType(true)} handleChange={handleChange}/>
+                <ObservedSignUp handleSubmit={handleSubmit}/>
             </div>
         )
     }
 }
+
+export const ObservedAuthentication = observer(Authentication)

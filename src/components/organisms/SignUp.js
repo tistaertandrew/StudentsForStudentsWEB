@@ -8,8 +8,10 @@ import HalfSelectInputForm from "../molecules/HalfSelectInputForm";
 import RightImage from '../../assets/images/tired.png'
 import config from "../../config.json";
 import DisplayGoogleProvider from "../molecules/DisplayGoogleProvider";
+import {authStore} from "../../stores/AuthStore";
+import {observer} from "mobx-react";
 
-export default function SignUp({handleSubmit, handleType, handleChange, hiddenValue, disablePassword}) {
+function SignUp({handleSubmit}) {
     const onSuccess = (response) => console.log('login succeed')
     const onError = () => console.log('login failed')
 
@@ -20,19 +22,21 @@ export default function SignUp({handleSubmit, handleType, handleChange, hiddenVa
                     <LockOutlinedIcon className={'icon-auth'}/>
                     <h1 className={'title-auth'}>CREATION DE COMPTE</h1>
                 </div>
-                <DisplayForm handleSubmit={handleSubmit} hiddenInput={hiddenValue} disablePassword={disablePassword}
+                <DisplayForm handleSubmit={handleSubmit}
                              inputs={[
                                  <HalfInputForm id={'lastname'} label={'Nom de famille'}/>,
                                  <HalfInputForm id={'firstname'} label={'Prénom'}/>,
                                  <InputForm id={'email'} label={'Adresse mail'}/>,
-                                 <HalfSelectInputForm id={'section'} label={'Section'} handleChange={handleChange}
-                                                      inputs={['Economique', 'Technique']}/>,
-                                 <HalfSelectInputForm id={'cursus'} label={'Cursus'} handleChange={handleChange}
-                                                      inputs={['Sécurité des systèmes', 'Développement d\'applications']}/>,
+                                 <HalfSelectInputForm id={'section'} label={'Section'}
+                                                      handleChange={(e) => authStore.loadCursus(e.target.value)}
+                                                      inputs={authStore.sections}/>,
+                                 <HalfSelectInputForm id={'cursus'} label={'Cursus'}
+                                                      inputs={authStore.cursus}/>,
                                  <InputForm id={'password'} label={'Mot de passe'}/>,
                                  <input type={'submit'} className={'btn-auth'} value={'CREER MON COMPTE'}/>
                              ]}/>
-                <RedirectLink message={'Déjà de compte ?'} label={'Connectez-vous !'} handleType={handleType}/>
+                <RedirectLink message={'Déjà de compte ?'} label={'Connectez-vous !'}
+                              handleMode={() => authStore.onModeChange()}/>
                 <p className={'word-auth'}>OU</p>
                 <DisplayProviders providers={[
                     <DisplayGoogleProvider clientId={config.GoogleClientID} onSuccess={onSuccess} onError={onError}/>
@@ -44,3 +48,5 @@ export default function SignUp({handleSubmit, handleType, handleChange, hiddenVa
         </div>
     )
 }
+
+export const ObservedSignUp = observer(SignUp)
