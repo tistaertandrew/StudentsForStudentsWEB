@@ -1,6 +1,5 @@
 import {useEffect} from "react";
 import {gapi} from "gapi-script";
-import config from "../../config.json";
 import GoogleLogo from "../../assets/icons/icons8-logo-google-100.png";
 import GoogleLogin from "react-google-login";
 
@@ -8,7 +7,7 @@ export default function DisplayGoogleProvider({clientId, onSuccess, onError}) {
     useEffect(() => {
         const initClient = () => {
             gapi.client.init({
-                clientId: config.GoogleClientID,
+                clientId: clientId,
                 scope: ''
             })
         }
