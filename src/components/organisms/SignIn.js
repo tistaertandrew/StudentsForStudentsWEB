@@ -29,7 +29,7 @@ function SignIn({handleSubmit}) {
                     <input type={'submit'} className={'btn-auth'} value={'SE CONNECTER'}/>
                 ]}/>
                 <RedirectLink message={'Pas de compte ?'} label={'Inscrivez-vous !'}
-                              handleMode={() => authStore.onModeChange()}/>
+                              handleMode={() => authStore.onModeChange('signup')}/>
                 <p className={'word-auth'}>OU</p>
                 <DisplayProviders providers={[
                     <DisplayGoogleProvider clientId={config.GoogleClientID} onSuccess={onSuccess} onError={onError}/>

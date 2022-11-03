@@ -27,16 +27,16 @@ function SignUp({handleSubmit}) {
                                  <HalfInputForm id={'lastname'} label={'Nom de famille'}/>,
                                  <HalfInputForm id={'firstname'} label={'Prénom'}/>,
                                  <InputForm id={'email'} label={'Adresse mail'}/>,
-                                 <HalfSelectInputForm id={'section'} label={'Section'}
+                                 <HalfSelectInputForm id={'section'} label={'Section *'}
                                                       handleChange={(e) => authStore.loadCursus(e.target.value)}
                                                       inputs={authStore.sections}/>,
-                                 <HalfSelectInputForm id={'cursus'} label={'Cursus'}
+                                 <HalfSelectInputForm id={'cursus'} label={'Cursus *'}
                                                       inputs={authStore.cursus}/>,
                                  <InputForm id={'password'} label={'Mot de passe'}/>,
                                  <input type={'submit'} className={'btn-auth'} value={'CREER MON COMPTE'}/>
                              ]}/>
                 <RedirectLink message={'Déjà de compte ?'} label={'Connectez-vous !'}
-                              handleMode={() => authStore.onModeChange()}/>
+                              handleMode={() => authStore.onModeChange('signin')}/>
                 <p className={'word-auth'}>OU</p>
                 <DisplayProviders providers={[
                     <DisplayGoogleProvider clientId={config.GoogleClientID} onSuccess={onSuccess} onError={onError}/>
