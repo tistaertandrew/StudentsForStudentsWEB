@@ -8,6 +8,7 @@ import {sessionStore} from "../../stores/SessionStore";
 import {useNavigate} from "react-router-dom";
 import routes from '../../routes.json'
 import {useEffect} from "react";
+import {ObservedSignUpProvider} from "../organisms/SignUpProvider";
 
 function Authentication() {
     const navigate = useNavigate()
@@ -19,6 +20,7 @@ function Authentication() {
     const handleSubmit = (event) => {
         event.preventDefault();
         let data = new FormData(event.currentTarget)
+        //console.log([...data.values()])
         authStore.handleSubmit([...data.values()])
     }
 
@@ -36,6 +38,16 @@ function Authentication() {
             <div>
                 <NavBar/>
                 <ObservedSignUp handleSubmit={handleSubmit}/>
+                <ObservedSnackBar open={authStore.open} message={authStore.errorMessage}/>
+            </div>
+        )
+    }
+
+    if(authStore.mode === 'provider') {
+        return (
+            <div>
+                <NavBar/>
+                <ObservedSignUpProvider handleSubmit={handleSubmit}/>
                 <ObservedSnackBar open={authStore.open} message={authStore.errorMessage}/>
             </div>
         )

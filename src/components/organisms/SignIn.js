@@ -10,9 +10,6 @@ import {authStore} from "../../stores/AuthStore";
 import {observer} from "mobx-react";
 
 function SignIn({handleSubmit}) {
-    const onSuccess = (response) => console.log('login succeed')
-    const onError = () => console.log('login failed')
-
     return (
         <div className={'auth-grid'}>
             <div className={'column'} style={{backgroundColor: '#5D7052'}}>
@@ -32,7 +29,7 @@ function SignIn({handleSubmit}) {
                               handleMode={() => authStore.onModeChange('signup')}/>
                 <p className={'word-auth'}>OU</p>
                 <DisplayProviders providers={[
-                    <DisplayGoogleProvider clientId={config.GoogleClientID} onSuccess={onSuccess} onError={onError}/>
+                    <DisplayGoogleProvider clientId={config.GoogleClientID} onSuccess={(response) => authStore.onSuccess(response)} onError={() => authStore.onError()}/>
                 ]}/>
             </div>
         </div>

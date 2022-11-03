@@ -105,6 +105,12 @@
     overflow-y: hidden;
 }
 
+.text-auth {
+    color: gray;
+    font-size: 1.2em;
+    overflow-y: hidden;
+}
+
 .providers {
     display: flex;
     width: 100%;
