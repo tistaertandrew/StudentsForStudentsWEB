@@ -29,6 +29,11 @@ class SessionStore {
         let userObject = JSON.stringify(this.user)
         localStorage.setItem('StudentsForStudentsUser', userObject)
     }
+
+    logout() {
+        this._user = undefined
+        localStorage.removeItem('StudentsForStudentsUser')
+    }
 }
 
 export const sessionStore = new SessionStore()

@@ -3,5 +3,7 @@
   "Authentication": "/Authentication",
   "About": "/About",
   "Contact": "/Contact",
+  "Requests": "/Requests",
+  "Syntheses": "/Syntheses",
   "User": "/User"
 }

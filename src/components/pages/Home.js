@@ -1,9 +1,9 @@
-import NavBar from "../organisms/NavBar";
+import NavBar, {ObservedNavBar} from "../templates/NavBar";
 
 function Home() {
     return (
         <div>
-            <NavBar />
+            <ObservedNavBar />
         </div>
     )
 }
