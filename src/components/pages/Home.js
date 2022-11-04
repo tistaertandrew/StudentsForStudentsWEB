@@ -1,4 +1,4 @@
-import NavBar, {ObservedNavBar} from "../templates/NavBar";
+import {ObservedNavBar} from "../templates/NavBar";
 
 function Home() {
     return (

@@ -1,5 +1,4 @@
 import {Box} from "@mui/material";
-import HiddenInputForm from "../molecules/HiddenInputForm";
 
 export default function DisplayForm({handleSubmit, inputs}) {
     return (

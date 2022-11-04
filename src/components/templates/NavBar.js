@@ -1,12 +1,9 @@
 import * as React from 'react';
-import {useState} from 'react';
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import NavButton from "../molecules/NavButton";
 import TitleNavButton from "../molecules/TitleNavButton";
 import routes from '../../routes.json'
 import {observer} from "mobx-react";
 import {sessionStore} from "../../stores/SessionStore";
-import {IconButton, Menu, MenuItem} from "@mui/material";
 import DisplayUserMenuInfos from "../organisms/DisplayUserMenuInfos";
 import DisplayUserMenuInfo from "../molecules/DisplayUserMenuInfo";
 import {navigationStore} from "../../stores/NavigationStore";

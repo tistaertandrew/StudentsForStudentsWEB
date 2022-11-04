@@ -6,9 +6,6 @@ import InputForm from "../molecules/InputForm";
 import HalfSelectInputForm from "../molecules/HalfSelectInputForm";
 import {authStore} from "../../stores/AuthStore";
 import RedirectLink from "../molecules/RedirectLink";
-import DisplayProviders from "../organisms/DisplayProviders";
-import DisplayGoogleProvider from "../molecules/DisplayGoogleProvider";
-import config from "../../config.json";
 import RightImage from "../../assets/images/tired.png";
 import HiddenInputForm from "../molecules/HiddenInputForm";
 

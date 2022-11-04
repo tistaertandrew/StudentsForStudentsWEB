@@ -1,4 +1,4 @@
-import NavBar, {ObservedNavBar} from "../templates/NavBar";
+import {ObservedNavBar} from "../templates/NavBar";
 import {ObservedSignIn} from "../templates/SignIn";
 import {authStore} from "../../stores/AuthStore";
 import {observer} from "mobx-react";

@@ -1,7 +1,4 @@
-import {sessionStore} from "../../stores/SessionStore";
-import {Menu, MenuItem} from "@mui/material";
-import NavButton from "../molecules/NavButton";
-import routes from "../../routes.json";
+import {Menu} from "@mui/material";
 import * as React from "react";
 
 export default function DisplayUserMenuInfos({label, handleMenu, anchorEl, handleClose, inputs}) {
