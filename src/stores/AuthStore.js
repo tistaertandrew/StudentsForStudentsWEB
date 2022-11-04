@@ -183,7 +183,13 @@ class AuthStore {
             return
         }
         this.signInProvider(email)
-            .then(data => data.error ? this.handleErrorMessage(data.message) : sessionStore.user = data)
+            .then(data => {
+                if (data.error) this.handleErrorMessage(data.message)
+                else {
+                    sessionStore.user = data
+                    this.onModeChange('signin')
+                }
+            })
 
     }
 
@@ -203,7 +209,13 @@ class AuthStore {
         }
 
         this.signIn(email, password)
-            .then(data => data.error ? this.handleErrorMessage(data.message) : sessionStore.user = data)
+            .then(data => {
+                if (data.error) this.handleErrorMessage(data.message)
+                else {
+                    sessionStore.user = data
+                    this.onModeChange('signin')
+                }
+            })
 
     }
 
