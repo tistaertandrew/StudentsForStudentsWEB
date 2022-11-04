@@ -34,8 +34,8 @@ function NavBar() {
             <ul className={'center'}>
                 <NavButton route={routes.About} label={'A PROPOS'}/>
                 <NavButton route={routes.Contact} label={'CONTACT'}/>
-                <NavButton route={routes.Requests} label={'DEMANDES'}/>
-                <NavButton route={routes.Syntheses} label={'SYNTHESES'}/>
+                {sessionStore.user && <NavButton route={routes.Requests} label={'DEMANDES'}/>}
+                {sessionStore.user && <NavButton route={routes.Syntheses} label={'SYNTHESES'}/>}
             </ul>
             <ul className={'right'}>
                 {isConnected()}
