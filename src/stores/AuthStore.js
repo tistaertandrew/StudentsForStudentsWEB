@@ -11,10 +11,19 @@ class AuthStore {
     _errorMessage = undefined
     _open = false
     _emailProvider = undefined
+    _severity = 'error'
 
     constructor() {
         makeAutoObservable(this)
         this.loadSections()
+    }
+
+    get severity() {
+        return this._severity
+    }
+
+    set severity(severity) {
+        this._severity = severity
     }
 
     get emailProvider() {

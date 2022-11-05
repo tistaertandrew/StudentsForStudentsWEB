@@ -3,6 +3,7 @@ import routes from './routes.json'
 import {HashRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./components/pages/Home";
 import {ObservedAuthentication} from "./components/pages/Authentication";
+import {ObservedContact} from "./components/pages/Contact";
 
 function App() {
     return (
@@ -10,6 +11,7 @@ function App() {
             <Routes>
                 <Route exact path={routes.Home} element={<Home/>}/>
                 <Route exact path={routes.Authentication} element={<ObservedAuthentication />}/>
+                <Route exact path={routes.Contact} element={<ObservedContact />}/>
             </Routes>
         </Router>
     )

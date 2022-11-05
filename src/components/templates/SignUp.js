@@ -5,7 +5,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import DisplayProviders from "../organisms/DisplayProviders";
 import HalfInputForm from "../molecules/HalfInputForm";
 import HalfSelectInputForm from "../molecules/HalfSelectInputForm";
-import RightImage from '../../assets/images/tired.png'
+import RightImage from '../../assets/images/students.png'
 import config from "../../config.json";
 import DisplayGoogleProvider from "../molecules/DisplayGoogleProvider";
 import {authStore} from "../../stores/AuthStore";

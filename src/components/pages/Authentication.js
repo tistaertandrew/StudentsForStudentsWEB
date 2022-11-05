@@ -28,7 +28,7 @@ function Authentication() {
             <div>
                 <ObservedNavBar/>
                 <ObservedSignIn handleSubmit={handleSubmit}/>
-                <ObservedSnackBar open={authStore.open} message={authStore.errorMessage}/>
+                <ObservedSnackBar open={authStore.open} message={authStore.errorMessage} severity={authStore.severity}/>
             </div>
         )
     }
@@ -37,7 +37,7 @@ function Authentication() {
             <div>
                 <ObservedNavBar/>
                 <ObservedSignUp handleSubmit={handleSubmit}/>
-                <ObservedSnackBar open={authStore.open} message={authStore.errorMessage}/>
+                <ObservedSnackBar open={authStore.open} message={authStore.errorMessage} severity={authStore.severity}/>
             </div>
         )
     }
@@ -47,7 +47,7 @@ function Authentication() {
             <div>
                 <ObservedNavBar/>
                 <ObservedSignUpProvider handleSubmit={handleSubmit}/>
-                <ObservedSnackBar open={authStore.open} message={authStore.errorMessage}/>
+                <ObservedSnackBar open={authStore.open} message={authStore.errorMessage} severity={authStore.severity}/>
             </div>
         )
     }

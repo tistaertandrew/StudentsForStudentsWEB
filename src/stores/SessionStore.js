@@ -33,6 +33,7 @@ class SessionStore {
     logout() {
         this._user = undefined
         localStorage.removeItem('StudentsForStudentsUser')
+        window.location.reload()
     }
 }
 

@@ -202,6 +202,25 @@
     background-color: white;
 }
 
+.textarea-input {
+    width: 82%;
+    height: 168px;
+    margin: 1%;
+    border-bottom: solid 1px;
+    background-color: white;
+    transition: border;
+    transition-duration: .1s;
+}
+
+.textarea-input:hover {
+    border-bottom: solid 2px;
+}
+
+.textarea-input:focus {
+    outline: none;
+    border-bottom: solid #4977CC 2px;
+}
+
 .half-input-auth {
     width: 40%;
     background-color: white;
