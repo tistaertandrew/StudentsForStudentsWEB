@@ -319,3 +319,20 @@
 .hero-banner-img {
     object-fit: contain;
 }
+
+.text-about {
+    margin: 20px 10%;
+    font-size: 1.2em;
+    text-align: justify;
+}
+
+.link-about {
+    transition-property: opacity;
+    transition-duration: .5s;
+    text-decoration: underline;
+}
+
+.link-about:hover {
+    opacity: .5;
+
+}
