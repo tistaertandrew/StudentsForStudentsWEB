@@ -106,7 +106,7 @@ class Api {
     }
 
     fetchUser(token) {
-        return fetch(`${this.base}/User/WhoAmI`, {
+        return fetch(`${this.base}/User`, {
             headers: {
                 'Authorization': `bearer ${token}`
             }
@@ -121,7 +121,7 @@ class Api {
             email: email,
             message: message
         })
-        return fetch(`${this.base}/User/Contact`, {
+        return fetch(`${this.base}/Contact`, {
             method: 'POST',
             body: data,
             headers: {
