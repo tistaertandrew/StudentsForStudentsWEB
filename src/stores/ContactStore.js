@@ -1,4 +1,5 @@
 import {makeAutoObservable} from "mobx";
+import {api} from '../repositories/Api'
 
 class ContactStore {
     _open = false
@@ -34,7 +35,54 @@ class ContactStore {
     }
 
     handleSubmit(data) {
+        this.handleContact(...data.values())
+    }
 
+    handleContact(lastname, firstname, email, message) {
+        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+        if(lastname === '') {
+            this.handleErrorMessage('Le champ \"Nom de famille\" est obligatoire')
+            return
+        }
+        if(firstname === '') {
+            this.handleErrorMessage('Le champ \"Prénom\" est obligatoire')
+            return
+        }
+        if(email === '') {
+            this.handleErrorMessage('Le champ \"Adresse mail\" est obligatoire')
+            return
+        }
+        if(!email.match(emailRegex)) {
+            this.handleErrorMessage('Veuillez encoder une adresse mail valide')
+            return
+        }
+        if(message === '') {
+            this.handleErrorMessage('Le champ \"Message\" est obligatoire')
+            return
+        }
+
+        api.sendContactForm(lastname, firstname, email, message)
+            .then(data => data.error ? this.handleErrorMessage(data.message) : this.handleSuccessMessage(data.message))
+    }
+
+    handleErrorMessage(message) {
+        this.message = message
+        this.severity = 'error'
+        this.open = true
+
+        setTimeout(() => {
+            this.open = false
+        }, 2500)
+    }
+
+    handleSuccessMessage(message) {
+        this.message = message
+        this.severity = 'success'
+        this.open = true
+
+        setTimeout(() => {
+            this.open = false
+        }, 2500)
     }
 }
 

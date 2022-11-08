@@ -113,6 +113,23 @@ class Api {
         })
             .then(resp => resp.json())
     }
+
+    sendContactForm(lastname, firstname, email, message) {
+        let data = JSON.stringify({
+            lastname: lastname,
+            firstname: firstname,
+            email: email,
+            message: message
+        })
+        return fetch(`${this.base}/User/Contact`, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(resp => resp.json())
+    }
 }
 
 export const api = new Api()
