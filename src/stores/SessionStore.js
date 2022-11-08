@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx";
 import User from "../models/User";
-import config from '../config.json'
+import {api} from '../repositories/Api'
 
 class SessionStore {
     _user = undefined
@@ -24,22 +24,11 @@ class SessionStore {
     loadUser() {
         let token = JSON.parse(localStorage.getItem('StudentsForStudentsUser'))
         if (token) {
-            this.fetchUser(token)
+            api.fetchUser(token)
                 .then(data => {
-                    if (!data.error) {
-                        this.user = data
-                    }
+                    if (!data.error) this.user = data
                 })
         }
-    }
-
-    fetchUser(token) {
-        return fetch(`${config.ApiUrl}/User/WhoAmI`, {
-            headers: {
-                'Authorization': `bearer ${token}`
-            }
-        })
-            .then(resp => resp.json())
     }
 
     saveUser() {

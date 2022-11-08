@@ -1,8 +1,8 @@
 import {makeAutoObservable} from "mobx";
 import {sessionStore} from "./SessionStore";
-import config from '../config.json'
 import Section from "../models/Section";
 import Cursus from "../models/Cursus";
+import {api} from '../repositories/Api'
 
 class AuthStore {
     _sections = []
@@ -75,15 +75,13 @@ class AuthStore {
     }
 
     loadSections() {
-        fetch(`${config.ApiUrl}/School/Sections`)
-            .then(resp => resp.json())
+        api.loadSections()
             .then(data => data.map(d => new Section(d.id, d.label)))
             .then(sections => this.sections = sections)
     }
 
     loadCursus(id) {
-        fetch(`${config.ApiUrl}/School/Cursus/${id}`)
-            .then(resp => resp.json())
+        api.loadCursus(id)
             .then(data => data.map(d => new Cursus(d.id, d.label, new Section(d.section.id, d.section.label))))
             .then(cursus => this.cursus = cursus)
     }
@@ -134,7 +132,7 @@ class AuthStore {
             this.handleErrorMessage('Le champ \"Cursus\" est obligatoire')
             return
         }
-        this.signUpProvider(lastname, firstname, email, sectionId, cursusId)
+        api.signUpProvider(lastname, firstname, email, sectionId, cursusId)
             .then(data => data.error ? this.handleErrorMessage(data.message) : this.handleSignInProvider(email))
     }
 
@@ -177,7 +175,7 @@ class AuthStore {
             return
         }
 
-        this.signUp(lastname, firstname, email, sectionId, cursusId, password)
+        api.signUp(lastname, firstname, email, sectionId, cursusId, password)
             .then(data => data.error ? this.handleErrorMessage(data.message) : this.handleSignIn(email, password))
     }
 
@@ -191,9 +189,9 @@ class AuthStore {
             this.handleErrorMessage('Veuillez encoder une adresse mail valide')
             return
         }
-        this.signInProvider(email)
+        api.signInProvider(email)
             .then(data => {
-                if (data.error) this.handleErrorMessage(data.message)
+                if(data.error) this.handleErrorMessage(data.message)
                 else {
                     sessionStore.user = data
                     this.onModeChange('signin')
@@ -217,88 +215,15 @@ class AuthStore {
             return
         }
 
-        this.signIn(email, password)
+        api.signIn(email, password)
             .then(data => {
-                if (data.error) this.handleErrorMessage(data.message)
+                if(data.error) this.handleErrorMessage(data.message)
                 else {
                     sessionStore.user = data
                     this.onModeChange('signin')
                 }
             })
 
-    }
-
-    signUp(lastname, firstname, email, sectionId, cursusId, password) {
-        let data = JSON.stringify({
-            lastname: lastname,
-            firstname: firstname,
-            email: email,
-            sectionId: sectionId,
-            cursusId: cursusId,
-            password: password
-        })
-        return fetch(`${config.ApiUrl}/User/SignUp`, {
-            method: 'POST',
-            body: data,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(resp => resp.json())
-    }
-
-    signIn(email, password) {
-        let data = JSON.stringify({email: email, password: password})
-        return fetch(`${config.ApiUrl}/User/SignIn`, {
-            method: 'POST',
-            body: data,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(resp => resp.json())
-    }
-
-    signUpProvider(lastname, firstname, email, sectionId, cursusId) {
-        let data = JSON.stringify({
-            lastname: lastname,
-            firstname: firstname,
-            email: email,
-            sectionId: sectionId,
-            cursusId: cursusId
-        })
-        return fetch(`${config.ApiUrl}/User/SignUp`, {
-            method: 'POST',
-            body: data,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(resp => resp.json())
-    }
-
-    signInProvider(email) {
-        let data = JSON.stringify({email: email})
-        return fetch(`${config.ApiUrl}/User/SignIn`, {
-            method: 'POST',
-            body: data,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(resp => resp.json())
-    }
-
-    handleProvider(credentials) {
-        let data = JSON.stringify({credentials: credentials})
-        return fetch(`${config.ApiUrl}/User/Google`, {
-            method: 'POST',
-            body: data,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(resp => resp.json())
     }
 
     handleErrorMessage(message) {
@@ -311,14 +236,12 @@ class AuthStore {
     }
 
     onSuccess(response) {
-        this.handleProvider(response.tokenId)
+        api.handleProvider(response.tokenId)
             .then(data => {
-                if (data.error) {
+                if(data.error) {
                     this.onModeChange('provider')
                     this.emailProvider = data.message
-                } else {
-                    sessionStore.user = data
-                }
+                } else sessionStore.user = data
             })
     }
 
