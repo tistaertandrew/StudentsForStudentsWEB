@@ -1,4 +1,5 @@
 {
   "short_name": "StudentsForStudents",
-  "name": "StudentsForStudents"
+  "name": "StudentsForStudents",
+  "start_url": "."
 }
