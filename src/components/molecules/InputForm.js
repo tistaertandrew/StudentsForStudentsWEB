@@ -7,7 +7,7 @@ export default function InputForm({id, label, disabled, value}) {
             required
             variant={"standard"}
             type={id}
-            defaultValue={value}
+            value={value}
             id={id}
             disabled={disabled}
             label={label}

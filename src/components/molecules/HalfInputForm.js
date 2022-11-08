@@ -8,7 +8,7 @@ export default function HalfInputForm({id, label, value}) {
             variant={"standard"}
             margin={'normal'}
             type={id}
-            defaultValue={value}
+            value={value}
             id={id}
             label={label}
             name={id}
