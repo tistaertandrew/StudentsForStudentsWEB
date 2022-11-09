@@ -111,7 +111,7 @@ class Api {
                 'Authorization': `bearer ${token}`
             }
         })
-            .then(resp => resp.json())
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
     }
 
     sendContactForm(lastname, firstname, email, message) {
