@@ -1,6 +1,6 @@
-import {makeAutoObservable} from "mobx";
+import { makeAutoObservable } from "mobx";
 import User from "../models/User";
-import {api} from '../repositories/Api'
+import { api } from '../repositories/Api'
 
 class SessionStore {
     _user = undefined

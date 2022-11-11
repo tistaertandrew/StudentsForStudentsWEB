@@ -5,5 +5,6 @@
   "Contact": "/Contact",
   "Requests": "/Requests",
   "Syntheses": "/Syntheses",
-  "User": "/User"
+  "User": "/User",
+  "Chat": "/Chat"
 }

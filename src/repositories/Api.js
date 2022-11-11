@@ -106,12 +106,12 @@ class Api {
     }
 
     fetchUser(token) {
-        return fetch(`${this.base}/User`, {
+        return fetch(`${this.base}/User/WhoAmI`, {
             headers: {
                 'Authorization': `bearer ${token}`
             }
         })
-            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+            .then(resp => resp.status === 401 ? ({ error: true, unauthorized: true }) : resp.json())
     }
 
     sendContactForm(lastname, firstname, email, message) {
