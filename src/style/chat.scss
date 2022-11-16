@@ -67,11 +67,12 @@
                 &__room {
                     padding: 10px;
                     display: flex;
-                    border-bottom: solid rgba(0, 0, 0, .1) 1px;
+                    border-width: 5px;
                     flex-direction: column;
                     cursor: pointer;
                     transition-duration: .2s;
                     opacity: 1;
+                    color: black;
 
                     &:hover {
                         background-color: $primaryColor;
@@ -79,7 +80,8 @@
                     }
 
                     &.isActive {
-                        background-color: $lightenPrimaryColor;
+                        background-color: $darkenPrimaryColor;
+                        color: white;
                     }
 
                     &__data {
@@ -110,12 +112,10 @@
 
                             &__name {
                                 font-size: calc(1rem + 0.1vw);
-                                color: black;
                             }
 
                             &__lastmessage {
                                 font-size: 14px;
-                                color: black;
                                 overflow: hidden;
                                 text-overflow: ellipsis;
                                 max-width: 250px;
@@ -125,7 +125,6 @@
 
                     &__time {
                         font-size: 14px;
-                        color: black;
                         align-self: flex-end;
                         justify-self: center;
                     }
@@ -237,7 +236,7 @@
                 justify-content: center;
                 align-items: center;
                 background-color: $secondaryColor;
-                padding: 10px calc(25px + 1vw);
+                padding: 10px calc(5px + 1vw);
                 cursor: pointer;
                 transition-duration: .2s;
 
@@ -246,7 +245,11 @@
                 }
 
                 &__icon {
-                    font-size: calc(20px + 1vw);
+                    position: relative;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: calc(15px + 1vw);
                     color: $primaryColor;
                 }
             }
