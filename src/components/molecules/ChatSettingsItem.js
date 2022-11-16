@@ -1,5 +1,5 @@
 import React from 'react'
-import { Delete } from '@mui/icons-material';
+import {Delete} from '@mui/icons-material';
 
 
 const ChatSettingsItem = ({ roomName, onDelete }) => {

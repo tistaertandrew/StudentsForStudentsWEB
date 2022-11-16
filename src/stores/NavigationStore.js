@@ -2,9 +2,18 @@ import {makeAutoObservable} from "mobx";
 
 class NavigationStore {
     _element = null
+    _menu = 'menu'
 
     constructor() {
         makeAutoObservable(this)
+    }
+
+    get menu() {
+        return this._menu
+    }
+
+    set menu(v) {
+        this._menu = v
     }
 
     get element() {
@@ -15,11 +24,21 @@ class NavigationStore {
         this._element = v
     }
 
+    handleDisplayMenu(menu) {
+        this.menu = 'menu active'
+        menu.className = this.menu
+    }
+
+    handleHideMenu(menu) {
+        this.menu = 'menu'
+        menu.className = this.menu
+    }
+
     handleOpenMenu(target) {
         this.element = target
     }
 
-    handleCLoseMenu() {
+    handleCloseMenu() {
         this.element = null
     }
 }

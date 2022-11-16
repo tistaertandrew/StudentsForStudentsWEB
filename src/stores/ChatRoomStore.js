@@ -1,6 +1,6 @@
-import { makeAutoObservable, reaction, action, observable } from "mobx";
-import { api } from "../repositories/Api";
-import { chatRoomRepository } from "../repositories/ChatRoomRepository";
+import {action, makeAutoObservable, observable, reaction} from "mobx";
+import {api} from "../repositories/Api";
+import {chatRoomRepository} from "../repositories/ChatRoomRepository";
 
 class ChatRoomStore {
 
@@ -237,7 +237,6 @@ class ChatRoomStore {
      * @param {int} cursusId the cursus id for which to retrieve the cursus and courses
      */
     async _setCursusAndCoursesFromRemoteOnce(cursusId) {
-        debugger;
         if (!cursusId) {
             console.error("cursusId is required for setting the cursus and courses");
             return;

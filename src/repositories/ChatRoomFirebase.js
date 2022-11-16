@@ -1,17 +1,17 @@
 import {
+    arrayUnion,
+    collection,
+    deleteDoc,
     doc,
     getDoc,
-    setDoc,
     getDocs,
-    collection,
-    updateDoc,
     onSnapshot,
-    arrayUnion,
+    setDoc,
     Timestamp,
-    deleteDoc,
+    updateDoc,
 } from "firebase/firestore";
 
-import { db } from "../firebase";
+import {db} from "../firebase";
 
 const CHAT_COLLECTION_NAME = "chats";
 

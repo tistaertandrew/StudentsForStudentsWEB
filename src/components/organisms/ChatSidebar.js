@@ -1,7 +1,5 @@
 import React from 'react'
-import ChatNavbar from '../molecules/ChatNavbar'
 import ChatList from '../templates/ChatList'
-import SearchForm from '../molecules/SearchForm'
 
 const ChatSidebar = ({ username, rooms, activeRoom }) => {
     return (

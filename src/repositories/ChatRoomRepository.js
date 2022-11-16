@@ -1,7 +1,7 @@
-import { v4 as uuid } from 'uuid';
+import {v4 as uuid} from 'uuid';
 import Room from "../models/Room";
-import { RoomMessage } from "../models/RoomMessage";
-import { chatRoomFirebase } from './ChatRoomFirebase';
+import {RoomMessage} from "../models/RoomMessage";
+import {chatRoomFirebase} from './ChatRoomFirebase';
 
 const INITIAL_ROOM_DATA = {
     name: null,

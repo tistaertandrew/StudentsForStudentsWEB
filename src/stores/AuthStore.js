@@ -1,8 +1,8 @@
-import { makeAutoObservable } from "mobx";
-import { sessionStore } from "./SessionStore";
+import {makeAutoObservable} from "mobx";
+import {sessionStore} from "./SessionStore";
 import Section from "../models/Section";
 import Cursus from "../models/Cursus";
-import { api } from '../repositories/Api'
+import {api} from '../repositories/Api'
 
 class AuthStore {
     _sections = []
@@ -109,15 +109,15 @@ class AuthStore {
     handleSignUpProvider(lastname, firstname, email, sectionId, cursusId) {
         const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
         if (lastname === '') {
-            this.handleErrorMessage('Le champ \"Nom de famille\" est obligatoire')
+            this.handleErrorMessage('Le champ "Nom de famille" est obligatoire')
             return
         }
         if (firstname === '') {
-            this.handleErrorMessage('Le champ \"Prénom\" est obligatoire')
+            this.handleErrorMessage('Le champ "Prénom" est obligatoire')
             return
         }
         if (email === '') {
-            this.handleErrorMessage('Le champ \"Adresse mail\" est obligatoire')
+            this.handleErrorMessage('Le champ "Adresse mail" est obligatoire')
             return
         }
         if (!email.match(emailRegex)) {
@@ -125,11 +125,11 @@ class AuthStore {
             return
         }
         if (sectionId === '') {
-            this.handleErrorMessage('Le champ \"Section\" est obligatoire')
+            this.handleErrorMessage('Le champ "Section" est obligatoire')
             return
         }
         if (cursusId === '') {
-            this.handleErrorMessage('Le champ \"Cursus\" est obligatoire')
+            this.handleErrorMessage('Le champ "Cursus" est obligatoire')
             return
         }
         api.signUpProvider(lastname, firstname, email, sectionId, cursusId)
@@ -139,15 +139,15 @@ class AuthStore {
     handleSignUp(lastname, firstname, email, sectionId, cursusId, password, confirmPassword) {
         const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
         if (lastname === '') {
-            this.handleErrorMessage('Le champ \"Nom de famille\" est obligatoire')
+            this.handleErrorMessage('Le champ "Nom de famille" est obligatoire')
             return
         }
         if (firstname === '') {
-            this.handleErrorMessage('Le champ \"Prénom\" est obligatoire')
+            this.handleErrorMessage('Le champ "Prénom" est obligatoire')
             return
         }
         if (email === '') {
-            this.handleErrorMessage('Le champ \"Adresse mail\" est obligatoire')
+            this.handleErrorMessage('Le champ "Adresse mail" est obligatoire')
             return
         }
         if (!email.match(emailRegex)) {
@@ -155,19 +155,19 @@ class AuthStore {
             return
         }
         if (sectionId === '') {
-            this.handleErrorMessage('Le champ \"Section\" est obligatoire')
+            this.handleErrorMessage('Le champ "Section" est obligatoire')
             return
         }
         if (cursusId === '') {
-            this.handleErrorMessage('Le champ \"Cursus\" est obligatoire')
+            this.handleErrorMessage('Le champ "Cursus" est obligatoire')
             return
         }
         if (password === '') {
-            this.handleErrorMessage('Le champ \"Mot de passe\" est obligatoire')
+            this.handleErrorMessage('Le champ "Mot de passe" est obligatoire')
             return
         }
         if (confirmPassword === '') {
-            this.handleErrorMessage('Le champ \"Confirmation du mot de passe\" est obligatoire')
+            this.handleErrorMessage('Le champ "Confirmation du mot de passe" est obligatoire')
             return
         }
         if (password !== confirmPassword) {
@@ -182,7 +182,7 @@ class AuthStore {
     handleSignInProvider(email) {
         const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
         if (email === '') {
-            this.handleErrorMessage('Le champ \"Adresse mail\" est obligatoire')
+            this.handleErrorMessage('Le champ "Adresse mail" est obligatoire')
             return
         }
         if (!email.match(emailRegex)) {
@@ -203,7 +203,7 @@ class AuthStore {
     handleSignIn(email, password) {
         const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
         if (email === '') {
-            this.handleErrorMessage('Le champ \"Adresse mail\" est obligatoire')
+            this.handleErrorMessage('Le champ "Adresse mail" est obligatoire')
             return
         }
         if (!email.match(emailRegex)) {
@@ -211,7 +211,7 @@ class AuthStore {
             return
         }
         if (password === '') {
-            this.handleErrorMessage('Le champ \"Mot de passe\" est obligatoire')
+            this.handleErrorMessage('Le champ "Mot de passe" est obligatoire')
             return
         }
 

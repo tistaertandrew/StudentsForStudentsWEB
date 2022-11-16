@@ -1,5 +1,5 @@
-import { Send } from '@mui/icons-material'
-import React, { useState } from 'react'
+import {Send} from '@mui/icons-material'
+import React, {useState} from 'react'
 
 const ChatInput = ({ onSubmit }) => {
 

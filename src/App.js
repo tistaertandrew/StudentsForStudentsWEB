@@ -2,11 +2,11 @@ import './index.css'
 import routes from './routes.json'
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
-import { HashRouter as Router, Navigate, Route, Routes } from "react-router-dom";
-import { ObservedAuthentication } from "./components/pages/Authentication";
-import { ObservedContact } from "./components/pages/Contact";
-import { ChatObserver } from './components/pages/Chat';
-import { sessionStore } from './stores/SessionStore';
+import {HashRouter as Router, Navigate, Route, Routes} from "react-router-dom";
+import {ObservedAuthentication} from "./components/pages/Authentication";
+import {ObservedContact} from "./components/pages/Contact";
+import {ChatObserver} from './components/pages/Chat';
+import {sessionStore} from './stores/SessionStore';
 
 function App() {
 
