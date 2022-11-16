@@ -1,21 +1,24 @@
 import './index.css'
 import routes from './routes.json'
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/pages/Home";
+import About from "./components/pages/About";
+import { HashRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import { ObservedAuthentication } from "./components/pages/Authentication";
 import { ObservedContact } from "./components/pages/Contact";
-import About from "./components/pages/About";
-import Chat from './components/pages/Chat';
+import { ChatObserver } from './components/pages/Chat';
+import { ChatSettingsObserver } from './components/pages/ChatSettings';
 import { sessionStore } from './stores/SessionStore';
-import ChatRoomStore from './stores/ChatRoomStore';
-import ChatRoomRepository from './repositories/ChatRoomRepository';
-import ChatRoomFirebase from './repositories/ChatRoomFirebase';
-import { db } from './firebase';
 
 function App() {
 
-    const chatRoomFirebase = new ChatRoomFirebase(db);
-    const chatRoomRepository = new ChatRoomRepository({ chatRoomSource: chatRoomFirebase });
+    const AuthenticatedRoute = ({ children }) => {
+        if (!sessionStore.user) {
+            // This way we could give to authentication a callback to redirect to the page the user wanted to access
+            return <Navigate to={routes.Authentication} />
+        } else {
+            return children
+        }
+    }
 
     return (
         <Router>
@@ -24,7 +27,16 @@ function App() {
                 <Route exact path={routes.Authentication} element={<ObservedAuthentication />} />
                 <Route exact path={routes.Contact} element={<ObservedContact />} />
                 <Route exact path={routes.About} element={<About />} />
-                <Route exat path={routes.Chat} element={<Chat chatRoomStore={new ChatRoomStore({ repository: chatRoomRepository, sessionStore: sessionStore })} />} />
+                <Route exat path={routes.Chat} element={
+                    <AuthenticatedRoute>
+                        <ChatObserver />
+                    </AuthenticatedRoute>
+                } />
+                <Route exact path={routes.ChatSettings} element={
+                    <AuthenticatedRoute>
+                        <ChatSettingsObserver />
+                    </AuthenticatedRoute>
+                } />
             </Routes>
         </Router>
     )

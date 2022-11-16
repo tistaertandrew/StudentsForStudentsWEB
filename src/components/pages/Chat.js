@@ -1,12 +1,58 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { observer } from 'mobx-react-lite'
 
-const Chat = ({ chatRoomStore }) => {
+import ChatSidebar from '../organisms/ChatSidebar'
 
-    const { currentRoom, rooms } = chatRoomStore
+import { chatRoomStore } from '../../stores/ChatRoomStore';
+
+import '../../style/chat.scss'
+import { sessionStore } from '../../stores/SessionStore';
+import ChatDialogue from '../organisms/ChatDialogue';
+
+const Chat = () => {
+
+    const onClickChatRoom = (room) => {
+        chatRoomStore.setActiveRoom(room);
+    }
+
+    const onSendMessage = async (message) => {
+        if (!chatRoomStore.isMessageEmpty(message) && chatRoomStore.activeRoom) {
+            await chatRoomStore.sendMessage(message);
+        }
+    }
+
+    useEffect(async () => {
+
+        chatRoomStore.definePropertiesToIncomingRooms({
+            onClick: onClickChatRoom,
+            dateString: (room) => chatRoomStore.getDateTimeString(room.lastMessageDate)
+        })
+
+        chatRoomStore.definePropertiesToIncommingMessages({
+            dateString: (message) => chatRoomStore.getDateTimeString(message.date),
+            isOwner: (message) => chatRoomStore.isCurrentUsername(message.senderUsername)
+        })
+
+        await chatRoomStore.setActiveUser(sessionStore.user);
+
+        const disposer = await chatRoomStore.initialize();
+
+        return () => disposer()
+    }, []);
 
     return (
-        <div>{console.log(rooms)}</div>
+        <div id='chat'>
+            <ChatSidebar
+                username={chatRoomStore.username}
+                rooms={chatRoomStore.rooms}
+                activeRoom={chatRoomStore.activeRoom?.uid}
+            />
+            <ChatDialogue
+                messages={chatRoomStore.messages}
+                onSendMessage={onSendMessage}
+            />
+        </div>
     )
 }
 
-export default Chat
+export const ChatObserver = observer(Chat)

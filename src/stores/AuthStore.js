@@ -1,8 +1,8 @@
-import {makeAutoObservable} from "mobx";
-import {sessionStore} from "./SessionStore";
+import { makeAutoObservable } from "mobx";
+import { sessionStore } from "./SessionStore";
 import Section from "../models/Section";
 import Cursus from "../models/Cursus";
-import {api} from '../repositories/Api'
+import { api } from '../repositories/Api'
 
 class AuthStore {
     _sections = []
@@ -191,7 +191,7 @@ class AuthStore {
         }
         api.signInProvider(email)
             .then(data => {
-                if(data.error) this.handleErrorMessage(data.message)
+                if (data.error) this.handleErrorMessage(data.message)
                 else {
                     sessionStore.user = data
                     this.onModeChange('signin')
@@ -217,8 +217,9 @@ class AuthStore {
 
         api.signIn(email, password)
             .then(data => {
-                if(data.error) this.handleErrorMessage(data.message)
+                if (data.error) this.handleErrorMessage(data.message)
                 else {
+                    console.log(data)
                     sessionStore.user = data
                     this.onModeChange('signin')
                 }
@@ -238,7 +239,7 @@ class AuthStore {
     onSuccess(response) {
         api.handleProvider(response.tokenId)
             .then(data => {
-                if(data.error) {
+                if (data.error) {
                     this.onModeChange('provider')
                     this.emailProvider = data.message
                 } else sessionStore.user = data

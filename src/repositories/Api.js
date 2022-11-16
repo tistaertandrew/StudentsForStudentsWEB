@@ -106,7 +106,7 @@ class Api {
     }
 
     fetchUser(token) {
-        return fetch(`${this.base}/User/WhoAmI`, {
+        return fetch(`${this.base}/User`, {
             headers: {
                 'Authorization': `bearer ${token}`
             }
@@ -128,6 +128,11 @@ class Api {
                 'Content-Type': 'application/json'
             }
         })
+            .then(resp => resp.json())
+    }
+
+    fetchCursusWithCourses(cursusId) {
+        return fetch(`${this.base}/School/CursusWithCourses/${cursusId}`)
             .then(resp => resp.json())
     }
 }

@@ -2,11 +2,21 @@ export default class User {
     _username
     _email
     _token
+    _cursusId
 
-    constructor(username, email, token) {
+    constructor(username, email, token, cursusId) {
         this.username = username
         this.email = email
         this.token = token
+        this.cursusId = cursusId
+    }
+
+    set cursusId(cursusId) {
+        this._cursusId = cursusId
+    }
+
+    get cursusId() {
+        return this._cursusId
     }
 
     set username(username) {

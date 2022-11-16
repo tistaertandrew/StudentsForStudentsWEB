@@ -1,20 +1,21 @@
-
-
 import {
     doc,
     getDoc,
     setDoc,
+    getDocs,
     collection,
     updateDoc,
     onSnapshot,
     arrayUnion,
     Timestamp,
+    deleteDoc,
 } from "firebase/firestore";
 
-const ROOM_COLLECTION_NAME = "rooms";
+import { db } from "../firebase";
+
 const CHAT_COLLECTION_NAME = "chats";
 
-export default class ChatRoomFirebase {
+class ChatRoomFirebase {
 
     constructor(db) {
         this.db = db;
@@ -22,31 +23,44 @@ export default class ChatRoomFirebase {
 
     /**
      * Create a new room
+     * @param {String} collectionName the collection name where to create the room
      * @param {String} roomName the room name to create
      * @returns {Promise<void>}
      */
-    async createRoom(roomName, data = {}) {
-        return await setDoc(doc(this.db, ROOM_COLLECTION_NAME, roomName), data);
+    async createRoom(collectionName, roomName, data = {}) {
+        return await setDoc(doc(this.db, collectionName, roomName), data);
     }
 
     /**
      * Create a new chat
-     * @param {String} roomName the room name
+     * @param {String} roomId the room name
      * @param {Object} data the data to create with
      * @returns {Promise<void>}
      */
-    async createChat(roomName, data = {}) {
-        return await setDoc(doc(this.db, CHAT_COLLECTION_NAME, roomName), data);
+    async createChat(roomId, data = {}) {
+        return await setDoc(doc(this.db, CHAT_COLLECTION_NAME, roomId), data);
     }
 
     /**
      * Performs { onNext } on each room changes
+     * @param {String} collectionName the collection to listen for his rooms
      * @param {Function} onNext function to call when a new snapchot is available
      * @param {Function} onError function to call when an error occurs
      * @returns a function to unsubscribe from the snapshot
      */
-    getSnapchotOnRooms({ onNext, onError }) {
-        return onSnapshot(collection(this.db, ROOM_COLLECTION_NAME), { next: onNext, error: onError })
+    getSnapchotOnRooms({ collectionName, onNext, onError }) {
+        return onSnapshot(collection(this.db, collectionName), { next: onNext, error: onError })
+    }
+
+    /**
+     * Performs { onNext } on each room's messages changes
+     * @param {String} roomId the room id to listen for messages
+     * @param {Function} onNext function to call when a new snapchot is available
+     * @param {Function} onError function to call when an error occurs
+     * @returns 
+     */
+    getSnapchotOnRoomMessages({ roomId, onNext, onError }) {
+        return onSnapshot(doc(this.db, CHAT_COLLECTION_NAME, roomId), { next: onNext, error: onError })
     }
 
     /**
@@ -66,7 +80,6 @@ export default class ChatRoomFirebase {
      */
     async sendMessage({ roomId, message, senderUsername }) {
         const timestamp = Timestamp.now();
-
         await updateDoc(doc(this.db, CHAT_COLLECTION_NAME, roomId), {
             messages: arrayUnion({
                 senderUsername: senderUsername,
@@ -74,12 +87,20 @@ export default class ChatRoomFirebase {
                 timestamp: timestamp
             })
         });
-
         return timestamp;
     }
 
-    async updateLastMessage({ roomName, message, senderUsername, timestamp }) {
-        return await updateDoc(doc(this.db, ROOM_COLLECTION_NAME, roomName), {
+    /**
+     * Update the last message of a room
+     * @param {String} collectionName the collection name where to update the room's last message
+     * @param {String} roomName the room name to update the last message
+     * @param {String} message the last message to update with
+     * @param {String} senderUsername the sender username
+     * @param {Timestamp} timestamp the timestamp when the message was sent
+     * @returns {Promise<void>}
+     */
+    async updateLastMessage({ collectionName, roomName, message, senderUsername, timestamp }) {
+        return await updateDoc(doc(this.db, collectionName, roomName), {
             lastMessage: {
                 senderUsername: senderUsername,
                 text: message,
@@ -88,86 +109,23 @@ export default class ChatRoomFirebase {
         });
     }
 
-    // /**
-    //  * @returns {Promise<Room[]>} the list of rooms
-    //  */
-    // async getRooms() {
-    //     const rooms = [];
-    //     try {
-    //         const snapchot = await getDocs(collection(db, ROOM_COLLECTION_NAME));
-    //         snapchot.forEach((doc) => rooms.push(Room.fromDocument(doc.data())));
-    //     } catch (error) {
-    //         console.error("Error getting rooms: ", error);
-    //     }
-    //     return rooms;
-    // }
-
-    // /**
-    //  * @param {String} roomId 
-    //  * @returns {Promise<Room>} the room
-    //  */
-    // async getRoom(roomId) {
-    //     try {
-    //         const doc = await getDoc(doc(db, ROOM_COLLECTION_NAME, roomId));
-    //         return Room.fromDocument(doc);
-    //     } catch (error) {
-    //         console.error("Error getting room: ", error);
-    //         return new Room();
-    //     }
-    // }
-
-
-    // /**
-    //  * Delete a room
-    //  * @param {String} roomId
-    //  * @returns {Promise<boolean>} true if the room is deleted, false otherwise
-    //  */
-    // async deleteRoom(roomId) {
-    //     try {
-    //         await deleteDoc(doc(db, ROOM_COLLECTION_NAME, roomId));
-    //         return true;
-    //     } catch (error) {
-    //         console.error("Error deleting room: ", error);
-    //         return false;
-    //     }
-    // }
-
-    // /**
-    //  * Update the room with the new message
-    //  * @param {String} roomId 
-    //  * @param {RoomMessage} data 
-    //  * @returns {Promise<boolean>} true if the message is added, false otherwise
-    //  */
-    // async updateRoom(roomId, data) {
-    //     try {
-    //         await updateDoc(doc(db, ROOM_COLLECTION_NAME, roomId), data);
-    //         return true;
-    //     } catch (error) {
-    //         console.error("Error updating document: ", error);
-    //         return false;
-    //     }
-    // }
-
-    // /**
-    //  * @param {String} roomId 
-    //  * @returns {Promise<RoomMessage[]>} the list of messages
-    //  */
-    // async getRoomMessages(roomId) {
-    //     const messages = [];
-    //     try {
-    //         const room = await this.getRoom(roomId);
-    //         room.messages.forEach((message) => messages.push(RoomMessage.fromObject(message)));
-    //     } catch (error) {
-    //         console.error("Error getting messages: ", error);
-    //     }
-    //     return messages;
-    // }
-
-}
-
-class RoomCollection {
-    constructor() {
-        this.documents = [];
+    /**
+     * Delete a room
+     * @param {String} collectionName the collection name where to delete the room
+     * @param {String} roomId the room's id to delete
+     * @param {String} roomName the room's name to delete
+     * @returns {Promise<void>}
+     */
+    async deleteRoom(collectionName, roomId, roomName) {
+        await deleteDoc(doc(db, collectionName, roomName));
+        await deleteDoc(doc(db, CHAT_COLLECTION_NAME, roomId));
     }
+
+    async getRooms(collectionName) {
+        return await getDocs(collection(this.db, collectionName));
+    }
+
 }
+
+export const chatRoomFirebase = new ChatRoomFirebase(db);
 

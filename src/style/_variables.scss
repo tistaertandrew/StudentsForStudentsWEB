@@ -1,0 +1,22 @@
+$primaryColor: #5d7052;
+$darkenPrimaryColor: #323c2c;
+$lightenPrimaryColor: #8faa7f;
+$secondaryColor: #333333;
+
+@mixin mobile {
+    @media screen and (max-width: 480px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin laptop {
+    @media screen and (max-width: 1200px) {
+        @content;
+    }
+}

@@ -6,5 +6,6 @@
   "Requests": "/Requests",
   "Syntheses": "/Syntheses",
   "User": "/User",
-  "Chat": "/Chat"
+  "Chat": "/Chat",
+  "ChatSettings": "/ChatSettings"
 }

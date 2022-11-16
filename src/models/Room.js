@@ -8,7 +8,7 @@ export default class Room {
         this.name = null;
         this.uid = null;
         this.lastMessageText = null;
-        this.lastMesageDate = null;
+        this.lastMessageDate = null;
         this.chatters = [];
     }
 
@@ -24,7 +24,7 @@ export default class Room {
             room.uid = doc.uid;
             room.chatters = doc.chatters;
             room.lastMessageText = doc.lastMessage.text;
-            room.lastMessageDate = doc.lastMessage.timestamp && Date(doc.lastMessage.timestamp.seconds * 1000);
+            room.lastMessageDate = doc.lastMessage.timestamp && new Date(doc.lastMessage.timestamp.seconds * 1000);
         } catch (error) {
             console.error("Error creating room from document: ", error);
         }
