@@ -6,8 +6,6 @@ import SearchForm from '../molecules/SearchForm'
 const ChatSidebar = ({ username, rooms, activeRoom }) => {
     return (
         <div className='chat_sidebar'>
-            <ChatNavbar username={username} />
-            <SearchForm />
             <ChatList rooms={rooms} activeRoom={activeRoom} />
         </div>
     )

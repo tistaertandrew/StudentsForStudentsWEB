@@ -2,9 +2,6 @@ import React from 'react'
 import RoomCard from '../molecules/RoomCard';
 
 const ChatList = ({ rooms, activeRoom }) => {
-
-    console.log(activeRoom)
-
     const sort = (a, b) => {
 
         if (!a.lastMessageDate) return 1;

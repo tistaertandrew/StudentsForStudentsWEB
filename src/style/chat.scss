@@ -2,7 +2,7 @@
 
 #chat {
     display: grid;
-    height: 100vh;
+    height: calc(100vh - 90px);
     grid-template-columns: minmax(300px, .5fr) 1fr;
 
     .chat_sidebar {
@@ -59,26 +59,27 @@
         }
 
         .chat_list {
-            overflow: scroll;
+            overflow-y: scroll;
             display: grid;
-            height: 100%;
             grid-template-rows: 1fr minmax(10px, .1fr);
 
             &__list {
-                border-top: 1px solid $darkenPrimaryColor;
-
                 &__room {
                     padding: 10px;
                     display: flex;
+                    border-bottom: solid rgba(0, 0, 0, .1) 1px;
                     flex-direction: column;
                     cursor: pointer;
+                    transition-duration: .2s;
+                    opacity: 1;
 
                     &.isActive {
                         background-color: $lightenPrimaryColor;
                     }
 
                     &:hover {
-                        background-color: $darkenPrimaryColor
+                        background-color: $primaryColor;
+                        opacity: .5;
                     }
 
                     &__data {
@@ -86,12 +87,12 @@
                         align-items: center;
 
                         &__avatar {
+                            display: flex;
                             width: 50px;
                             height: 50px;
                             border-radius: 50%;
-                            background-color: $lightenPrimaryColor;
+                            background-color: $secondaryColor;
                             margin-right: 10px;
-                            display: flex;
                             justify-content: center;
                             align-items: center;
                             color: white;
@@ -109,12 +110,12 @@
 
                             &__name {
                                 font-size: calc(1rem + 0.1vw);
-                                color: white;
+                                color: black;
                             }
 
                             &__lastmessage {
                                 font-size: 14px;
-                                color: white;
+                                color: black;
                                 overflow: hidden;
                                 text-overflow: ellipsis;
                                 max-width: 250px;
@@ -124,7 +125,7 @@
 
                     &__time {
                         font-size: 14px;
-                        color: white;
+                        color: black;
                         align-self: flex-end;
                         justify-self: center;
                     }
@@ -140,11 +141,12 @@
 
         .chat_messages {
             flex: 1;
-            background-color: $secondaryColor;
+            background-color: $primaryColor;
+            color: black;
             padding: 10px;
             display: flex;
             flex-direction: column-reverse;
-            overflow: scroll;
+            overflow-y: scroll;
 
 
             &.noRoomSelected {
@@ -152,7 +154,6 @@
                 justify-content: center;
                 align-items: center;
                 font-size: calc(.5rem + 1vw);
-                color: white;
             }
 
             &__message {
@@ -166,7 +167,7 @@
                     width: 50px;
                     height: 50px;
                     border-radius: 50%;
-                    background-color: $lightenPrimaryColor;
+                    background-color: $darkenPrimaryColor;
                     margin-right: 10px;
                     display: flex;
                     justify-content: center;
@@ -175,6 +176,7 @@
                     font-size: 1.5rem;
 
                     &.owner {
+                        background-color: $secondaryColor;
                         margin-right: 0;
                         margin-left: 10px;
                     }
@@ -184,26 +186,25 @@
 
                     &__username {
                         font-size: 16px;
-                        color: white;
+                        color: black;
                     }
 
                     &__time {
                         font-size: 12px;
-                        color: white;
+                        color: black;
                     }
 
                     &__message {
+                        color: white;
                         font-size: 16px;
-                        background-color: white;
+                        background-color: $darkenPrimaryColor;
                         padding: 5px 10px;
                         max-width: calc((100vw / 3) - 20px);
                         border-radius: 0 10px 10px 10px;
-                        max-width: 250px;
                         overflow-wrap: break-word;
 
                         &.owner {
-                            background-color: $primaryColor;
-                            color: white;
+                            background-color: $secondaryColor;
                         }
                     }
                 }
@@ -220,13 +221,13 @@
                 height: 100%;
 
                 &__input {
-                    background-color: $darkenPrimaryColor;
-                    border: none;
+                    background-color: $primaryColor;
+                    border-top: solid rgba(0, 0, 0, .1) 1px;
                     padding: 15px;
                     width: 100%;
                     height: 100%;
                     outline: none;
-                    color: white;
+                    color: black;
                 }
             }
 
@@ -235,17 +236,18 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                background-color: $lightenPrimaryColor;
+                background-color: $secondaryColor;
                 padding: 10px calc(25px + 1vw);
                 cursor: pointer;
+                transition-duration: .2s;
 
                 &:hover {
-                    background-color: $primaryColor;
+                    opacity: .5;
                 }
 
                 &__icon {
                     font-size: calc(20px + 1vw);
-                    color: $darkenPrimaryColor;
+                    color: $primaryColor;
                 }
             }
         }

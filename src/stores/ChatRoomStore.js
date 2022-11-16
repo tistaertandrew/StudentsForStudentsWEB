@@ -237,13 +237,14 @@ class ChatRoomStore {
      * @param {int} cursusId the cursus id for which to retrieve the cursus and courses
      */
     async _setCursusAndCoursesFromRemoteOnce(cursusId) {
+        debugger;
         if (!cursusId) {
             console.error("cursusId is required for setting the cursus and courses");
             return;
-        };
-        const cursusAndCourses = await api.fetchCursusWithCourses(cursusId);
-        action(() => this.cursus = cursusAndCourses.cursus)();
-        action(() => this.courses = cursusAndCourses.courses)();
+        }
+        const courses = await api.fetchCoursesByCursusId(cursusId);
+        action(() => this.cursus = courses[0].cursus)();
+        action(() => this.courses = courses.courses)();
     }
 
     /**

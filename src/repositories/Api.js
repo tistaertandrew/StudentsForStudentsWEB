@@ -131,8 +131,8 @@ class Api {
             .then(resp => resp.json())
     }
 
-    fetchCursusWithCourses(cursusId) {
-        return fetch(`${this.base}/School/CursusWithCourses/${cursusId}`)
+    fetchCoursesByCursusId(cursusId) {
+        return fetch(`${this.base}/School/Courses/${cursusId}`)
             .then(resp => resp.json())
     }
 }

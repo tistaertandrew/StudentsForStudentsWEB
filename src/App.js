@@ -6,7 +6,6 @@ import { HashRouter as Router, Navigate, Route, Routes } from "react-router-dom"
 import { ObservedAuthentication } from "./components/pages/Authentication";
 import { ObservedContact } from "./components/pages/Contact";
 import { ChatObserver } from './components/pages/Chat';
-import { ChatSettingsObserver } from './components/pages/ChatSettings';
 import { sessionStore } from './stores/SessionStore';
 
 function App() {
@@ -30,11 +29,6 @@ function App() {
                 <Route exat path={routes.Chat} element={
                     <AuthenticatedRoute>
                         <ChatObserver />
-                    </AuthenticatedRoute>
-                } />
-                <Route exact path={routes.ChatSettings} element={
-                    <AuthenticatedRoute>
-                        <ChatSettingsObserver />
                     </AuthenticatedRoute>
                 } />
             </Routes>
