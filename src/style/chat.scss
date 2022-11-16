@@ -73,13 +73,13 @@
                     transition-duration: .2s;
                     opacity: 1;
 
-                    &.isActive {
-                        background-color: $lightenPrimaryColor;
-                    }
-
                     &:hover {
                         background-color: $primaryColor;
                         opacity: .5;
+                    }
+
+                    &.isActive {
+                        background-color: $lightenPrimaryColor;
                     }
 
                     &__data {
