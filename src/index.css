@@ -134,7 +134,7 @@
 
 }
 
-.title:hover, .subtitle:hover, .nav-button:hover, .provider:hover .close:hover, .open:hover {
+.title:hover, .subtitle:hover, .nav-button:hover, .provider:hover, .close:hover, .open:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
