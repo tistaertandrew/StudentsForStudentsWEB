@@ -17,7 +17,7 @@ const ChatMessages = ({ messages }) => {
                 })
                 .map((message) => {
                     return (
-                        <ChatMessage message={message} />
+                        <ChatMessage key={message[1].id()} message={message[1]} />
                     )
                 })}
         </div>

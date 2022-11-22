@@ -85,7 +85,7 @@ class ChatRoomStore {
      * Start listening to remote rooms changes
      * @returns {Function} a function to dispose from listening
      */
-    async initialize() {
+    initialize() {
         const unsubscribeFromRemoteChanges = this._onRemoteRoomsChangeSetLocalRooms();
         const disposeFromLocalRoomsReaction = this._onLocalRoomsChangeSetObservedRoom();
         const disposeFromLocalMessagesReaction = this._onLocalMessagesChangeSetObservedMessages();
