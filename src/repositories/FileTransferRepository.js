@@ -15,6 +15,7 @@ export class FileTransferRepository {
                 return {
                     name: file.filename,
                     owner: file.ownerName,
+                    creationDate: file.creationDate.substring(0, 10),
                     ownerId: file.ownerId,
                     id: file.fileId
                 }

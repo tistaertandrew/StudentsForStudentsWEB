@@ -35,6 +35,10 @@ function Files() {
                                     <p className={'file-key'}>Auteur :</p>
                                     <p className={'file-value'}>{file.owner}</p>
                                 </div>
+                                <div className={'file-name'}>
+                                    <p className={'file-key'}>Date :</p>
+                                    <p className={'file-value'}>{file.creationDate}</p>
+                                </div>
                                 <div className={'file-button'}>
                                     <input type={'submit'} className={'btn-file-download'} value={'TELECHARGER'} onClick={() => fileTransferStore.onDownloadFile(file, sessionStore.user?.token)}/>
                                     {sessionStore.user?.username === file.owner ? <input type={'submit'} className={'btn-file-delete'} value={'SUPPRIMER'} onClick={() => fileTransferStore.onDeleteFile(file, sessionStore.user?.token)}/> : null}
