@@ -7,13 +7,14 @@ import {ObservedAuthentication} from "./components/pages/Authentication";
 import {ObservedContact} from "./components/pages/Contact";
 import {ChatObserver} from './components/pages/Chat';
 import {sessionStore} from './stores/SessionStore';
+import {ObservedCalendar} from "./components/pages/Calendar";
 
 function App() {
 
-    const AuthenticatedRoute = ({ children }) => {
+    const AuthenticatedRoute = ({children}) => {
         if (!sessionStore.user) {
             // This way we could give to authentication a callback to redirect to the page the user wanted to access
-            return <Navigate to={routes.Authentication} />
+            return <Navigate to={routes.Authentication}/>
         } else {
             return children
         }
@@ -22,15 +23,21 @@ function App() {
     return (
         <Router>
             <Routes>
-                <Route exact path={routes.Home} element={<Home />} />
-                <Route exact path={routes.Authentication} element={<ObservedAuthentication />} />
-                <Route exact path={routes.Contact} element={<ObservedContact />} />
-                <Route exact path={routes.About} element={<About />} />
-                <Route exat path={routes.Chat} element={
+                <Route exact path={routes.Home} element={<Home/>}/>
+                <Route exact path={routes.Authentication} element={<ObservedAuthentication/>}/>
+                <Route exact path={routes.Contact} element={<ObservedContact/>}/>
+                <Route exact path={routes.About} element={<About/>}/>
+                <Route exact path={routes.Chat} element={
                     <AuthenticatedRoute>
-                        <ChatObserver />
+                        <ChatObserver/>
                     </AuthenticatedRoute>
-                } />
+                }/>
+                <Route exact path={routes.Calendar} element={
+                    <AuthenticatedRoute>
+                        <ObservedCalendar/>
+                    </AuthenticatedRoute>
+                }/>
+
             </Routes>
         </Router>
     )

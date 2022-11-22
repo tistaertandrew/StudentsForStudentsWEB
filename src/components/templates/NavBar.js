@@ -48,6 +48,7 @@ function NavBar() {
                         {sessionStore.user && <NavButton route={routes.Requests} label={'DEMANDES'} onClick={() => hideMenu()}/>}
                         {sessionStore.user && <NavButton route={routes.Syntheses} label={'SYNTHESES'} onClick={() => hideMenu()}/>}
                         {sessionStore.user && <NavButton route={routes.Chat} label={'SALONS'} onClick={() => hideMenu()}/>}
+                        {sessionStore.user && <NavButton route={routes.Calendar} label={'PLANNING'} onClick={() => hideMenu()}/>}
                     </ul>
                 </div>
             )

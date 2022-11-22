@@ -7,5 +7,6 @@
   "Syntheses": "/Syntheses",
   "User": "/User",
   "Chat": "/Chat",
-  "ChatSettings": "/ChatSettings"
+  "ChatSettings": "/ChatSettings",
+  "Calendar": "/Calendar"
 }

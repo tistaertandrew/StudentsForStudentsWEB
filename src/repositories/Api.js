@@ -135,6 +135,25 @@ class Api {
         return fetch(`${this.base}/School/Courses/${cursusId}`)
             .then(resp => resp.json())
     }
+
+    fetchCalendar(token) {
+        return fetch(`${this.base}/Calendar`, {
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({ error: true, unauthorized: true }) : resp.json())
+    }
+
+    updateCalendarLink(token, link) {
+        return fetch(`${this.base}/User/${link}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({ error: true, unauthorized: true }) : resp.json())
+    }
 }
 
 export const api = new Api()
