@@ -26,6 +26,14 @@ class FileTransferStore {
         this._onLocalErrorChange();
     }
 
+    handleErrorMessage() {
+        this.isError = true
+
+        setTimeout(() => {
+            this.isError = false
+        }, 2500)
+    }
+
     async init({ token }) {
         try {
             this._setLoading(true);
@@ -173,6 +181,7 @@ class FileTransferStore {
 
     _setErrors(errors) {
         action(() => this._errors = errors.message)();
+        this.handleErrorMessage()
     }
 
     _setIsError(isError) {

@@ -7,6 +7,7 @@ import { Button, CircularProgress } from '@mui/material';
 import { observer } from "mobx-react";
 import { sessionStore } from '../../stores/SessionStore';
 import { ObservedSnackBar } from "../molecules/SnackBar";
+import LoadingMessage from "../molecules/LoadingMessage";
 
 function Files() {
 
@@ -15,6 +16,50 @@ function Files() {
     }, []);
 
     return (
+        <div>
+            <ObservedNavBar />
+            <div className='files'>
+                <h1 className={'file-title'}>
+                    Listes des synthèses et des prises de note disponibles
+                    <label className='files__add' htmlFor='files__add'>AJOUTER UN FICHIER</label>
+                    <input onChange={(event) => fileTransferStore.onInputFileChange(event.target)} id='files__add' type='file' accept='.txt' hidden></input>
+                </h1>
+                <div className={'file-container'}>
+                    {
+                        fileTransferStore.files.map((file) => (
+                            <div className={'file-item'}>
+                                <div className={'file-name'}>
+                                    <p className={'file-key'}>Nom :</p>
+                                    <p className={'file-value'}>{file.name}</p>
+                                </div>
+                                <div className={'file-name'}>
+                                    <p className={'file-key'}>Auteur :</p>
+                                    <p className={'file-value'}>{file.owner}</p>
+                                </div>
+                                <div className={'file-button'}>
+                                    <input type={'submit'} className={'btn-file-download'} value={'TELECHARGER'} onClick={() => fileTransferStore.onDownloadFile(file, sessionStore.user?.token)}/>
+                                    {sessionStore.user?.username === file.owner ? <input type={'submit'} className={'btn-file-delete'} value={'SUPPRIMER'} onClick={() => fileTransferStore.onDeleteFile(file, sessionStore.user?.token)}/> : null}
+                                </div>
+                            </div>
+                        ))
+                    }
+
+                </div>
+                <ObservedSnackBar
+                    open={fileTransferStore.isError}
+                    message={fileTransferStore.errors}
+                    severity={"error"} />
+                {
+                    fileTransferStore.isLoading && (
+                        <>
+                            <LoadingMessage message={"Traitement en cours..."} />
+                        </>
+                    )}
+            </div>
+        </div >
+    )
+
+        /*return (
         <div>
             <ObservedNavBar />
             <div className='files'>
@@ -28,14 +73,14 @@ function Files() {
                     <div className='files__table__file'>
                         {
                             fileTransferStore.files.map((file) => (
-                                <>
+                                <div className={'file-container'}>
                                     <div className='files__table__file__name'>{file.name}</div>
                                     <div className='files__table__file__owner'>{file.owner}</div>
                                     <div className='files__table__file__download'>
-                                        <Button variant="contained" color="success" onClick={() => fileTransferStore.onDownloadFile(file, sessionStore.user?.token)} className='files__table__file__button'>TELECHARGER</Button>
+                                        <input type={'submit'} className={'btn-file-download'} value={'TELECHARGER'} onClick={() => fileTransferStore.onDownloadFile(file, sessionStore.user?.token)}/>
                                     </div>
-                                    {sessionStore.user?.username === file.owner ? <Button variant="outlined" color='error' onClick={() => fileTransferStore.onDeleteFile(file, sessionStore.user?.token)} className='files__table__file__button'>SUPPRIMER</Button> : <div></div>}
-                                </>
+                                    {sessionStore.user?.username === file.owner ? <input type={'submit'} className={'btn-file-delete'} value={'SUPPRIMER'} onClick={() => fileTransferStore.onDeleteFile(file, sessionStore.user?.token)}/> : <div></div>}
+                                </div>
                             ))
                         }
                     </div>
@@ -49,15 +94,12 @@ function Files() {
                 {
                     fileTransferStore.isLoading && (
                         <>
-                            <div className='files__progress'>
-                                <CircularProgress />
-                            </div>
-                            <div className='files__overlay'></div>
+                            <LoadingMessage message={"Traitement en cours..."} />
                         </>
                     )}
             </div>
         </div >
-    )
+    )*/
 }
 
 export const ObserverFiles = observer(Files);

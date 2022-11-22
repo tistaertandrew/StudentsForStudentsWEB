@@ -320,6 +320,42 @@
     background-color: rgba(193, 136, 69, 0.8);
 }
 
+.btn-file-download {
+    margin: 2% 5%;
+    background-color: #5D7052;
+    color: white;
+    border-radius: 10px;
+    min-width: 35%;
+    height: 56px;
+    font-weight: bold;
+    position: relative;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+.btn-file-download:hover {
+    cursor: pointer;
+    background-color: rgba(93, 112, 82, 0.8);
+}
+
+.btn-file-delete {
+    margin: 2% 5%;
+    background-color: #670000;
+    color: white;
+    border-radius: 10px;
+    min-width: 35%;
+    height: 56px;
+    font-weight: bold;
+    position: relative;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+.btn-file-delete:hover {
+    cursor: pointer;
+    background-color: rgba(103, 0, 0, 0.8);
+}
+
 
 ::-webkit-scrollbar {
     width: 5px;
@@ -410,3 +446,54 @@
 .rbc-month-view {
      height: 100vh;
  }
+
+.file-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 95%;
+    font-size: 2em;
+    margin-bottom: 2%;
+    font-weight: bold;
+}
+
+.file-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.file-item {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: .5%;
+    border-radius: 10px;
+    box-shadow: 10px 10px 39px -13px rgba(0, 0, 0, 0.75);
+}
+
+.file-name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 1%;
+    min-width: 30%;
+}
+
+.file-key {
+    margin: 10px;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.file-value {
+    font-size: 1.2em;
+    opacity: .8;
+}
+
+.file-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
