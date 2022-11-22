@@ -14,15 +14,8 @@ function Files() {
         await fileTransferStore.init({ token: sessionStore.user?.token });
     }, []);
 
-    if (fileTransferStore.files.length === 0) {
-        <ObservedNavBar />
-        return <div>Aucune synthèse</div>
-    }
-
     return (
         <div>
-
-
             <ObservedNavBar />
             <div className='files'>
                 <div className='files__head'>
@@ -39,15 +32,15 @@ function Files() {
                                     <div className='files__table__file__name'>{file.name}</div>
                                     <div className='files__table__file__owner'>{file.owner}</div>
                                     <div className='files__table__file__download'>
-                                        <Button variant="contained" color="success" onClick={() => fileTransferStore.onDownloadFile(file, sessionStore.user?.token)} className='files__table__file__button'>Download</Button>
+                                        <Button variant="contained" color="success" onClick={() => fileTransferStore.onDownloadFile(file, sessionStore.user?.token)} className='files__table__file__button'>TELECHARGER</Button>
                                     </div>
-                                    {sessionStore.user?.username === file.owner ? <Button variant="outlined" color='error' onClick={() => fileTransferStore.onDeleteFile(file, sessionStore.user?.token)} className='files__table__file__button'>Delete</Button> : <div></div>}
+                                    {sessionStore.user?.username === file.owner ? <Button variant="outlined" color='error' onClick={() => fileTransferStore.onDeleteFile(file, sessionStore.user?.token)} className='files__table__file__button'>SUPPRIMER</Button> : <div></div>}
                                 </>
                             ))
                         }
                     </div>
                 </div>
-                <label className='files__add' htmlFor='files__add'>Ajouter un fichier</label>
+                <label className='files__add' htmlFor='files__add'>AJOUTER UN FICHIER</label>
                 <input onChange={(event) => fileTransferStore.onInputFileChange(event.target)} id='files__add' type='file' accept='.txt' hidden></input>
                 <ObservedSnackBar
                     open={fileTransferStore.isError}
