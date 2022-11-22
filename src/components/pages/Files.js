@@ -27,15 +27,15 @@ function Files() {
                     {
                         fileTransferStore.files.map((file) => (
                             <div className={'file-item'}>
-                                <div className={'file-name'}>
+                                <div className={'file-name'} style={{minWidth: '30%'}}>
                                     <p className={'file-key'}>Nom :</p>
                                     <p className={'file-value'}>{file.name}</p>
                                 </div>
-                                <div className={'file-name'}>
+                                <div className={'file-name'} style={{minWidth: '20%'}}>
                                     <p className={'file-key'}>Auteur :</p>
                                     <p className={'file-value'}>{file.owner}</p>
                                 </div>
-                                <div className={'file-name'}>
+                                <div className={'file-name'} style={{minWidth: '15%'}}>
                                     <p className={'file-key'}>Date :</p>
                                     <p className={'file-value'}>{file.creationDate}</p>
                                 </div>
