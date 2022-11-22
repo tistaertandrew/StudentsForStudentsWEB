@@ -1,5 +1,5 @@
-import { Alert, Snackbar } from "@mui/material";
-import { observer } from "mobx-react";
+import {Alert, Snackbar} from "@mui/material";
+import {observer} from "mobx-react";
 
 function SnackBar({ open, message, severity }) {
     return (

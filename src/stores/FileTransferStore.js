@@ -1,6 +1,6 @@
-import { action, makeAutoObservable, observable, reaction, runInAction, _allowStateChangesInsideComputed } from "mobx";
-import { fileTransferRepository } from "../repositories/FileTransferRepository";
-import { sessionStore } from "./SessionStore";
+import {action, makeAutoObservable, reaction} from "mobx";
+import {fileTransferRepository} from "../repositories/FileTransferRepository";
+import {sessionStore} from "./SessionStore";
 
 class FileTransferStore {
     constructor({ repository }) {

@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react'
-import { observer } from 'mobx-react-lite'
+import React, {useEffect} from 'react'
+import {observer} from 'mobx-react-lite'
 
 import ChatSidebar from '../organisms/ChatSidebar'
 
-import { chatRoomStore } from '../../stores/ChatRoomStore';
+import {chatRoomStore} from '../../stores/ChatRoomStore';
 
 import '../../style/chat.scss'
-import { sessionStore } from '../../stores/SessionStore';
+import {sessionStore} from '../../stores/SessionStore';
 import ChatDialogue from '../organisms/ChatDialogue';
-import { ObservedNavBar } from "../templates/NavBar";
+import {ObservedNavBar} from "../templates/NavBar";
 
 const Chat = () => {
     const onClickChatRoom = (room) => {

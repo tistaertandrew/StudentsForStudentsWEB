@@ -1,12 +1,10 @@
-import React from 'react'
-import { useEffect } from 'react'
+import React, {useEffect} from 'react'
 import "../../style/files.scss"
-import { ObservedNavBar } from "../templates/NavBar";
-import { fileTransferStore } from '../../stores/FileTransferStore';
-import { Button, CircularProgress } from '@mui/material';
-import { observer } from "mobx-react";
-import { sessionStore } from '../../stores/SessionStore';
-import { ObservedSnackBar } from "../molecules/SnackBar";
+import {ObservedNavBar} from "../templates/NavBar";
+import {fileTransferStore} from '../../stores/FileTransferStore';
+import {observer} from "mobx-react";
+import {sessionStore} from '../../stores/SessionStore';
+import {ObservedSnackBar} from "../molecules/SnackBar";
 import LoadingMessage from "../molecules/LoadingMessage";
 import {Add} from "@mui/icons-material";
 

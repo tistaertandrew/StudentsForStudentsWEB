@@ -1,4 +1,4 @@
-import { FileTransferApi } from "./FileTransferApi";
+import {FileTransferApi} from "./FileTransferApi";
 
 export class FileTransferRepository {
     constructor({ api }) {

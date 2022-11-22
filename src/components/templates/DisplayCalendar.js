@@ -22,6 +22,7 @@ function DisplayCalendar({rowCalendar}) {
             <Calendar localizer={localizer} events={events} startAccessor="start" endAccessor="end" defaultView="week"
                       min={new Date(0, 0, 0, 7, 0, 0)}
                       max={new Date(0, 0, 0, 22, 0, 0)}
+                      views={['month', 'week', 'day']}
                       messages={{
                           next: "Suivant",
                           previous: "Précédent",

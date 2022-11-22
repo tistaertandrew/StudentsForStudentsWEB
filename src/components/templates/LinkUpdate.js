@@ -2,8 +2,7 @@ import LeftImage from "../../assets/images/peace.png";
 import DisplayForm from "../organisms/DisplayForm";
 import InputForm from "../molecules/InputForm";
 import {observer} from "mobx-react";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import {CalendarMonth, CalendarToday} from "@mui/icons-material";
+import {CalendarMonth} from "@mui/icons-material";
 
 function LinkUpdate({handleSubmit}) {
     return (
