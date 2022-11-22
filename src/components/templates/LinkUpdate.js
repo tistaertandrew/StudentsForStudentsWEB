@@ -2,6 +2,8 @@ import LeftImage from "../../assets/images/peace.png";
 import DisplayForm from "../organisms/DisplayForm";
 import InputForm from "../molecules/InputForm";
 import {observer} from "mobx-react";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import {CalendarMonth, CalendarToday} from "@mui/icons-material";
 
 function LinkUpdate({handleSubmit}) {
     return (
@@ -11,9 +13,10 @@ function LinkUpdate({handleSubmit}) {
             </div>
             <div className={'column'}>
                 <div className={'container-title-auth'}>
+                    <CalendarMonth className={'icon-auth'}/>
                     <h1 className={'title-auth'}>AFFICHAGE DE VOTRE CALENDRIER</h1>
                 </div>
-                <p>Pour afficher votre calendrier horiairix, veuillez entrer son lien ci-dessous</p>
+                <p style={{fontSize: '1.4em'}}>Pour afficher votre calendrier horairix, veuillez insérer son lien ci-dessous</p>
                 <DisplayForm handleSubmit={handleSubmit} inputs={[
                     <InputForm id={'text'} label={'Lien horairix'}/>,
                     <input type={'submit'} className={'btn-auth'} value={'VALIDER'}/>

@@ -2,13 +2,13 @@ import React from 'react'
 
 const ChatMessage = ({ message }) => {
     return (
-        <div key={message[1].uid && 0} className={`chat_messages__message ${message[1].isOwner() && 'owner'}`}>
-            <div className={`chat_messages__message__avatar ${message[1].isOwner() && 'owner'}`}>{message[1].senderUsername[0]}</div>
-            <div className={`chat_messages__message__info ${message[1].isOwner() && 'owner'}`}>
-                <div className='chat_messages__message__info__username'>{message[1].senderUsername}
-                    <div className='chat_messages__message__info__time'>{message[1].dateString()}</div>
+        <div className={`chat_messages__message ${message.isOwner() && 'owner'}`}>
+            <div className={`chat_messages__message__avatar ${message.isOwner() && 'owner'}`}>{message.senderUsername[0]}</div>
+            <div className={`chat_messages__message__info ${message.isOwner() && 'owner'}`}>
+                <div className='chat_messages__message__info__username'>{message.senderUsername}
+                    <div className='chat_messages__message__info__time'>{message.dateString()}</div>
                 </div>
-                <div className={`chat_messages__message__info__message ${message[1].isOwner() && 'owner'}`}>{message[1].text}</div>
+                <div className={`chat_messages__message__info__message ${message.isOwner() && 'owner'}`}>{message.text}</div>
             </div>
         </div >
     )

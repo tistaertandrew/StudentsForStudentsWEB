@@ -1,17 +1,16 @@
-import React, {useEffect} from 'react'
-import {observer} from 'mobx-react-lite'
+import React, { useEffect } from 'react'
+import { observer } from 'mobx-react-lite'
 
 import ChatSidebar from '../organisms/ChatSidebar'
 
-import {chatRoomStore} from '../../stores/ChatRoomStore';
+import { chatRoomStore } from '../../stores/ChatRoomStore';
 
 import '../../style/chat.scss'
-import {sessionStore} from '../../stores/SessionStore';
+import { sessionStore } from '../../stores/SessionStore';
 import ChatDialogue from '../organisms/ChatDialogue';
-import {ObservedNavBar} from "../templates/NavBar";
+import { ObservedNavBar } from "../templates/NavBar";
 
 const Chat = () => {
-
     const onClickChatRoom = (room) => {
         chatRoomStore.setActiveRoom(room);
     }
@@ -23,7 +22,6 @@ const Chat = () => {
     }
 
     useEffect(async () => {
-
         chatRoomStore.definePropertiesToIncomingRooms({
             onClick: onClickChatRoom,
             dateString: (room) => chatRoomStore.getDateTimeString(room.lastMessageDate)
@@ -31,19 +29,20 @@ const Chat = () => {
 
         chatRoomStore.definePropertiesToIncommingMessages({
             dateString: (message) => chatRoomStore.getDateTimeString(message.date),
-            isOwner: (message) => chatRoomStore.isCurrentUsername(message.senderUsername)
+            isOwner: (message) => chatRoomStore.isCurrentUsername(message.senderUsername),
+            id: (message) => message.date.valueOf(),
         })
 
         await chatRoomStore.setActiveUser(sessionStore.user);
 
-        const disposer = await chatRoomStore.initialize();
+        const disposer = chatRoomStore.initialize();
 
         return () => disposer()
     }, []);
 
     return (
         <div>
-            <ObservedNavBar/>
+            <ObservedNavBar />
             <div id='chat'>
                 <ChatSidebar
                     username={chatRoomStore.username}

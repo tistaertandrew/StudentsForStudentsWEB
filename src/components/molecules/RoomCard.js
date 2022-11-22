@@ -1,9 +1,6 @@
 import React from 'react'
 
 const RoomCard = ({ room, isActive }) => {
-
-    console.log(isActive)
-
     return (
         <div className={`chat_list__list__room ${isActive && 'isActive'}`} onClick={room[1].onClick}>
             <div className='chat_list__list__room__data'>
