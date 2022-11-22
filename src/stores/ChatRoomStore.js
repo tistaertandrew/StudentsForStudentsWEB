@@ -1,6 +1,6 @@
-import {action, makeAutoObservable, observable, reaction} from "mobx";
-import {api} from "../repositories/Api";
-import {chatRoomRepository} from "../repositories/ChatRoomRepository";
+import { action, makeAutoObservable, observable, reaction } from "mobx";
+import { api } from "../repositories/Api";
+import { chatRoomRepository } from "../repositories/ChatRoomRepository";
 
 class ChatRoomStore {
 
@@ -22,6 +22,10 @@ class ChatRoomStore {
          */
         this._messages = null;
         /**
+         * The local loading state
+         */
+        this._loading = false;
+        /**
          * The observable rooms
          */
         this.rooms = null;
@@ -29,6 +33,10 @@ class ChatRoomStore {
          * The observable messages of the tracked room
          */
         this.messages = null;
+        /**
+         * Property to know if the store is currently loading
+         */
+        this.loading = false;
         /**
          * The currently selected room
          */
@@ -86,6 +94,7 @@ class ChatRoomStore {
             unsubscribeFromRemoteChanges();
             disposeFromLocalRoomsReaction();
             disposeFromLocalMessagesReaction();
+            this.unsubscribeFromActiveRoomMessagesChange && this.unsubscribeFromActiveRoomMessagesChange();
         }
     }
 
@@ -131,6 +140,12 @@ class ChatRoomStore {
             });
         }
     );
+
+    /**
+     * Set the observable loading state
+     * @returns {Function} to dispose from the reaction
+     */
+    _onLocalLoadingChanges = () => reaction(() => this._loading, (loading) => this.loading = loading);
 
     /**
      * Command to add properties to incoming rooms.
@@ -194,11 +209,11 @@ class ChatRoomStore {
     * @SideEffect Retrieve the messages of the given room
     * @param {Room} room 
     */
-    setActiveRoom = (room) => {
+    setActiveRoom = async (room) => {
         this.unsubscribeFromActiveRoomMessagesChange();
         action(() => this.activeRoom = room)();
         this.unsubscribeFromActiveRoomMessagesChange = this._onRemoteActiveRoomMessagesChangeSetLocalMessages(this.activeRoom);
-        this._retrieveActiveRoomMessagesOnce();
+        await this._retrieveActiveRoomMessagesOnce();
     }
 
     /**
@@ -276,6 +291,12 @@ class ChatRoomStore {
      * @param {String} messages 
      */
     _setLocalMessages = (messages) => action(() => this._messages = messages)();
+
+    /**
+     * Set the local loading state
+     * @param {Boolean} loading 
+     */
+    _setLocalLoading = (loading) => action(() => this._loading = loading)();
 
     /**
      * Append properties to the room
