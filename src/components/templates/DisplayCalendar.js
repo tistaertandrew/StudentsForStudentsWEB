@@ -20,6 +20,8 @@ function DisplayCalendar({rowCalendar}) {
     return (
         <div style={{height: 'calc(100vh - 110px)', margin: '10px'}}>
             <Calendar localizer={localizer} events={events} startAccessor="start" endAccessor="end" defaultView="week"
+                      min={new Date(0, 0, 0, 7, 0, 0)}
+                      max={new Date(0, 0, 0, 22, 0, 0)}
                       messages={{
                           next: "Suivant",
                           previous: "Précédent",
