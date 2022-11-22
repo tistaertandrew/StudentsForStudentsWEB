@@ -1,8 +1,8 @@
-import {makeAutoObservable} from "mobx";
-import {sessionStore} from "./SessionStore";
+import { makeAutoObservable } from "mobx";
+import { sessionStore } from "./SessionStore";
 import Section from "../models/Section";
 import Cursus from "../models/Cursus";
-import {api} from '../repositories/Api'
+import { api } from '../repositories/Api'
 
 class AuthStore {
     _sections = []
@@ -219,7 +219,6 @@ class AuthStore {
             .then(data => {
                 if (data.error) this.handleErrorMessage(data.message)
                 else {
-                    console.log(data)
                     sessionStore.user = data
                     this.onModeChange('signin')
                 }
