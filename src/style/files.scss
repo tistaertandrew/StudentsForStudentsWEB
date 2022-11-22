@@ -59,14 +59,15 @@ $onBackgroundColor: #949fc1;
     }
 
     &__add {
-        font-size: .7em;
-        position: relative;
-        top: 0;
-        right: 0;
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        bottom: 2%;
+        right: 50%;
         transform: translateX(50%);
         color: white;
         background-color: $secondaryColor;
-        padding: 20px;
+        padding: 10px;
         font-weight: bold;
         border-radius: 10px;
         transition-duration: .5s;

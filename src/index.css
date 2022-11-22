@@ -450,8 +450,10 @@
 .file-title {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 95%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
     font-size: 2em;
     margin-bottom: 2%;
     font-weight: bold;
@@ -494,6 +496,7 @@
 .file-button {
     display: flex;
     flex-direction: row;
+    justify-content: end;
     align-items: center;
     width: 100%;
 }

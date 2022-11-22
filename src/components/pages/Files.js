@@ -8,6 +8,7 @@ import { observer } from "mobx-react";
 import { sessionStore } from '../../stores/SessionStore';
 import { ObservedSnackBar } from "../molecules/SnackBar";
 import LoadingMessage from "../molecules/LoadingMessage";
+import {Add} from "@mui/icons-material";
 
 function Files() {
 
@@ -21,8 +22,6 @@ function Files() {
             <div className='files'>
                 <h1 className={'file-title'}>
                     Listes des synthèses et des prises de note disponibles
-                    <label className='files__add' htmlFor='files__add'>AJOUTER UN FICHIER</label>
-                    <input onChange={(event) => fileTransferStore.onInputFileChange(event.target)} id='files__add' type='file' accept='.txt' hidden></input>
                 </h1>
                 <div className={'file-container'}>
                     {
@@ -43,8 +42,12 @@ function Files() {
                             </div>
                         ))
                     }
-
                 </div>
+                <label className='files__add' htmlFor='files__add'>
+                    <Add/>
+                    AJOUTER UN FICHIER
+                </label>
+                <input onChange={(event) => fileTransferStore.onInputFileChange(event.target)} id='files__add' type='file' accept='.txt' hidden></input>
                 <ObservedSnackBar
                     open={fileTransferStore.isError}
                     message={fileTransferStore.errors}
