@@ -16,7 +16,7 @@ function RequestsContent({handleAccept, handleChangeMode, handleFiltrerRequests,
     return (
         <div className={'requests'}>
             <h1 className={'file-title'}>
-                <Tooltip title={'Filtrer les demandes par cours'}>
+                <Tooltip title={'Filtrer les demandes'}>
                     <Tune className={'settings-icon-right'} onClick={() => requestsStore.openFilterPopup()}/>
                 </Tooltip>
                 Liste des demandes disponibles
