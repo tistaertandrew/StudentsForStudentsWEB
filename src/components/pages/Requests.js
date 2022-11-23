@@ -15,8 +15,7 @@ function Requests() {
     const handleSubmitRequest = (event) => {
         event.preventDefault();
         let data = new FormData(event.currentTarget)
-        console.log('request')
-        console.log([...data.values()])
+        requestsStore.submitRequest([...data.values()])
     }
 
     const handleSubmitAddress = (event) => {
@@ -33,22 +32,38 @@ function Requests() {
         requestsStore.changeMode()
     }
 
-    if(requestsStore.mode) {
-        return(
+    const handleFilterRequests = (event) => {
+        event.preventDefault();
+        let data = new FormData(event.currentTarget)
+        requestsStore.filterRequests([...data.values()])
+    }
+
+    const handleResetFilter = () => {
+        requestsStore.resetFilter()
+    }
+
+    if (requestsStore.mode) {
+        return (
             <div>
                 <ObservedNavBar/>
-                <ObservedRequestsContent handleAccept={handleAccept} handleChangeMode={handleChangeMode}/>
-                <ObservedSnackBar open={requestsStore.open} message={requestsStore.message} severity={requestsStore.severity}/>
+                <ObservedRequestsContent handleAccept={handleAccept}
+                                         handleChangeMode={handleChangeMode}
+                                         handleFiltrerRequests={handleFilterRequests}
+                                         handleResetFilter={handleResetFilter}/>
+                <ObservedSnackBar open={requestsStore.open} message={requestsStore.message}
+                                  severity={requestsStore.severity}/>
             </div>
         )
     }
 
-    if(!requestsStore.mode) {
-        return(
+    if (!requestsStore.mode) {
+        return (
             <div>
                 <ObservedNavBar/>
-                <ObservedRequestForm handleSubmitRequest={handleSubmitRequest} handleSubmitAddress={handleSubmitAddress}/>
-                <ObservedSnackBar open={requestsStore.open} message={requestsStore.message} severity={requestsStore.severity}/>
+                <ObservedRequestForm handleSubmitRequest={handleSubmitRequest}
+                                     handleSubmitAddress={handleSubmitAddress}/>
+                <ObservedSnackBar open={requestsStore.open} message={requestsStore.message}
+                                  severity={requestsStore.severity}/>
             </div>
         )
     }

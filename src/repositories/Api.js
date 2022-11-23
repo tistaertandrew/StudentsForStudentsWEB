@@ -206,6 +206,24 @@ class Api {
         })
             .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
     }
+
+    submitRequest(name, placeId, courseId, description, token) {
+        let data = JSON.stringify({
+            name: name,
+            placeId: placeId,
+            courseId: courseId,
+            description: description
+        })
+        return fetch(`${this.base}/Request`, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+    }
 }
 
 export const api = new Api()

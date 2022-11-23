@@ -120,6 +120,7 @@
     transition-property: background-color;
     transition-duration: .5s;
 }
+
 .navbar .right .nav-button {
     text-align: center;
     font-size: 1.2em;
@@ -318,8 +319,8 @@
 
 .half-button-auth-cancel {
     margin: 5% 1%;
-    border: solid #670000 1px;
-    color: #670000;
+    background-color: #670000;
+    color: white;
     border-radius: 10px;
     width: 40%;
     height: 56px;
@@ -343,7 +344,7 @@
     transition-duration: .5s;
 }
 
-.btn-auth:hover {
+.btn-auth:hover, .half-button-auth-accept:hover{
     cursor: pointer;
     background-color: rgba(193, 136, 69, 0.8);
 }
@@ -370,6 +371,7 @@
     height: 56px;
     font-weight: bold;
     position: relative;
+    cursor: help;
     transition-property: background-color;
     transition-duration: .5s;
 
@@ -393,7 +395,7 @@
     transition-duration: .5s;
 }
 
-.btn-file-delete:hover {
+.btn-file-delete:hover, .half-button-auth-cancel:hover {
     cursor: pointer;
     background-color: rgba(103, 0, 0, 0.8);
 }
@@ -499,9 +501,10 @@
     flex-direction: column;
     align-items: center;
 }
+
 .rbc-month-view {
-     height: 100vh;
- }
+    height: 100vh;
+}
 
 .file-title {
     display: flex;
@@ -574,7 +577,7 @@
 }
 
 .popup-container {
-    width: 100%;
+    width: 600px;
     padding: 5%;
     display: flex;
     flex-direction: column;
@@ -586,4 +589,28 @@
     font-size: 2em;
     font-weight: bold;
     margin-bottom: 2%;
+}
+
+.settings-icon-left {
+    position: relative;
+    top: 0;
+    right: -3%;
+    left: 3%;
+    cursor: pointer;
+    transform: scale(1.2);
+    color: black;
+}
+
+.settings-icon-right {
+    position: relative;
+    top: 0;
+    right: 3%;
+    left: -3%;
+    cursor: pointer;
+    transform: scale(1.2);
+    color: black;
+}
+
+.settings-icon:hover {
+    opacity: .5;
 }

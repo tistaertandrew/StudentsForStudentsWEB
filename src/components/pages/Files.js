@@ -6,7 +6,6 @@ import {observer} from "mobx-react";
 import {sessionStore} from '../../stores/SessionStore';
 import {ObservedSnackBar} from "../molecules/SnackBar";
 import LoadingMessage from "../molecules/LoadingMessage";
-import {Add} from "@mui/icons-material";
 
 function Files() {
 
@@ -46,7 +45,6 @@ function Files() {
                     }
                 </div>
                 <label className='files__add' htmlFor='files__add'>
-                    <Add/>
                     AJOUTER UN FICHIER
                 </label>
                 <input onChange={(event) => fileTransferStore.onInputFileChange(event.target)} id='files__add' type='file' accept='.txt' hidden></input>

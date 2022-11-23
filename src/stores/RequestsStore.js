@@ -13,10 +13,10 @@ class RequestsStore {
     _courses = []
 
     _open = false
-    _popup = false
+    _addressPopup = false
+    _filterPopup = false
     _message = undefined
     _severity = 'error'
-
     _mode = true
 
     constructor() {
@@ -94,12 +94,20 @@ class RequestsStore {
         this._mode = mode
     }
 
-    get popup() {
-        return this._popup
+    get addressPopup() {
+        return this._addressPopup
     }
 
-    set popup(popup) {
-        this._popup = popup
+    set addressPopup(popup) {
+        this._addressPopup = popup
+    }
+
+    get filterPopup() {
+        return this._filterPopup
+    }
+
+    set filterPopup(popup) {
+        this._filterPopup = popup
     }
 
     init() {
@@ -187,12 +195,20 @@ class RequestsStore {
             })
     }
 
-    openPopup() {
-        this.popup = true
+    openAddressPopup() {
+        this.addressPopup = true
     }
 
-    closePopup() {
-        this.popup = false
+    closeAddressPopup() {
+        this.addressPopup = false
+    }
+
+    openFilterPopup() {
+        this.filterPopup = true
+    }
+
+    closeFilterPopup() {
+        this.filterPopup = false
     }
 
     addAddress(data) {
@@ -238,10 +254,86 @@ class RequestsStore {
                 } else {
                     this.handleSuccessMessage(data.message)
                     this.loadPlaces()
-                    this.closePopup()
+                    this.closeAddressPopup()
+                }
+            })
+    }
+
+    submitRequest(data) {
+        this.handleSubmitRequest(...data.values())
+    }
+
+    handleSubmitRequest(name, placeId, courseId, description) {
+        if (name === '') {
+            this.handleErrorMessage('Le champ "Nom de la demande" est obligatoire')
+            return
+        }
+
+        if (placeId === '') {
+            this.handleErrorMessage('Le champ "Lieu concerné" est obligatoire')
+            return
+        }
+
+        if (courseId === '') {
+            this.handleErrorMessage('Le champ "Cours concerné" est obligatoire')
+            return
+        }
+
+        if (description === '') {
+            this.handleErrorMessage('Le champ "Description de la demande" est obligatoire')
+            return
+        }
+
+        api.submitRequest(name, placeId, courseId, description, sessionStore.user.token)
+            .then(data => {
+                debugger
+                if (data.error) {
+                    if (data.unauthorized) {
+                        sessionStore.logout()
+                    } else {
+                        this.handleErrorMessage(data.message)
+                    }
+                } else {
+                    this.handleSuccessMessage(data.message)
+                    this.loadRequests()
+                }
+            })
+    }
+
+    filterRequests(data) {
+        let id = parseInt([...data.values()][0])
+        if(isNaN(id)) {
+            this.handleErrorMessage('Le champ "Cours concerné" est obligatoire"')
+            return
+        }
+        api.fetchRequests(sessionStore.user.token)
+            .then(data => {
+                if (data.error) {
+                    if (data.unauthorized) {
+                        sessionStore.logout()
+                    }
+                } else {
+                    this.requests = data
+                    this.requests = this.requests.filter(request => request.course.id === id)
+                    this.closeFilterPopup()
+                }
+            })
+    }
+
+    resetFilter() {
+        api.fetchRequests(sessionStore.user.token)
+            .then(data => {
+                if (data.error) {
+                    if (data.unauthorized) {
+                        sessionStore.logout()
+                    }
+                } else {
+                    this.requests = data
+                    this.closeFilterPopup()
                 }
             })
     }
 }
 
-export const requestsStore = new RequestsStore()
+export const
+    requestsStore = new RequestsStore()

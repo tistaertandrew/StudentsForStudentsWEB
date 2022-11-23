@@ -22,16 +22,16 @@ function RequestForm({handleSubmitRequest, handleSubmitAddress}) {
                     <InputForm id={'name'} label={'Nom de la demande'}/>,
                     <HalfSelectInputForm id={'place'} label={'Lieu concerné *'} inputs={requestsStore.places}/>,
                     <HalfSelectInputForm id={'course'} label={'Cours concerné *'} inputs={requestsStore.courses}/>,
-                    <RedirectLink label={'Ajouter une adresse'} handleMode={() => requestsStore.openPopup()}/>,
+                    <RedirectLink label={'Ajouter une adresse'} handleMode={() => requestsStore.openAddressPopup()}/>,
                     <TextAreaInputForm id={'description'} label={'Description de la demande *'}/>,
                     <input type={'submit'} className={'btn-auth'} value={'VALIDER'}/>
                 ]}/>
-                <RedirectLink label={'Annuler'} handleMode={() => requestsStore.changeMode()}/>
+                <RedirectLink label={'Retour'} handleMode={() => requestsStore.changeMode()}/>
             </div>
             <div className={'column'} style={{backgroundColor: '#5D7052'}}>
                 <img src={LeftImage} alt={'students'} className={'hero-banner-img'}/>
             </div>
-            <Dialog open={requestsStore.popup} onClose={() => requestsStore.closePopup()}>
+            <Dialog open={requestsStore.addressPopup} onClose={() => requestsStore.closeAddressPopup()}>
                 <div className={'popup-container'}>
                     <h1 className={'popup-title'}>AJOUTER UNE ADRESSE</h1>
                     <DisplayForm handleSubmit={handleSubmitAddress} inputs={[
@@ -41,7 +41,7 @@ function RequestForm({handleSubmitRequest, handleSubmitAddress}) {
                         <InputForm id={'locality'} label={'Localité'}/>,
                         <input type={'submit'} className={'btn-auth'} value={'AJOUTER'}/>
                     ]}/>
-                    <RedirectLink label={'Annuler'} handleMode={() => requestsStore.closePopup()}/>
+                    <RedirectLink label={'Annuler'} handleMode={() => requestsStore.closeAddressPopup()}/>
                 </div>
             </Dialog>
         </div>

@@ -1,4 +1,4 @@
-import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
+import {Accordion, AccordionDetails, AccordionSummary, Tooltip} from "@mui/material";
 import {ExpandMore} from "@mui/icons-material";
 import React from "react";
 
@@ -26,9 +26,11 @@ export default function DisplayRequest({id, name, sender, date, course, place, s
                         <p className={'request-value'}>{date}</p>
                     </div>
                     <div className={'request-button'}>
-                        <input type={'submit'}
-                               className={expanded ? 'btn-request-accept' : 'btn-request-accept-disabled'}
-                               value={'ACCEPTER'} onClick={handleAccept} disabled={!expanded}/>
+                        <Tooltip title={expanded ? 'Accepter la demande' : 'Veuillez ouvrir l\'accordéon pour pouvoir accepter la demande'}>
+                            <input type={'submit'}
+                                   className={expanded ? 'btn-request-accept' : 'btn-request-accept-disabled'}
+                                   value={'ACCEPTER'} onClick={expanded ? handleAccept : null}/>
+                        </Tooltip>
                     </div>
                 </div>
             </AccordionSummary>
