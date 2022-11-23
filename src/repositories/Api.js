@@ -111,7 +111,7 @@ class Api {
                 'Authorization': `bearer ${token}`
             }
         })
-            .then(resp => resp.status === 401 ? ({ error: true, unauthorized: true }) : resp.json())
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
     }
 
     sendContactForm(lastname, firstname, email, message) {
@@ -142,7 +142,7 @@ class Api {
                 'Authorization': `bearer ${token}`
             }
         })
-            .then(resp => resp.status === 401 ? ({ error: true, unauthorized: true }) : resp.json())
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
     }
 
     updateCalendarLink(token, link) {
@@ -152,7 +152,41 @@ class Api {
                 'Authorization': `bearer ${token}`
             }
         })
-            .then(resp => resp.status === 401 ? ({ error: true, unauthorized: true }) : resp.json())
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+    }
+
+    fetchRequests(token) {
+        return fetch(`${this.base}/Request`, {
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+    }
+
+    fetchPlaces(token) {
+        return fetch(`${this.base}/Place`, {
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+    }
+
+    fetchCourses(cursusId) {
+        return fetch(`${this.base}/School/Courses/${cursusId}`)
+            .then(resp => resp.json())
+        
+    }
+
+    acceptRequest(id, token) {
+        return fetch(`${this.base}/Request/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
     }
 }
 

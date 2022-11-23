@@ -320,7 +320,7 @@
     background-color: rgba(193, 136, 69, 0.8);
 }
 
-.btn-file-download {
+.btn-file-download, .btn-request-accept {
     margin: 2% 5%;
     background-color: #5D7052;
     color: white;
@@ -331,9 +331,25 @@
     position: relative;
     transition-property: background-color;
     transition-duration: .5s;
+    z-index: 1000;
 }
 
-.btn-file-download:hover {
+.btn-request-accept-disabled {
+    margin: 2% 5%;
+    color: white;
+    background-color: gray;
+    border-radius: 10px;
+    min-width: 35%;
+    height: 56px;
+    font-weight: bold;
+    position: relative;
+    transition-property: background-color;
+    transition-duration: .5s;
+    z-index: 1000;
+
+}
+
+.btn-file-download:hover, .btn-request-accept:hover {
     cursor: pointer;
     background-color: rgba(93, 112, 82, 0.8);
 }
@@ -374,6 +390,20 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+.request-grid {
+    display: flex;
+    align-items: flex-start;
+}
+
+.request-grid .column {
+    float: left;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .auth-grid {
@@ -474,28 +504,46 @@
     box-shadow: 10px 10px 39px -13px rgba(0, 0, 0, 0.75);
 }
 
-.file-name {
+.file-name, .request-name {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     margin: 1%;
 }
 
-.file-key {
-    margin: 10px;
-    font-size: 1.3em;
+.file-key, .request-key {
+    font-size: 1.4em;
     font-weight: bold;
 }
 
-.file-value {
-    font-size: 1.3em;
+.file-value, .request-value {
+    font-size: 1.4em;
     opacity: .8;
 }
 
-.file-button {
+.file-button, .request-button {
     display: flex;
     flex-direction: row;
     justify-content: end;
     align-items: center;
     width: 100%;
+}
+
+.requests {
+    padding: calc(60px + 1rem);
+}
+
+.request-item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.request-details-item {
+    border-top: solid rgba(0, 0, 0, .1) 1px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
 }

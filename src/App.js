@@ -1,4 +1,4 @@
-import './index.css'
+import './style/index.css'
 import routes from './routes.json'
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
@@ -9,6 +9,7 @@ import {ChatObserver} from './components/pages/Chat';
 import {sessionStore} from './stores/SessionStore';
 import {ObserverFiles} from './components/pages/Files';
 import {ObservedCalendar} from "./components/pages/Calendar";
+import {ObservedRequests} from "./components/pages/Requests";
 
 function App() {
 
@@ -42,6 +43,11 @@ function App() {
                 <Route exact path={routes.Calendar} element={
                     <AuthenticatedRoute>
                         <ObservedCalendar/>
+                    </AuthenticatedRoute>
+                }/>
+                <Route exact path={routes.Requests} element={
+                    <AuthenticatedRoute>
+                        <ObservedRequests/>
                     </AuthenticatedRoute>
                 }/>
             </Routes>
