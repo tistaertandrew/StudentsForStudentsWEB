@@ -13,6 +13,7 @@ class RequestsStore {
     _courses = []
 
     _open = false
+    _popup = false
     _message = undefined
     _severity = 'error'
 
@@ -91,6 +92,14 @@ class RequestsStore {
 
     set mode(mode) {
         this._mode = mode
+    }
+
+    get popup() {
+        return this._popup
+    }
+
+    set popup(popup) {
+        this._popup = popup
     }
 
     init() {
@@ -174,6 +183,62 @@ class RequestsStore {
                 } else {
                     this.handleSuccessMessage(data.message)
                     this.loadRequests()
+                }
+            })
+    }
+
+    openPopup() {
+        this.popup = true
+    }
+
+    closePopup() {
+        this.popup = false
+    }
+
+    addAddress(data) {
+        this.handleAddAddress(...data.values())
+    }
+
+    handleAddAddress(street, number, postalCode, locality) {
+        const regex = /^[0-9]{1,4}[a-zA-Z]?$/
+        if (street === '') {
+            this.handleErrorMessage('Le champ "Rue" est obligatoire')
+            return
+        }
+
+        if (number === '') {
+            this.handleErrorMessage('Le champ "Numéro" est obligatoire')
+            return
+        }
+
+        if (!number.match(regex)) {
+            this.handleErrorMessage('Veuillez entrer un numéro de rue valide')
+            return
+        }
+
+        if (postalCode === '') {
+            this.handleErrorMessage('Le champ "Code postal" est obligatoire')
+            return
+        }
+
+        if (locality === '') {
+            this.handleErrorMessage('Le champ "Localité" est obligatoire')
+            return
+        }
+
+        api.addAddress(street, number, postalCode, locality, sessionStore.user.token)
+            .then(data => {
+                debugger
+                if (data.error) {
+                    if (data.unauthorized) {
+                        sessionStore.logout()
+                    } else {
+                        this.handleErrorMessage(data.message)
+                    }
+                } else {
+                    this.handleSuccessMessage(data.message)
+                    this.loadPlaces()
+                    this.closePopup()
                 }
             })
     }

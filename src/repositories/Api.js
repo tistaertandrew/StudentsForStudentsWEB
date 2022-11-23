@@ -188,6 +188,24 @@ class Api {
         })
             .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
     }
+
+    addAddress(street, number, postalCode, locality, token) {
+        let data = JSON.stringify({
+            street: street,
+            number: number,
+            postalCode: postalCode,
+            locality: locality
+        })
+        return fetch(`${this.base}/Place`, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+    }
 }
 
 export const api = new Api()

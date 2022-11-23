@@ -302,6 +302,34 @@
     opacity: 50%;
 }
 
+.half-button-auth-accept {
+    margin: 5% 1%;
+    background-color: #C18845;
+    color: white;
+    border-radius: 10px;
+    width: 40%;
+    height: 56px;
+    font-weight: bold;
+    position: relative;
+    transition-property: background-color;
+    transition-duration: .5s;
+
+}
+
+.half-button-auth-cancel {
+    margin: 5% 1%;
+    border: solid #670000 1px;
+    color: #670000;
+    border-radius: 10px;
+    width: 40%;
+    height: 56px;
+    font-weight: bold;
+    position: relative;
+    transition-property: background-color;
+    transition-duration: .5s;
+
+}
+
 .btn-auth {
     margin: 5% 0 0 0;
     background-color: #C18845;
@@ -331,7 +359,6 @@
     position: relative;
     transition-property: background-color;
     transition-duration: .5s;
-    z-index: 1000;
 }
 
 .btn-request-accept-disabled {
@@ -345,7 +372,6 @@
     position: relative;
     transition-property: background-color;
     transition-duration: .5s;
-    z-index: 1000;
 
 }
 
@@ -545,5 +571,19 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
 
+.popup-container {
+    width: 100%;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 2%;
 }
