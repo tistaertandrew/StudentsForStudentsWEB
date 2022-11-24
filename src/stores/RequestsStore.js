@@ -186,7 +186,7 @@ class RequestsStore {
                     if (data.unauthorized) {
                         sessionStore.logout()
                     } else {
-                        this.handleErrorMessage(data.error)
+                        this.handleErrorMessage(data.message)
                     }
                 } else {
                     this.handleSuccessMessage(data.message)
