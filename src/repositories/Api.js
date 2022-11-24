@@ -224,6 +224,16 @@ class Api {
         })
             .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
     }
+
+    fetchUsersCount() {
+        return fetch(`${this.base}/User/Count`)
+            .then(resp => resp.json())
+    }
+
+    fetchFilesCount() {
+        return fetch(`${this.base}/File/Count`)
+            .then(resp => resp.json())
+    }
 }
 
 export const api = new Api()
