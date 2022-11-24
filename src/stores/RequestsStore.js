@@ -303,7 +303,7 @@ class RequestsStore {
     filterRequests(data) {
         let id = parseInt([...data.values()][0])
         if(isNaN(id)) {
-            this.handleErrorMessage('Le champ "Cours concerné" est obligatoire"')
+            this.handleErrorMessage('Le champ "Cours concerné" est obligatoire')
             return
         }
         api.fetchRequests(sessionStore.user.token)
