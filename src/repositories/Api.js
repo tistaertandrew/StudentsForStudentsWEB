@@ -155,8 +155,8 @@ class Api {
             .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
     }
 
-    fetchRequests(token) {
-        return fetch(`${this.base}/Request`, {
+    fetchRequests(type, token) {
+        return fetch(`${this.base}/Request/${type}`, {
             headers: {
                 'Authorization': `bearer ${token}`
             }

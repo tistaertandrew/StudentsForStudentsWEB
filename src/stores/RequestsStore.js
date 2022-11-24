@@ -117,7 +117,7 @@ class RequestsStore {
     }
 
     loadRequests() {
-        api.fetchRequests(sessionStore.user.token)
+        api.fetchRequests(false, sessionStore.user.token)
             .then(data => {
                 if (data.error) {
                     if (data.unauthorized) {
@@ -306,8 +306,9 @@ class RequestsStore {
             this.handleErrorMessage('Le champ "Cours concerné" est obligatoire')
             return
         }
-        api.fetchRequests(sessionStore.user.token)
+        api.fetchRequests(false, sessionStore.user.token)
             .then(data => {
+                debugger
                 if (data.error) {
                     if (data.unauthorized) {
                         sessionStore.logout()
@@ -321,7 +322,7 @@ class RequestsStore {
     }
 
     resetFilter() {
-        api.fetchRequests(sessionStore.user.token)
+        api.fetchRequests(false, sessionStore.user.token)
             .then(data => {
                 if (data.error) {
                     if (data.unauthorized) {
