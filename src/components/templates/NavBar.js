@@ -27,9 +27,9 @@ function NavBar() {
                 anchorEl={navigationStore.element}
                 label={`Bonjour, ${sessionStore.user.username}`}
                 inputs={[
-                    <DisplayUserMenuInfo route={routes.User}
+                    <DisplayUserMenuInfo route={routes.MyRequests}
                         onReset={() => navigationStore.handleCloseMenu()}
-                        label={'Paramètres'} />,
+                        label={'Mes demandes'} />,
                     <DisplayUserMenuInfo onClick={() => sessionStore.logout()}
                         onReset={() => navigationStore.handleCloseMenu()}
                         label={'Se déconnecter'} />]} />

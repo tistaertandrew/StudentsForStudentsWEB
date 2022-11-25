@@ -189,6 +189,17 @@ class Api {
             .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
     }
 
+    deleteRequest(id, token) {
+        debugger
+        return fetch(`${this.base}/Request/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+    }
+
     addAddress(street, number, postalCode, locality, token) {
         let data = JSON.stringify({
             street: street,

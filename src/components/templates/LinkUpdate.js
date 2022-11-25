@@ -1,4 +1,4 @@
-import LeftImage from "../../assets/images/peace.png";
+import LeftImage from "../../assets/images/calendar.png";
 import DisplayForm from "../organisms/DisplayForm";
 import InputForm from "../molecules/InputForm";
 import {observer} from "mobx-react";

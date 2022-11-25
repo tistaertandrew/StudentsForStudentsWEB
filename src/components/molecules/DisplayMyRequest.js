@@ -2,7 +2,7 @@ import {Accordion, AccordionDetails, AccordionSummary, Tooltip} from "@mui/mater
 import {ExpandMore} from "@mui/icons-material";
 import React from "react";
 
-export default function DisplayRequest({id, name, sender, date, course, place, status, description, handleAccept}) {
+export default function DisplayMyRequest({id, name, sender, handler, date, course, place, status, description, handleDelete}) {
     const [expanded, setExpanded] = React.useState(false);
 
     return (
@@ -26,11 +26,14 @@ export default function DisplayRequest({id, name, sender, date, course, place, s
                         <p className={'request-value'}>{date}</p>
                     </div>
                     <div className={'request-button'}>
-                        <Tooltip title={expanded ? 'Accepter la demande' : 'Veuillez ouvrir l\'accordéon pour pouvoir accepter la demande'}>
-                            <input type={'submit'}
-                                   className={expanded ? 'btn-request-accept' : 'btn-request-accept-disabled'}
-                                   value={'ACCEPTER'} onClick={expanded ? handleAccept : null}/>
-                        </Tooltip>
+                        {!status &&
+                            <Tooltip
+                                title={expanded ? 'Supprimer la demande' : 'Veuillez ouvrir l\'accordéon pour pouvoir supprimer votre demande'}>
+                                <input type={'submit'}
+                                       className={expanded ? 'btn-request-delete' : 'btn-request-accept-disabled'}
+                                       value={'SUPPRIMER'} onClick={expanded ? handleDelete : null}/>
+                            </Tooltip>
+                        }
                     </div>
                 </div>
             </AccordionSummary>
@@ -47,7 +50,7 @@ export default function DisplayRequest({id, name, sender, date, course, place, s
                     <div className={'request-name'} style={{minWidth: '15%', maxWidth: '15%'}}>
                         <p className={'request-key'}>Statut :</p>
                         <p className={'request-value'}
-                           style={status ? {color: 'green'} : {color: 'orange'}}>{status ? 'acceptée' : 'en attente'}</p>
+                           style={status ? {color: 'green'} : {color: 'orange'}}>{status ? `acceptée par ${handler}` : 'en attente'}</p>
                     </div>
                     <div className={'request-name'} style={{minWidth: '100%', maxWidth: '100%'}}>
                         <p className={'request-key'}>Description :</p>

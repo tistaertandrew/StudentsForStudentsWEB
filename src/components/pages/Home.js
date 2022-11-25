@@ -2,7 +2,7 @@ import {ObservedNavBar} from "../templates/NavBar";
 import {observer} from "mobx-react";
 import {homeStore} from "../../stores/HomeStore";
 import {useEffect} from "react";
-import LeftImage from '../../assets/images/tired.png'
+import LeftImage from '../../assets/images/home.png'
 import {useNavigate} from "react-router-dom";
 import routes from '../../routes.json'
 import {sessionStore} from "../../stores/SessionStore";

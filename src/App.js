@@ -10,6 +10,7 @@ import {sessionStore} from './stores/SessionStore';
 import {ObserverFiles} from './components/pages/Files';
 import {ObservedCalendar} from "./components/pages/Calendar";
 import {ObservedRequests} from "./components/pages/Requests";
+import {ObservedMyRequests} from "./components/pages/MyRequests";
 
 function App() {
 
@@ -48,6 +49,11 @@ function App() {
                 <Route exact path={routes.Requests} element={
                     <AuthenticatedRoute>
                         <ObservedRequests/>
+                    </AuthenticatedRoute>
+                }/>
+                <Route exact path={routes.MyRequests} element={
+                    <AuthenticatedRoute>
+                        <ObservedMyRequests/>
                     </AuthenticatedRoute>
                 }/>
             </Routes>

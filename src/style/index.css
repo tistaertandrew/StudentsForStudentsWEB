@@ -420,7 +420,7 @@
     background-color: rgba(93, 112, 82, 0.8);
 }
 
-.btn-file-delete {
+.btn-file-delete, .btn-request-delete {
     margin: 2% 5%;
     background-color: #670000;
     color: white;
@@ -433,7 +433,7 @@
     transition-duration: .5s;
 }
 
-.btn-file-delete:hover, .half-button-auth-cancel:hover {
+.btn-file-delete:hover, .half-button-auth-cancel:hover, .btn-request-delete:hover {
     cursor: pointer;
     background-color: rgba(103, 0, 0, 0.8);
 }

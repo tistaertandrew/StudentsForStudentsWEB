@@ -1,5 +1,5 @@
 import {observer} from "mobx-react";
-import LeftImage from "../../assets/images/students.png";
+import LeftImage from "../../assets/images/request.png";
 import DisplayForm from "../organisms/DisplayForm";
 import InputForm from "../molecules/InputForm";
 import RedirectLink from "../molecules/RedirectLink";

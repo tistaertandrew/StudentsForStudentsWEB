@@ -56,6 +56,7 @@ class RequestsStore {
                 request.date,
                 request.status,
                 request.sender,
+                request.handler,
                 new Place(request.place.id, request.place.street, request.place.postalCode, request.place.number, request.place.locality),
                 new Course(request.course.id, request.course.label, new Cursus(request.course.cursus.id, request.course.cursus.label, new Section(request.course.cursus.section.id, request.course.cursus.section.label)))
             )
