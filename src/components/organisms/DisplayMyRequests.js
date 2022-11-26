@@ -9,7 +9,7 @@ export default function DisplayMyRequests({requests, onDelete}) {
 
     if(requests.length === 0) {
         return (
-            <EmptyContent message={'Aucune demande disponible'}/>
+            <EmptyContent message={'Vous n\'avez créé ou accepté aucune demande'}/>
         )
     }
 
