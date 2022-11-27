@@ -6,6 +6,7 @@
   "Requests": "/Requests",
   "MyRequests": "/MyRequests",
   "Syntheses": "/Syntheses",
+  "NotFound": "/*",
   "User": "/User",
   "Chat": "/Chat",
   "ChatSettings": "/ChatSettings",

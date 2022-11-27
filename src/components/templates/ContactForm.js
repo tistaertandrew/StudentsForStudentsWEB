@@ -6,6 +6,8 @@ import RightImage from "../../assets/images/tired.png";
 import TextAreaInputForm from "../molecules/TextAreaInputForm";
 import {sessionStore} from "../../stores/SessionStore";
 import HiddenInputForm from "../molecules/HiddenInputForm";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import {Contacts} from "@mui/icons-material";
 
 function ContactForm({handleSubmit}) {
     const isConnected = () => {
@@ -40,6 +42,7 @@ function ContactForm({handleSubmit}) {
         <div className={'auth-grid'}>
             <div className={'column'}>
                 <div className={'container-title-auth'}>
+                    <Contacts className={'icon-auth'}/>
                     <h1 className={'title-auth'}>CONTACTER UN ADMINISTRATEUR</h1>
                 </div>
                 <DisplayForm handleSubmit={handleSubmit}

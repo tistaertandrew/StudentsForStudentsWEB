@@ -11,6 +11,7 @@ import {ObserverFiles} from './components/pages/Files';
 import {ObservedCalendar} from "./components/pages/Calendar";
 import {ObservedRequests} from "./components/pages/Requests";
 import {ObservedMyRequests} from "./components/pages/MyRequests";
+import NotFound from "./components/pages/NotFound";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
                 <Route exact path={routes.Authentication} element={<ObservedAuthentication/>}/>
                 <Route exact path={routes.Contact} element={<ObservedContact/>}/>
                 <Route exact path={routes.About} element={<About/>}/>
+                <Route exact path={routes.NotFound} element={<NotFound/>}/>
                 <Route exact path={routes.Syntheses} element={
                     <AuthenticatedRoute>
                         <ObserverFiles/>
