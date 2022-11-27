@@ -35,13 +35,13 @@ function Home() {
                     <h2 className={'home-main-p'}>Une plateforme pour les étudiants, faites par les étudiants.</h2>
                     <div className={'row'}>
                         <div className={'column'}>
-                            <h1 className={'home-main-key'}>{homeStore.usersCount < 9 ? `0${homeStore.usersCount}` : homeStore.usersCount}</h1>
-                            <h2 className={'home-main-value'}>Utilisateur(s) inscrit(s)</h2>
-                        </div>
-                        <div className={'column'}>
                             <h1 className={'home-main-key'}>{homeStore.filesCount < 9 ? `0${homeStore.filesCount}` :
                                 <homeStore className="gi"></homeStore>}</h1>
                             <h2 className={'home-main-value'}>Synthèse(s) disponible(s)</h2>
+                        </div>
+                        <div className={'column'}>
+                            <h1 className={'home-main-key'}>{homeStore.usersCount < 9 ? `0${homeStore.usersCount}` : homeStore.usersCount}</h1>
+                            <h2 className={'home-main-value'}>Utilisateur(s) inscrit(s)</h2>
                         </div>
                     </div>
                     <div className={'row'}>

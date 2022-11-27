@@ -1,6 +1,6 @@
 import './style/index.css'
 import routes from './routes.json'
-import Home, {ObservedHome} from "./components/pages/Home";
+import {ObservedHome} from "./components/pages/Home";
 import About from "./components/pages/About";
 import {HashRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 import {ObservedAuthentication} from "./components/pages/Authentication";

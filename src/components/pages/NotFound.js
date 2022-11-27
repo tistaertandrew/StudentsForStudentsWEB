@@ -1,10 +1,8 @@
 import {ObservedNavBar} from "../templates/NavBar";
-import {sessionStore} from "../../stores/SessionStore";
 import {useNavigate} from "react-router-dom";
 import routes from '../../routes.json'
 import RightImage from "../../assets/images/tired.png";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import {DoNotDisturb, DoNotDisturbOn, Foundation} from "@mui/icons-material";
+import {DoNotDisturbOn} from "@mui/icons-material";
 
 export default function NotFound() {
     const navigate = useNavigate();

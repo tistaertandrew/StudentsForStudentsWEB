@@ -1,7 +1,5 @@
 import {observer} from "mobx-react";
-import {requestsStore} from "../../stores/RequestsStore";
 import React from "react";
-import DisplayRequests from "../organisms/DisplayRequests";
 import {Dialog, Tooltip} from "@mui/material";
 import DisplayForm from "../organisms/DisplayForm";
 import RedirectLink from "../molecules/RedirectLink";
