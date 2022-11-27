@@ -4,7 +4,13 @@ import DisplayForm from "../organisms/DisplayForm";
 import InputForm from "../molecules/InputForm";
 import RedirectLink from "../molecules/RedirectLink";
 import {requestsStore} from "../../stores/RequestsStore";
-import {AddBox} from "@mui/icons-material";
+import {
+    AddBox,
+    People,
+    SupervisedUserCircle,
+    SupervisedUserCircleOutlined, SupervisedUserCircleRounded,
+    SupervisedUserCircleTwoTone
+} from "@mui/icons-material";
 import TextAreaInputForm from "../molecules/TextAreaInputForm";
 import HalfInputForm from "../molecules/HalfInputForm";
 import HalfSelectInputForm from "../molecules/HalfSelectInputForm";
@@ -15,7 +21,7 @@ function RequestForm({handleSubmitRequest, handleSubmitAddress}) {
         <div className={'auth-grid'}>
             <div className={'column'}>
                 <div className={'container-title-auth'}>
-                    <AddBox className={'icon-auth'}/>
+                    <People className={'icon-auth'}/>
                     <h1 className={'title-auth'}>DEMANDE DE TUTORAT</h1>
                 </div>
                 <DisplayForm handleSubmit={handleSubmitRequest} inputs={[

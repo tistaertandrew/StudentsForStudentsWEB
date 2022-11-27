@@ -115,6 +115,7 @@ class RequestsStore {
         this.loadRequests()
         this.loadPlaces()
         this.loadCourses()
+        this.mode = true
     }
 
     loadRequests() {
