@@ -148,6 +148,7 @@ button.rbc-input::-moz-focus-inner {
 }
 
 .rbc-today {
+    color: black;
     background-color: #eaf6ff;
 }
 
