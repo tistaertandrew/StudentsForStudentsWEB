@@ -725,6 +725,12 @@
     background-color: #5D7052;
 }
 
+.icon-accordion {
+    width: 50px;
+    height: 50px;
+    margin: 0 15%;
+}
+
 @keyframes anim-lineUp {
     0% {
         opacity: 0;

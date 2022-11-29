@@ -1,5 +1,14 @@
 import {Accordion, AccordionDetails, AccordionSummary, Tooltip} from "@mui/material";
-import {ExpandMore} from "@mui/icons-material";
+import {
+    AddTask,
+    Check,
+    CheckBoxSharp, CheckCircle,
+    CheckCircleOutline,
+    CheckCircleOutlineSharp,
+    Delete,
+    ExpandMore,
+    PersonAddAlt
+} from "@mui/icons-material";
 import React from "react";
 
 export default function DisplayRequest({id, name, sender, date, course, place, status, description, handleAccept}) {
@@ -21,15 +30,13 @@ export default function DisplayRequest({id, name, sender, date, course, place, s
                         <p className={'request-key'}>Auteur :</p>
                         <p className={'request-value'}>{sender}</p>
                     </div>
-                    <div className={'request-name'} style={{minWidth: '15%', maxWidth: '15%'}}>
+                    <div className={'request-name'} style={{minWidth: '25%', maxWidth: '25%'}}>
                         <p className={'request-key'}>Date :</p>
                         <p className={'request-value'}>{date}</p>
                     </div>
                     <div className={'request-button'}>
                         <Tooltip title={expanded ? 'Accepter la demande' : 'Veuillez ouvrir l\'accordéon pour pouvoir accepter la demande'}>
-                            <input type={'submit'}
-                                   className={expanded ? 'btn-request-accept' : 'btn-request-accept-disabled'}
-                                   value={'ACCEPTER'} onClick={expanded ? handleAccept : null}/>
+                            <CheckCircle className={'icon-accordion'} onClick={expanded ? handleAccept : null} sx={{color: expanded ? '#5D7052' : 'gray', width: '40px', height: '40px'}}/>
                         </Tooltip>
                     </div>
                 </div>
@@ -44,7 +51,7 @@ export default function DisplayRequest({id, name, sender, date, course, place, s
                         <p className={'request-key'}>Lieu :</p>
                         <p className={'request-value'}>{place}</p>
                     </div>
-                    <div className={'request-name'} style={{minWidth: '15%', maxWidth: '15%'}}>
+                    <div className={'request-name'} style={{minWidth: '25%', maxWidth: '25%'}}>
                         <p className={'request-key'}>Statut :</p>
                         <p className={'request-value'}
                            style={status ? {color: 'green'} : {color: 'orange'}}>{status ? 'acceptée' : 'en attente'}</p>
