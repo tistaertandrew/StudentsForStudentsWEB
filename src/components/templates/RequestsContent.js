@@ -19,7 +19,7 @@ function RequestsContent({handleAccept, handleChangeMode, handleFiltrerRequests,
                 <Tooltip title={'Filtrer les demandes'}>
                     <Tune className={'settings-icon-right'} onClick={() => requestsStore.openFilterPopup()}/>
                 </Tooltip>
-                Liste des demandes disponibles
+                Liste des demandes de tutorat disponibles
                 <Tooltip title={'Réinitialiser les filtres appliqués'}>
                     <Cached className={'settings-icon-left'} onClick={handleResetFilter}/>
                 </Tooltip>

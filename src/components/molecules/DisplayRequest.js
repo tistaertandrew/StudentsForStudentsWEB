@@ -1,14 +1,5 @@
 import {Accordion, AccordionDetails, AccordionSummary, Tooltip} from "@mui/material";
-import {
-    AddTask,
-    Check,
-    CheckBoxSharp, CheckCircle,
-    CheckCircleOutline,
-    CheckCircleOutlineSharp,
-    Delete,
-    ExpandMore,
-    PersonAddAlt
-} from "@mui/icons-material";
+import {CheckCircle, ExpandMore} from "@mui/icons-material";
 import React from "react";
 
 export default function DisplayRequest({id, name, sender, date, course, place, status, description, handleAccept}) {

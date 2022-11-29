@@ -1,5 +1,5 @@
-import {Accordion, AccordionDetails, AccordionSummary, Tooltip} from "@mui/material";
-import {Delete, Download, ExpandMore} from "@mui/icons-material";
+import {Accordion, AccordionSummary, Tooltip} from "@mui/material";
+import {Delete, Download} from "@mui/icons-material";
 import React from "react";
 import {sessionStore} from "../../stores/SessionStore";
 

@@ -5,7 +5,6 @@ import {fileTransferStore} from '../../stores/FileTransferStore';
 import {observer} from "mobx-react";
 import {sessionStore} from '../../stores/SessionStore';
 import {ObservedSnackBar} from "../molecules/SnackBar";
-import LoadingMessage from "../molecules/LoadingMessage";
 import DisplayForm from "../organisms/DisplayForm";
 import SelectInputForm from "../molecules/SelectInputForm";
 import RedirectLink from "../molecules/RedirectLink";
