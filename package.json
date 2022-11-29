@@ -15,6 +15,7 @@
     "date-fns": "^2.29.3",
     "firebase": "^9.14.0",
     "gapi-script": "^1.2.0",
+    "material-ui-dropzone": "^3.5.0",
     "mobx": "^6.6.2",
     "mobx-react": "^7.5.3",
     "moment": "^2.29.4",

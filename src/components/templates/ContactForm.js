@@ -21,6 +21,7 @@ function ContactForm({handleSubmit}) {
                 <InputForm id={'email'} label={'Adresse mail'}
                            value={sessionStore.user?.email} disabled={true}/>,
                 <HiddenInputForm id={'email'} value={sessionStore.user?.email}/>,
+                <InputForm id={'subject'} label={'Sujet'}/>,
                 <TextAreaInputForm id={'message'} label={'Votre message...'}/>,
                 <input type={'submit'} className={'btn-auth'} value={'ENVOYER'}/>
             ]
@@ -32,6 +33,7 @@ function ContactForm({handleSubmit}) {
                                value={sessionStore.user?.firstname}/>,
                 <InputForm id={'email'} label={'Adresse mail'}
                            value={sessionStore.user?.email}/>,
+                <InputForm id={'subject'} label={'Sujet'}/>,
                 <TextAreaInputForm id={'message'} label={'Votre message...'}/>,
                 <input type={'submit'} className={'btn-auth'} value={'ENVOYER'}/>
             ]

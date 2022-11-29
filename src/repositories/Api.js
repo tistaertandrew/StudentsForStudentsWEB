@@ -114,11 +114,12 @@ class Api {
             .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
     }
 
-    sendContactForm(lastname, firstname, email, message) {
+    sendContactForm(lastname, firstname, email, subject, message) {
         let data = JSON.stringify({
             lastname: lastname,
             firstname: firstname,
             email: email,
+            subject: subject,
             message: message
         })
         return fetch(`${this.base}/Contact`, {

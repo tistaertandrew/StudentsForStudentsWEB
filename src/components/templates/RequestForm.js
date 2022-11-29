@@ -4,13 +4,7 @@ import DisplayForm from "../organisms/DisplayForm";
 import InputForm from "../molecules/InputForm";
 import RedirectLink from "../molecules/RedirectLink";
 import {requestsStore} from "../../stores/RequestsStore";
-import {
-    AddBox,
-    People,
-    SupervisedUserCircle,
-    SupervisedUserCircleOutlined, SupervisedUserCircleRounded,
-    SupervisedUserCircleTwoTone
-} from "@mui/icons-material";
+import {People} from "@mui/icons-material";
 import TextAreaInputForm from "../molecules/TextAreaInputForm";
 import HalfInputForm from "../molecules/HalfInputForm";
 import HalfSelectInputForm from "../molecules/HalfSelectInputForm";
