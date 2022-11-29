@@ -12,6 +12,7 @@ import RedirectLink from "../molecules/RedirectLink";
 import {Dialog} from "@mui/material";
 import {DropzoneArea} from "material-ui-dropzone";
 import DisplaySynthese from "../molecules/DisplaySynthese";
+import EmptyContent from "../molecules/EmptyContent";
 
 function Files() {
     useEffect(() => {
@@ -22,6 +23,22 @@ function Files() {
         event.preventDefault()
         let data = new FormData(event.currentTarget)
         fileTransferStore.handleFileSubmit([...data.values()])
+    }
+
+    const displayFiles = () => {
+        if (fileTransferStore.files.length === 0) {
+            return (
+                <EmptyContent message={'Aucune synthèse à afficher'}/>
+            )
+        }
+        return fileTransferStore.files.map((file, index) => {
+            return <DisplaySynthese id={index} name={file.name} sender={file.owner}
+                                    date={file.creationDate}
+                                    course={file.course.content}
+                                    handleDownload={() => fileTransferStore.onDownloadFile(file, sessionStore.user.token)}
+                                    handleDelete={() => fileTransferStore.onDeleteFile(file, sessionStore.user.token)}
+            />
+        })
     }
 
     useEffect(async () => {
@@ -36,16 +53,7 @@ function Files() {
                     Listes des synthèses et des prises de note disponibles
                 </h1>
                 <div className={'file-container'}>
-                    {
-                        fileTransferStore.files.map((file, index) => {
-                            return <DisplaySynthese id={index} name={file.name} sender={file.owner}
-                                                    date={file.creationDate}
-                                                    course={file.course.content}
-                                                    handleDownload={() => fileTransferStore.onDownloadFile(file, sessionStore.user.token)}
-                                                    handleDelete={() => fileTransferStore.onDeleteFile(file, sessionStore.user.token)}
-                            />
-                        })
-                    }
+                    {displayFiles()}
                 </div>
                 <input type={'submit'} className={'files__add'} value={'AJOUTER UNE SYNTHESE'}
                        onClick={() => fileTransferStore.openPopup()}/>
@@ -75,54 +83,14 @@ function Files() {
                 {
                     fileTransferStore.isLoading && (
                         <>
-                            <LoadingMessage message={"Traitement en cours..."}/>
+                            <ObservedSnackBar open={fileTransferStore.isLoading}
+                                              message={'Traitement en cours...'}
+                                              severity={'info'}/>
                         </>
                     )}
             </div>
         </div>
     )
-
-    /*return (
-    <div>
-        <ObservedNavBar />
-        <div className='files'>
-            <div className='files__head'>
-                <div className='files__head__name'>Nom</div>
-                <div className='files__head__owner'>Propriétaire</div>
-                <div></div>
-                <div></div>
-            </div>
-            <div className='files__table'>
-                <div className='files__table__file'>
-                    {
-                        fileTransferStore.files.map((file) => (
-                            <div className={'file-container'}>
-                                <div className='files__table__file__name'>{file.name}</div>
-                                <div className='files__table__file__owner'>{file.owner}</div>
-                                <div className='files__table__file__download'>
-                                    <input type={'submit'} className={'btn-file-download'} value={'TELECHARGER'} onClick={() => fileTransferStore.onDownloadFile(file, sessionStore.user?.token)}/>
-                                </div>
-                                {sessionStore.user?.username === file.owner ? <input type={'submit'} className={'btn-file-delete'} value={'SUPPRIMER'} onClick={() => fileTransferStore.onDeleteFile(file, sessionStore.user?.token)}/> : <div></div>}
-                            </div>
-                        ))
-                    }
-                </div>
-            </div>
-            <label className='files__add' htmlFor='files__add'>AJOUTER UN FICHIER</label>
-            <input onChange={(event) => fileTransferStore.onInputFileChange(event.target)} id='files__add' type='file' accept='.txt' hidden></input>
-            <ObservedSnackBar
-                open={fileTransferStore.isError}
-                message={fileTransferStore.errors}
-                severity={"error"} />
-            {
-                fileTransferStore.isLoading && (
-                    <>
-                        <LoadingMessage message={"Traitement en cours..."} />
-                    </>
-                )}
-        </div>
-    </div >
-)*/
 }
 
 export const ObserverFiles = observer(Files);
