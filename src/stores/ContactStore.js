@@ -65,7 +65,7 @@ class ContactStore {
             return
         }
 
-        api.sendContactForm(lastname, firstname, email, message)
+        api.sendContactForm(lastname, firstname, email, subject, message)
             .then(data => data.error ? this.handleErrorMessage(data.message) : this.handleSuccessMessage(data.message))
     }
 
