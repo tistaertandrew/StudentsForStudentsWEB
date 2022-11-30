@@ -262,6 +262,10 @@ class RequestsStore {
     }
 
     submitRequest(data) {
+        if(data.length < 4) {
+            this.handleErrorMessage('Veuillez remplir tous les champs')
+            return
+        }
         this.handleSubmitRequest(...data.values())
     }
 
