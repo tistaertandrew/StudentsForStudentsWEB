@@ -8,10 +8,12 @@ import {ObservedSnackBar} from "../molecules/SnackBar";
 import DisplayForm from "../organisms/DisplayForm";
 import SelectInputForm from "../molecules/SelectInputForm";
 import RedirectLink from "../molecules/RedirectLink";
-import {Dialog} from "@mui/material";
+import {Dialog, Tooltip} from "@mui/material";
 import {DropzoneArea} from "material-ui-dropzone";
 import DisplaySynthese from "../molecules/DisplaySynthese";
 import EmptyContent from "../molecules/EmptyContent";
+import {Cached, Tune} from "@mui/icons-material";
+import {requestsStore} from "../../stores/RequestsStore";
 
 function Files() {
     useEffect(() => {
@@ -22,6 +24,16 @@ function Files() {
         event.preventDefault()
         let data = new FormData(event.currentTarget)
         fileTransferStore.handleFileSubmit([...data.values()])
+    }
+
+    const handleFilter = async (event) => {
+        event.preventDefault()
+        let data = new FormData(event.currentTarget)
+        await fileTransferStore.filterRequests([...data.values()])
+    }
+
+    const handleResetFilter = async () => {
+        await fileTransferStore.handleResetFilter()
     }
 
     const displayFiles = () => {
@@ -49,14 +61,30 @@ function Files() {
             <ObservedNavBar/>
             <div className='files'>
                 <h1 className={'file-title'}>
-                    Listes des synthèses et des prises de note disponibles
+                    <Tooltip title={'Filtrer les synthèses'}>
+                        <Tune className={'settings-icon-right'} onClick={() => fileTransferStore.openFilterPopup()}/>
+                    </Tooltip>
+                    Liste des synthèses disponibles
+                    <Tooltip title={'Réinitialiser les filtres appliqués'}>
+                        <Cached className={'settings-icon-left'} onClick={handleResetFilter}/>
+                    </Tooltip>
                 </h1>
                 <div className={'file-container'}>
                     {displayFiles()}
                 </div>
                 <input type={'submit'} className={'files__add'} value={'AJOUTER UNE SYNTHESE'}
-                       onClick={() => fileTransferStore.openPopup()}/>
-                <Dialog open={fileTransferStore.open} onClose={() => fileTransferStore.closePopup()}>
+                       onClick={() => fileTransferStore.openFileAddPopup()}/>
+                <Dialog open={fileTransferStore.openFilter} onClose={() => fileTransferStore.closeFilterPopup()}>
+                    <div className={'popup-container'}>
+                        <h1 className={'popup-title'}>FILTRER LES SYNTHESES</h1>
+                        <DisplayForm handleSubmit={handleFilter} inputs={[
+                            <SelectInputForm id={'course'} label={'Cours concerné'} inputs={fileTransferStore.courses}/>,
+                            <input type={'submit'} className={'btn-auth'} value={'FILTRER'}/>
+                        ]}/>
+                        <RedirectLink label={'Retour'} handleMode={() => fileTransferStore.closeFilterPopup()}/>
+                    </div>
+                </Dialog>
+                <Dialog open={fileTransferStore.openFileAdd} onClose={() => fileTransferStore.closeFileAddPopup()}>
                     <div className={'popup-container'}>
                         <h1 className={'popup-title'}>AJOUTER UNE SYNTHESE</h1>
                         <DisplayForm handleSubmit={handleSubmit} inputs={[
@@ -72,7 +100,7 @@ function Files() {
                             </div>,
                             <input type={'submit'} className={'btn-auth'} value={'AJOUTER'}/>,
                         ]}/>
-                        <RedirectLink label={'Annuler'} handleMode={() => fileTransferStore.closePopup()}/>
+                        <RedirectLink label={'Annuler'} handleMode={() => fileTransferStore.closeFileAddPopup()}/>
                     </div>
                 </Dialog>
                 <ObservedSnackBar

@@ -6,7 +6,8 @@ import Cursus from "../models/Cursus";
 import Section from "../models/Section";
 
 class FileTransferStore {
-    _open = false
+    _openFileAdd = false
+    _openFilter = false
     _courses = []
     _file = undefined
 
@@ -35,12 +36,20 @@ class FileTransferStore {
 
     }
 
-    get open() {
-        return this._open
+    get openFileAdd() {
+        return this._openFileAdd
     }
 
-    set open(open) {
-        this._open = open
+    set openFileAdd(open) {
+        this._openFileAdd = open
+    }
+
+    get openFilter() {
+        return this._openFilter
+    }
+
+    set openFilter(open) {
+        this._openFilter = open
     }
 
     get courses() {
@@ -126,7 +135,7 @@ class FileTransferStore {
             this.handleErrorMessage()
             return
         }
-        this.closePopup()
+        this.closeFileAddPopup()
         try {
             this._fileReader.onload = () => {
                 this._setLocalContent({courseId: courseId, text: this._fileReader.result, name: this.file.name});
@@ -247,12 +256,20 @@ class FileTransferStore {
         action(() => this._input = input)();
     }
 
-    openPopup() {
-        this.open = true
+    openFileAddPopup() {
+        this.openFileAdd = true
     }
 
-    closePopup() {
-        this.open = false
+    closeFileAddPopup() {
+        this.openFileAdd = false
+    }
+
+    openFilterPopup() {
+        this.openFilter = true
+    }
+
+    closeFilterPopup() {
+        this.openFilter = false
     }
 
     loadCourses(cursusId) {
@@ -262,6 +279,22 @@ class FileTransferStore {
 
     handleFileSubmit(data) {
         this.onInputFileChange(...data.values())
+    }
+
+    async filterRequests(data) {
+        let id = parseInt([...data.values()][0])
+        if(isNaN(id)) {
+            this._setErrors({message: 'Le champ "Cours concerné" est obligatoire'})
+            this.handleErrorMessage()
+        }
+
+        await this._loadFiles(sessionStore.user?.token)
+        this._files = this._files.filter(file => file.course.id === id)
+        this.closeFilterPopup()
+    }
+
+    async handleResetFilter() {
+        await this._loadFiles(sessionStore.user?.token)
     }
 }
 

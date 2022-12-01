@@ -619,6 +619,7 @@
 }
 
 .popup-container {
+    overflow-x: hidden;
     width: 600px;
     padding: 5%;
     display: flex;
