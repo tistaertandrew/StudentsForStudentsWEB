@@ -10,8 +10,8 @@ import {sessionStore} from "../../stores/SessionStore";
 function Home() {
     const navigate = useNavigate()
 
-    useEffect(async () => {
-        await homeStore.init()
+    useEffect( () => {
+        homeStore.init()
     }, [])
 
     const navigateToAuthentication = () => {

@@ -186,7 +186,6 @@ class MyRequestsStore {
                     }
                 } else {
                     this.handleSuccessMessage(data.message)
-                    this.loadMyRequests()
                 }
             })
     }
