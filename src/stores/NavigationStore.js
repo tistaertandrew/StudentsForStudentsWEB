@@ -59,7 +59,7 @@ class NavigationStore {
 
     hideNotification() {
         this.open = false
-        this.severity = 'error'
+        this.severity = 'info'
         this.message = ''
     }
 
