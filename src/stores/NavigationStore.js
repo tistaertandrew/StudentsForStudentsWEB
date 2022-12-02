@@ -1,4 +1,5 @@
 import {makeAutoObservable} from "mobx";
+import NotificationSound from "../assets/sounds/notification-sound.mp3"
 
 class NavigationStore {
     _open = false
@@ -52,6 +53,7 @@ class NavigationStore {
     }
 
     handleNotification(message) {
+        new Audio(NotificationSound).play()
         this.message = message
         this.severity = 'info'
         this.open = true
@@ -59,8 +61,6 @@ class NavigationStore {
 
     hideNotification() {
         this.open = false
-        this.severity = 'info'
-        this.message = ''
     }
 
     handleDisplayMenu(menu) {
