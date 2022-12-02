@@ -15,7 +15,7 @@ class NotificationsHub {
         this._connection = new signalR.HubConnectionBuilder()
             .withUrl(config.ApiUrl + "/Notifications")
             .build()
-        this._connection.start()
+        this.start()
         this.listen()
     }
 
