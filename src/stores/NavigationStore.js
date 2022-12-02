@@ -1,11 +1,38 @@
 import {makeAutoObservable} from "mobx";
 
 class NavigationStore {
+    _open = false
+    _message = ''
+    _severity = 'error'
     _element = null
     _menu = 'menu'
 
     constructor() {
         makeAutoObservable(this)
+    }
+
+    get open() {
+        return this._open
+    }
+
+    set open(v) {
+        this._open = v
+    }
+
+    get message() {
+        return this._message
+    }
+
+    set message(v) {
+        this._message = v
+    }
+
+    get severity() {
+        return this._severity
+    }
+
+    set severity(v) {
+        this._severity = v
     }
 
     get menu() {
@@ -22,6 +49,18 @@ class NavigationStore {
 
     set element(v) {
         this._element = v
+    }
+
+    handleNotification(message) {
+        this.message = message
+        this.severity = 'info'
+        this.open = true
+    }
+
+    hideNotification() {
+        this.open = false
+        this.severity = 'error'
+        this.message = ''
     }
 
     handleDisplayMenu(menu) {

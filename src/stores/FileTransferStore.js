@@ -94,6 +94,10 @@ class FileTransferStore {
         }
     }
 
+    async update(token) {
+        await this._loadFiles(token)
+    }
+
     async onDownloadFile(file, token) {
         try {
             this._setLoading(true);
@@ -113,7 +117,7 @@ class FileTransferStore {
             this._setLoading(true);
             console.log(file);
             await this._repository.deleteFile({name: file.name}, token);
-            this._loadFiles(token);
+            //this._loadFiles(token);
         } catch (e) {
             console.error("Error on file delete", e);
             this._setErrors(e);
@@ -191,7 +195,7 @@ class FileTransferStore {
                     content: content.text,
                     extension: content.extension
                 }, sessionStore.user?.token);
-                this._loadFiles(sessionStore.user?.token);
+                //this._loadFiles(sessionStore.user?.token);
             } catch (e) {
                 console.error("Error on file upload", e);
                 this._setErrors(e);

@@ -8,6 +8,7 @@ import DisplayUserMenuInfos from "../organisms/DisplayUserMenuInfos";
 import DisplayUserMenuInfo from "../molecules/DisplayUserMenuInfo";
 import {navigationStore} from "../../stores/NavigationStore";
 import {Close, Menu} from "@mui/icons-material";
+import {ObservedNotificationBar} from "../molecules/NotificationBar";
 
 function NavBar() {
     const showMenu = () => {
@@ -66,6 +67,7 @@ function NavBar() {
                 {isConnected()}
             </ul>
             {displayMenu()}
+            <ObservedNotificationBar open={navigationStore.open} message={navigationStore.message} severity={navigationStore.severity} handleClose={() => navigationStore.hideNotification()}/>
         </nav>
     )/*
 

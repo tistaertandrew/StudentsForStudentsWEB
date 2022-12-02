@@ -13,7 +13,6 @@ import {DropzoneArea} from "material-ui-dropzone";
 import DisplaySynthese from "../molecules/DisplaySynthese";
 import EmptyContent from "../molecules/EmptyContent";
 import {Cached, Tune} from "@mui/icons-material";
-import {requestsStore} from "../../stores/RequestsStore";
 
 function Files() {
     useEffect(() => {

@@ -192,7 +192,6 @@ class RequestsStore {
                     }
                 } else {
                     this.handleSuccessMessage(data.message)
-                    this.loadRequests()
                 }
             })
     }
@@ -301,7 +300,6 @@ class RequestsStore {
                     }
                 } else {
                     this.handleSuccessMessage(data.message)
-                    this.loadRequests()
                 }
             })
     }

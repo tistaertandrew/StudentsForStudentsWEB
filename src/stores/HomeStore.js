@@ -26,10 +26,18 @@ class HomeStore {
     }
 
     init() {
+        this.loadUsersCount()
+        this.loadFilesCount()
+    }
+
+    loadUsersCount() {
         api.fetchUsersCount()
             .then(data => {
                 this.usersCount = data
             })
+    }
+
+    loadFilesCount() {
         api.fetchFilesCount()
             .then(data => {
                 this.filesCount = data

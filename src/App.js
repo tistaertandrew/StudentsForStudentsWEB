@@ -12,9 +12,11 @@ import {ObservedCalendar} from "./components/pages/Calendar";
 import {ObservedRequests} from "./components/pages/Requests";
 import {ObservedMyRequests} from "./components/pages/MyRequests";
 import NotFound from "./components/pages/NotFound";
+import NotificationsHub from "./models/NotificationsHub";
 
 function App() {
 
+    NotificationsHub()
 
     const AuthenticatedRoute = ({children}) => {
         if (!sessionStore.user) {
