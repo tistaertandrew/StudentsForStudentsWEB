@@ -51,9 +51,9 @@ class NotificationsHub {
             myRequestsStore.loadMyRequests()
         })
 
-        this._connection.on("updateUsers", () => {
-            debugger
-            adminStore.loadUsers()
+        this._connection.on("updateUsers", (email) => {
+            if(sessionStore.user.isAdmin) adminStore.loadUsers()
+            if(email && email === sessionStore.user.email) sessionStore.logout()
         })
     }
 

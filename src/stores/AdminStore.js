@@ -56,7 +56,7 @@ class AdminStore {
         api.fetchUsers(sessionStore.user.token)
             .then(data => {
                 if (data.error) {
-                    if (data.unauthorized || data.forbidden) {
+                    if (data.message || data.forbidden) {
                         sessionStore.logout()
                     }
                 } else {

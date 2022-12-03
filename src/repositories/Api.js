@@ -191,7 +191,6 @@ class Api {
     }
 
     deleteRequest(id, token) {
-        debugger
         return fetch(`${this.base}/Request/${id}`, {
             method: 'DELETE',
             headers: {

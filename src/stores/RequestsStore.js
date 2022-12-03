@@ -245,7 +245,6 @@ class RequestsStore {
 
         api.addAddress(street, number, postalCode, locality, sessionStore.user.token)
             .then(data => {
-                debugger
                 if (data.error) {
                     if (data.unauthorized) {
                         sessionStore.logout()
@@ -291,7 +290,6 @@ class RequestsStore {
 
         api.submitRequest(name, placeId, courseId, description, sessionStore.user.token)
             .then(data => {
-                debugger
                 if (data.error) {
                     if (data.unauthorized) {
                         sessionStore.logout()
@@ -312,7 +310,6 @@ class RequestsStore {
         }
         api.fetchRequests(false, sessionStore.user.token)
             .then(data => {
-                debugger
                 if (data.error) {
                     if (data.unauthorized) {
                         sessionStore.logout()

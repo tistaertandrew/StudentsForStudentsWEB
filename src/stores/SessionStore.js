@@ -16,7 +16,6 @@ class SessionStore {
 
     set user(data) {
         if (data) {
-            debugger
             this._user = new User(data.username, data.email, data.token, data.cursusId, data.isAdmin, data.isBanned)
             this.saveUser()
         }
