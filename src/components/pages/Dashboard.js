@@ -16,11 +16,8 @@ function Dashboard() {
         adminStore.handleAdd([...data.values()])
     }
 
-    const handleEdit = (event) => {
-        event.preventDefault()
-        let data = new FormData(event.currentTarget)
-        console.log([...data.values()])
-        //adminStore.handleEdit([...data.values()])
+    const handleEdit = (lastname, firstname, newLastname, newFirstname, email) => {
+        adminStore.handleEdit(lastname, firstname, newLastname, newFirstname, email)
     }
 
     const handleBlock = (email) => {

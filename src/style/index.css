@@ -592,6 +592,19 @@
     opacity: .8;
 }
 
+.edit-value {
+    font-size: 1.2em;
+    opacity: 1;
+    width: 100%;
+    border: none;
+    border-bottom: solid 1px;
+    background-color: transparent;
+}
+
+.edit-value:focus {
+    outline: none;
+}
+
 .file-button, .request-button {
     display: flex;
     flex-direction: row;

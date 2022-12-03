@@ -123,6 +123,28 @@ class AdminStore {
             })
     }
 
+    handleEdit(lastname, firstname, newLastname, newFirstame, email) {
+        if(newLastname === '' || newFirstame === '') {
+            this.handleErrorMessage('Veuillez remplir tous les champs')
+            return
+        }
+
+        if(lastname === newLastname && firstname === newFirstame) return
+
+        api.UpdateUser(newLastname, newFirstame, email, sessionStore.user.token)
+            .then(data => {
+                if (data.error) {
+                    if (data.unauthorized || data.forbidden) {
+                        sessionStore.logout()
+                    } else {
+                        this.handleErrorMessage(data.message)
+                    }
+                } else {
+                    this.handleSuccessMessage(data.message)
+                }
+            })
+    }
+
     handleDelete(email) {
         api.deleteUser(email, sessionStore.user.token)
             .then(data => {

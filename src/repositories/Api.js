@@ -286,6 +286,20 @@ class Api {
                 return resp.json()
             })
     }
+
+    UpdateUser(lastname, firstname, email, token) {
+        return fetch(`${this.base}/User/${email}/Username/${lastname} ${firstname}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => {
+                if(resp.status === 401) return {error: true, unauthorized: true}
+                if (resp.status === 403) return {error: true, forbidden: true}
+                return resp.json()
+            })
+    }
 }
 
 export const api = new Api()
