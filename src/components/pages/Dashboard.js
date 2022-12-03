@@ -13,12 +13,13 @@ function Dashboard() {
     const handleAdd = (event) => {
         event.preventDefault()
         let data = new FormData(event.currentTarget)
-        //adminStore.handleAdd([...data.values()])
+        adminStore.handleAdd([...data.values()])
     }
 
     const handleEdit = (event) => {
         event.preventDefault()
         let data = new FormData(event.currentTarget)
+        console.log([...data.values()])
         //adminStore.handleEdit([...data.values()])
     }
 

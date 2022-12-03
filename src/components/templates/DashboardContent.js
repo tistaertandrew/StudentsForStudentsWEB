@@ -1,8 +1,15 @@
 import {observer} from "mobx-react";
 import {adminStore} from "../../stores/AdminStore";
 import DisplayUsers from "../organisms/DisplayUsers";
-import {Tooltip} from "@mui/material";
+import {Dialog, Tooltip} from "@mui/material";
 import {Add, Cached, Tune} from "@mui/icons-material";
+import {requestsStore} from "../../stores/RequestsStore";
+import DisplayForm from "../organisms/DisplayForm";
+import SelectInputForm from "../molecules/SelectInputForm";
+import RedirectLink from "../molecules/RedirectLink";
+import HalfInputForm from "../molecules/HalfInputForm";
+import InputForm from "../molecules/InputForm";
+import HalfSelectInputForm from "../molecules/HalfSelectInputForm";
 
 function DashboardContent({handleAdd, handleEdit, handleBlock, handleDelete}) {
 
@@ -18,7 +25,26 @@ function DashboardContent({handleAdd, handleEdit, handleBlock, handleDelete}) {
                 </Tooltip>
             </h1>
             <DisplayUsers handleEdit={handleEdit} handleBlock={handleBlock} handleDelete={handleDelete} users={adminStore.users}/>
-            <input type={'submit'} className={'files__add'} value={'AJOUTER UN UTILISATEUR'} onClick={() => {}}/>
+            <input type={'submit'} className={'files__add'} value={'AJOUTER UN UTILISATEUR'} onClick={() => adminStore.openUserPopup()}/>
+            <Dialog open={adminStore.userPopup} onClose={() => adminStore.closeUserPopup()}>
+                <div className={'popup-container'}>
+                    <h1 className={'popup-title'}>AJOUTER UN UTILISATEUR</h1>
+                    <DisplayForm handleSubmit={handleAdd} inputs={[
+                        <HalfInputForm id={'lastname'} label={'Nom de famille'}/>,
+                        <HalfInputForm id={'firstname'} label={'Prénom'}/>,
+                        <InputForm id={'email'} label={'Adresse mail'}/>,
+                        <HalfSelectInputForm id={'section'} label={'Section *'}
+                                             handleChange={(e) => adminStore.loadCursus(e.target.value)}
+                                             inputs={adminStore.sections}/>,
+                        <HalfSelectInputForm id={'cursus'} label={'Cursus *'}
+                                             inputs={adminStore.cursus}/>,
+                        <InputForm id={'password'} label={'Mot de passe'}/>,
+                        <InputForm id={'password'} label={'Confirmation du mot de passe'}/>,
+                        <input type={'submit'} className={'btn-auth'} value={'AJOUTER'}/>,
+                    ]}/>
+                    <RedirectLink label={'Retour'} handleMode={() => adminStore.closeUserPopup()}/>
+                </div>
+            </Dialog>
         </div>
     )
 }

@@ -30,11 +30,11 @@ export function DisplayUser({firstname, lastname, email, isAdmin, isBanned, hand
                         <p className={'request-key'}>Prénom :</p>
                         <p className={'request-value'}>{firstname}</p>
                     </div>
-                    <div className={'request-name'} style={{minWidth: '25%', maxWidth: '25%'}}>
+                    <div className={'request-name'} style={{minWidth: '20%', maxWidth: '20%'}}>
                         <p className={'request-key'}>Email :</p>
                         <p className={'request-value'}>{email}</p>
                     </div>
-                    <div className={'request-name'} style={{minWidth: '10%', maxWidth: '10%'}}>
+                    <div className={'request-name'} style={{minWidth: '15%', maxWidth: '15%'}}>
                         <p className={'request-key'}>Role :</p>
                         <p className={'request-value'}>{isAdmin ? 'Administrateur' : 'Membre'}</p>
                     </div>
