@@ -24,7 +24,7 @@ export default function NotFound() {
                         <h1 className={'title-auth'}>PAGE INTROUVABLE</h1>
                         <p className={'text-about'}>
                             Le chemin que vous avez décidé d'emprunter ne mène nulle part.
-                            N'hésitez pas à revenir à la page d'accueil pour revenir sur le droit chemin.
+                            N'hésitez pas à revenir à la page d'accueil pour retourner sur le droit chemin.
                         </p>
                         <input type={'submit'} className={'btn-auth'}
                                value={'RETOUR À L\'ACCUEIL'}
