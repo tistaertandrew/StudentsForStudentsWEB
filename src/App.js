@@ -13,6 +13,7 @@ import {ObservedRequests} from "./components/pages/Requests";
 import {ObservedMyRequests} from "./components/pages/MyRequests";
 import NotFound from "./components/pages/NotFound";
 import NotificationsHub from "./models/NotificationsHub";
+import {ObservedDashboard} from "./components/pages/Dashboard";
 
 function App() {
 
@@ -22,6 +23,14 @@ function App() {
         if (!sessionStore.user) {
             // This way we could give to authentication a callback to redirect to the page the user wanted to access
             return <Navigate to={routes.Authentication}/>
+        } else {
+            return children
+        }
+    }
+
+    const AdminRoute = ({children}) => {
+        if(!sessionStore.user.isAdmin) {
+            return <Navigate to={routes.Home}/>
         } else {
             return children
         }
@@ -58,6 +67,13 @@ function App() {
                 <Route exact path={routes.MyRequests} element={
                     <AuthenticatedRoute>
                         <ObservedMyRequests/>
+                    </AuthenticatedRoute>
+                }/>
+                <Route exact path={routes.Dashboard} element={
+                    <AuthenticatedRoute>
+                        <AdminRoute>
+                            <ObservedDashboard/>
+                        </AdminRoute>
                     </AuthenticatedRoute>
                 }/>
             </Routes>

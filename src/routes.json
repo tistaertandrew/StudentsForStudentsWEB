@@ -10,5 +10,6 @@
   "User": "/User",
   "Chat": "/Chat",
   "ChatSettings": "/ChatSettings",
-  "Calendar": "/Calendar"
+  "Calendar": "/Calendar",
+  "Dashboard": "/Dashboard"
 }

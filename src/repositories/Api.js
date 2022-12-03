@@ -246,6 +246,47 @@ class Api {
         return fetch(`${this.base}/File/Count`)
             .then(resp => resp.json())
     }
+
+    fetchUsers(token) {
+        return fetch(`${this.base}/User/List`, {
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => {
+                if(resp.status === 401) return {error: true, unauthorized: true}
+                if (resp.status === 403) return {error: true, forbidden: true}
+                return resp.json()
+            })
+    }
+
+    updateBannedStatus(email, token) {
+        return fetch(`${this.base}/User/Status/${email}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => {
+                if(resp.status === 401) return {error: true, unauthorized: true}
+                if (resp.status === 403) return {error: true, forbidden: true}
+                return resp.json()
+            })
+    }
+
+    deleteUser(email, token) {
+        return fetch(`${this.base}/User/${email}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => {
+                if(resp.status === 401) return {error: true, unauthorized: true}
+                if (resp.status === 403) return {error: true, forbidden: true}
+                return resp.json()
+            })
+    }
 }
 
 export const api = new Api()

@@ -6,6 +6,7 @@ import {fileTransferStore} from "../stores/FileTransferStore";
 import {navigationStore} from "../stores/NavigationStore";
 import {requestsStore} from "../stores/RequestsStore";
 import {myRequestsStore} from "../stores/MyRequestsStore";
+import {adminStore} from "../stores/AdminStore";
 
 class NotificationsHub {
     _connection = undefined
@@ -48,6 +49,11 @@ class NotificationsHub {
         this._connection.on("updateRequests", () => {
             requestsStore.loadRequests()
             myRequestsStore.loadMyRequests()
+        })
+
+        this._connection.on("updateUsers", () => {
+            debugger
+            adminStore.loadUsers()
         })
     }
 
