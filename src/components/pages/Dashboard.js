@@ -28,10 +28,20 @@ function Dashboard() {
         adminStore.handleDelete(email)
     }
 
+    const handleFilterUsers = (event) => {
+        event.preventDefault()
+        let data = new FormData(event.currentTarget)
+        adminStore.handleFilterUsers([...data.values()])
+    }
+
+    const handleResetFilter = () => {
+        adminStore.handleResetFilter()
+    }
+
     return (
         <div>
             <ObservedNavBar/>
-            <ObservedDashboardContent handleAdd={handleAdd} handleEdit={handleEdit} handleBlock={handleBlock} handleDelete={handleDelete}/>
+            <ObservedDashboardContent handleAdd={handleAdd} handleEdit={handleEdit} handleBlock={handleBlock} handleDelete={handleDelete} handleFilterUsers={handleFilterUsers} handleResetFilter={handleResetFilter}/>
             <ObservedSnackBar open={adminStore.open} message={adminStore.message} severity={adminStore.severity}/>
         </div>
     )

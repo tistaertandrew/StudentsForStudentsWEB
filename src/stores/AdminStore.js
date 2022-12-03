@@ -15,6 +15,7 @@ class AdminStore {
     _open = false
 
     _userPopup = false
+    _filterPopup = false
 
     constructor() {
         makeAutoObservable(this)
@@ -60,6 +61,14 @@ class AdminStore {
 
     set userPopup(data) {
         this._userPopup = data
+    }
+
+    get filterPopup() {
+        return this._filterPopup
+    }
+
+    set filterPopup(data) {
+        this._filterPopup = data
     }
 
     get sections() {
@@ -188,6 +197,14 @@ class AdminStore {
         this.userPopup = false
     }
 
+    openFilterPopup() {
+        this.filterPopup = true
+    }
+
+    closeFilterPopup() {
+        this.filterPopup = false
+    }
+
     handleAdd(data) {
         this.addUser(...data.values())
     }
@@ -241,6 +258,31 @@ class AdminStore {
                     this.closeUserPopup()
                 }
             })
+    }
+
+    handleFilterUsers(data) {
+        let username = [...data.values()][0]
+        if(username === '') {
+            this.handleErrorMessage('Le champ "Nom et/ou prénom" est obligatoire')
+            return
+        }
+
+        api.fetchUsers(sessionStore.user.token)
+            .then(data => {
+                if (data.error) {
+                    if (data.unauthorized || data.forbidden) {
+                        sessionStore.logout()
+                    }
+                } else {
+                    this.users = data
+                    this.users = this.users.filter(user => user.username.toLowerCase().includes(username.toLowerCase()))
+                    this.closeFilterPopup()
+                }
+            })
+    }
+
+    handleResetFilter() {
+        this.loadUsers()
     }
 }
 

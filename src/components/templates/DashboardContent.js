@@ -11,17 +11,17 @@ import HalfInputForm from "../molecules/HalfInputForm";
 import InputForm from "../molecules/InputForm";
 import HalfSelectInputForm from "../molecules/HalfSelectInputForm";
 
-function DashboardContent({handleAdd, handleEdit, handleBlock, handleDelete}) {
+function DashboardContent({handleAdd, handleEdit, handleBlock, handleDelete, handleFilterUsers, handleResetFilter}) {
 
     return (
         <div className={'files'}>
             <h1 className={'file-title'}>
                 <Tooltip title={'Filtrer les utilisateurs'}>
-                    <Tune className={'settings-icon-right'} onClick={() => {}}/>
+                    <Tune className={'settings-icon-right'} onClick={() => {adminStore.openFilterPopup()}}/>
                 </Tooltip>
                 Liste des utilisateurs de Students for Students
                 <Tooltip title={'Réinitialiser les filtres appliqués'}>
-                    <Cached className={'settings-icon-left'} onClick={() => {}}/>
+                    <Cached className={'settings-icon-left'} onClick={handleResetFilter}/>
                 </Tooltip>
             </h1>
             <DisplayUsers handleEdit={handleEdit} handleBlock={handleBlock} handleDelete={handleDelete} users={adminStore.users}/>
@@ -43,6 +43,16 @@ function DashboardContent({handleAdd, handleEdit, handleBlock, handleDelete}) {
                         <input type={'submit'} className={'btn-auth'} value={'AJOUTER'}/>,
                     ]}/>
                     <RedirectLink label={'Retour'} handleMode={() => adminStore.closeUserPopup()}/>
+                </div>
+            </Dialog>
+            <Dialog open={adminStore.filterPopup} onClose={() => adminStore.closeFilterPopup()}>
+                <div className={'popup-container'}>
+                    <h1 className={'popup-title'}>FILTRER LES UTILISATEURS</h1>
+                    <DisplayForm handleSubmit={handleFilterUsers} inputs={[
+                        <InputForm id={'email'} label={'Nom et/ou prénom'}/>,
+                        <input type={'submit'} className={'btn-auth'} value={'FILTRER'}/>,
+                    ]}/>
+                    <RedirectLink label={'Retour'} handleMode={() => adminStore.closeFilterPopup()}/>
                 </div>
             </Dialog>
         </div>

@@ -35,15 +35,15 @@ function NavBar() {
     const isAdmin = () => {
         return sessionStore.user.isAdmin ?
             [
+                <DisplayUserMenuInfo route={routes.Dashboard}
+                                     onReset={() => navigationStore.handleCloseMenu()}
+                                     label={'Administration'}/>,
                 <DisplayUserMenuInfo route={routes.MyRequests}
                                      onReset={() => navigationStore.handleCloseMenu()}
                                      label={'Mes demandes'}/>,
                 <DisplayUserMenuInfo onClick={() => sessionStore.logout()}
                                      onReset={() => navigationStore.handleCloseMenu()}
-                                     label={'Se déconnecter'}/>,
-                <DisplayUserMenuInfo route={routes.Dashboard}
-                                     onReset={() => navigationStore.handleCloseMenu()}
-                                     label={'Panel d\'administration'}/>
+                                     label={'Se déconnecter'}/>
             ]
             :
             [

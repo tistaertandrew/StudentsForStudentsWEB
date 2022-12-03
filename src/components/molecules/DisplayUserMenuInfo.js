@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 export default function DisplayUserMenuInfo({onClick, route, label, onReset}) {
     if (onClick) {
         return (
-            <MenuItem onClick={onClick}>
+            <MenuItem onClick={onClick} sx={{justifyContent: 'flex-end'}}>
                 <p onClick={onReset}>{label}</p>
             </MenuItem>
         )
@@ -13,7 +13,7 @@ export default function DisplayUserMenuInfo({onClick, route, label, onReset}) {
     if (route) {
         return (
             <Link to={route}>
-                <MenuItem>
+                <MenuItem sx={{justifyContent: 'flex-end'}}>
                     <p onClick={onReset}>{label}</p>
                 </MenuItem>
             </Link>
