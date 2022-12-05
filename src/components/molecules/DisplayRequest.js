@@ -1,5 +1,5 @@
 import {Accordion, AccordionDetails, AccordionSummary, Tooltip} from "@mui/material";
-import {CheckCircle, ExpandMore} from "@mui/icons-material";
+import {CheckCircle, CheckOutlined, ExpandMore} from "@mui/icons-material";
 import React from "react";
 
 export default function DisplayRequest({id, name, sender, date, course, place, status, description, handleAccept}) {
@@ -27,7 +27,7 @@ export default function DisplayRequest({id, name, sender, date, course, place, s
                     </div>
                     <div className={'request-button'}>
                         <Tooltip title={expanded ? 'Accepter la demande' : 'Veuillez ouvrir l\'accordéon pour pouvoir accepter la demande'}>
-                            <CheckCircle className={'icon-accordion'} onClick={expanded ? handleAccept : null} sx={{color: expanded ? '#5D7052' : 'gray', width: '40px', height: '40px'}}/>
+                            <CheckOutlined className={'icon-accordion'} onClick={expanded ? handleAccept : null} sx={{color: expanded ? '#5D7052' : 'gray', width: '40px', height: '40px'}}/>
                         </Tooltip>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import {Accordion, AccordionSummary, Tooltip} from "@mui/material";
-import {Delete, Download} from "@mui/icons-material";
+import {Delete, DeleteOutlined, Download, DownloadOutlined} from "@mui/icons-material";
 import React from "react";
 import {sessionStore} from "../../stores/SessionStore";
 
@@ -31,12 +31,12 @@ export default function DisplaySynthese({id, name, sender, date, course, handleD
                     </div>
                     <div className={'request-button'}>
                         <Tooltip title={'Télécharger la synthèse'}>
-                            <Download className={'icon-accordion'} onClick={handleDownload} sx={{color: '#5D7052', width: '40px', height: '40px'}}/>
+                            <DownloadOutlined className={'icon-accordion'} onClick={handleDownload} sx={{color: '#5D7052', width: '40px', height: '40px'}}/>
                         </Tooltip>
                         {
                             sessionStore.user?.username === sender ?
                                 <Tooltip title={'Supprimer la synthèse'}>
-                                    <Delete className={'icon-accordion'} onClick={handleDelete} sx={{color: '#670000', width: '40px', height: '40px'}}/>
+                                    <DeleteOutlined className={'icon-accordion'} onClick={handleDelete} sx={{color: '#670000', width: '40px', height: '40px'}}/>
                                 </Tooltip> : null
                         }
                     </div>

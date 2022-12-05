@@ -1,5 +1,5 @@
 import {Accordion, AccordionDetails, AccordionSummary, Tooltip} from "@mui/material";
-import {Delete, ExpandMore} from "@mui/icons-material";
+import {Delete, DeleteOutlined, ExpandMore} from "@mui/icons-material";
 import React from "react";
 
 export default function DisplayMyRequest({id, name, sender, handler, date, course, place, status, description, handleDelete}) {
@@ -29,7 +29,7 @@ export default function DisplayMyRequest({id, name, sender, handler, date, cours
                         {!status &&
 
                             <Tooltip title={expanded ? 'Supprimer la demande' : 'Veuillez ouvrir l\'accordéon pour pouvoir supprimer votre demande'}>
-                                <Delete className={'icon-accordion'} onClick={expanded ? handleDelete : null} sx={{color: expanded ?'#670000' : 'gray', width: '40px', height: '40px'}}/>
+                                <DeleteOutlined className={'icon-accordion'} onClick={expanded ? handleDelete : null} sx={{color: expanded ?'#670000' : 'gray', width: '40px', height: '40px'}}/>
                             </Tooltip>
                         }
                     </div>
