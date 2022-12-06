@@ -1,6 +1,6 @@
-import {action, makeAutoObservable, observable, reaction} from "mobx";
-import {api} from "../repositories/Api";
-import {chatRoomRepository} from "../repositories/ChatRoomRepository";
+import { action, makeAutoObservable, observable, reaction } from "mobx";
+import { api } from "../repositories/Api";
+import { chatRoomRepository } from "../repositories/ChatRoomRepository";
 
 class ChatRoomStore {
 
@@ -135,12 +135,12 @@ class ChatRoomStore {
         () => this._messages,
         (messages) => {
             this.messages = []
-            setTimeout(() => {
-                this.messages = messages.map(message => {
-                    this._appendAdditionalProperties(message, this._propertiesToAppendToIncommingMessages);
-                    return message
-                });
-            }, 100);
+            // setTimeout(() => {
+            this.messages = messages.map(message => {
+                this._appendAdditionalProperties(message, this._propertiesToAppendToIncommingMessages);
+                return message
+            });
+            // }, 100);
         }
     );
 

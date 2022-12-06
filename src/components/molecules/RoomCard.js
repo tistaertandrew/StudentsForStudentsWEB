@@ -2,7 +2,7 @@ import React from 'react'
 
 const RoomCard = ({ room, isActive }) => {
     return (
-        <div className={`chat_list__list__room ${isActive && 'isActive'}`} onClick={async () => room[1].onClick()}>
+        <div className={`chat_list__list__room ${isActive && 'isActive'}`} onClick={async () => await room[1].onClick()}>
             <div className='chat_list__list__room__data'>
                 <div className='chat_list__list__room__data__avatar' >{room[1].name[0]}</div>
                 <div className='chat_list__list__room__data__info'>
