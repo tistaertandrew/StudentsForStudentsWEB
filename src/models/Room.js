@@ -1,7 +1,9 @@
 /**
  *
  * @property {String} uid
- * @property {[String]} messages
+ * @property {String} name
+ * @property {String} lastMessage
+ * @property {[String]} chatters
  */
 export default class Room {
     constructor() {

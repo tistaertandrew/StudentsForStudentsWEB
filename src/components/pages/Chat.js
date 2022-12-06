@@ -11,8 +11,8 @@ import ChatDialogue from '../organisms/ChatDialogue';
 import { ObservedNavBar } from "../templates/NavBar";
 
 const Chat = () => {
-    const onClickChatRoom = (room) => {
-        chatRoomStore.setActiveRoom(room);
+    const onClickChatRoom = async (room) => {
+        await chatRoomStore.setActiveRoom(room);
     }
 
     const onSendMessage = async (message) => {

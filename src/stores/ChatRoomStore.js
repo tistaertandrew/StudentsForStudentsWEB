@@ -126,10 +126,13 @@ class ChatRoomStore {
     _onLocalMessagesChangeSetObservedMessages = () => reaction(
         () => this._messages,
         (messages) => {
-            this.messages = messages.map(message => {
-                this._appendAdditionalProperties(message, this._propertiesToAppendToIncommingMessages);
-                return message
-            });
+            this.messages = []
+            setTimeout(() => {
+                this.messages = messages.map(message => {
+                    this._appendAdditionalProperties(message, this._propertiesToAppendToIncommingMessages);
+                    return message
+                });
+            }, 100);
         }
     );
 
@@ -195,11 +198,11 @@ class ChatRoomStore {
     * @SideEffect Retrieve the messages of the given room
     * @param {Room} room 
     */
-    setActiveRoom = (room) => {
+    setActiveRoom = async (room) => {
         this.unsubscribeFromActiveRoomMessagesChange();
         action(() => this.activeRoom = room)();
         this.unsubscribeFromActiveRoomMessagesChange = this._onRemoteActiveRoomMessagesChangeSetLocalMessages(this.activeRoom);
-        this._retrieveActiveRoomMessagesOnce();
+        await this._retrieveActiveRoomMessagesOnce();
     }
 
     /**
