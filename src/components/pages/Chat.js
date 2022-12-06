@@ -1,20 +1,16 @@
-import React, {  useEffect  } from 'react'
-import {  observer  } from 'mobx-react-lite'
+import React, { useEffect } from 'react'
+import { observer } from 'mobx-react-lite'
 
 import ChatSidebar from '../organisms/ChatSidebar'
 
-import {  chatRoomStore  } from '../../stores/ChatRoomStore';
+import { chatRoomStore } from '../../stores/ChatRoomStore';
 
 import '../../style/chat.scss'
-import {  sessionStore  } from '../../stores/SessionStore';
+import { sessionStore } from '../../stores/SessionStore';
 import ChatDialogue from '../organisms/ChatDialogue';
-import {  ObservedNavBar  } from "../templates/NavBar";
+import { ObservedNavBar } from "../templates/NavBar";
 
 const Chat = () => {
-<<<<<<< HEAD
-=======
-
->>>>>>> e63396feb49aa4d6d7a85dfbe1e29d8d70849dc6
     const onClickChatRoom = async (room) => {
         await chatRoomStore.setActiveRoom(room);
     }
@@ -46,7 +42,7 @@ const Chat = () => {
 
     return (
         <div>
-            <ObservedNavBar/>
+            <ObservedNavBar />
             <div id='chat'>
                 <ChatSidebar
                     username={chatRoomStore.username}
