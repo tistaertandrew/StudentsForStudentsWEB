@@ -4,8 +4,12 @@
   "About": "/About",
   "Contact": "/Contact",
   "Requests": "/Requests",
+  "MyRequests": "/MyRequests",
   "Syntheses": "/Syntheses",
+  "NotFound": "/*",
   "User": "/User",
   "Chat": "/Chat",
-  "ChatSettings": "/ChatSettings"
+  "ChatSettings": "/ChatSettings",
+  "Calendar": "/Calendar",
+  "Dashboard": "/Dashboard"
 }

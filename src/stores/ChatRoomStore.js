@@ -1,6 +1,6 @@
-import { action, makeAutoObservable, observable, reaction } from "mobx";
-import { api } from "../repositories/Api";
-import { chatRoomRepository } from "../repositories/ChatRoomRepository";
+import {action, makeAutoObservable, observable, reaction} from "mobx";
+import {api} from "../repositories/Api";
+import {chatRoomRepository} from "../repositories/ChatRoomRepository";
 
 class ChatRoomStore {
 

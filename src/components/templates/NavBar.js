@@ -8,6 +8,7 @@ import DisplayUserMenuInfos from "../organisms/DisplayUserMenuInfos";
 import DisplayUserMenuInfo from "../molecules/DisplayUserMenuInfo";
 import {navigationStore} from "../../stores/NavigationStore";
 import {Close, Menu} from "@mui/icons-material";
+import {ObservedNotificationBar} from "../molecules/NotificationBar";
 
 function NavBar() {
     const showMenu = () => {
@@ -23,34 +24,56 @@ function NavBar() {
     const isConnected = () => {
         return sessionStore.user ?
             <DisplayUserMenuInfos handleMenu={(e) => navigationStore.handleOpenMenu(e.currentTarget)}
-                handleClose={() => navigationStore.handleCloseMenu()}
-                anchorEl={navigationStore.element}
-                label={`Bonjour, ${sessionStore.user.username}`}
-                inputs={[
-                    <DisplayUserMenuInfo route={routes.User}
-                        onReset={() => navigationStore.handleCloseMenu()}
-                        label={'Paramètres'} />,
-                    <DisplayUserMenuInfo onClick={() => sessionStore.logout()}
-                        onReset={() => navigationStore.handleCloseMenu()}
-                        label={'Se déconnecter'} />]} />
+                                  handleClose={() => navigationStore.handleCloseMenu()}
+                                  anchorEl={navigationStore.element}
+                                  label={`Bonjour, ${sessionStore.user.username}`}
+                                  inputs={[isAdmin()]}/>
             :
-            <NavButton route={routes.Authentication} label={'SE CONNECTER'} />
+            <NavButton route={routes.Authentication} label={'SE CONNECTER'}/>
+    }
+
+    const isAdmin = () => {
+        return sessionStore.user.isAdmin ?
+            [
+                <DisplayUserMenuInfo route={routes.Dashboard}
+                                     onReset={() => navigationStore.handleCloseMenu()}
+                                     label={'Administration'}/>,
+                <DisplayUserMenuInfo route={routes.MyRequests}
+                                     onReset={() => navigationStore.handleCloseMenu()}
+                                     label={'Mes demandes'}/>,
+                <DisplayUserMenuInfo onClick={() => sessionStore.logout()}
+                                     onReset={() => navigationStore.handleCloseMenu()}
+                                     label={'Se déconnecter'}/>
+            ]
+            :
+            [
+                <DisplayUserMenuInfo route={routes.MyRequests}
+                                     onReset={() => navigationStore.handleCloseMenu()}
+                                     label={'Mes demandes'}/>,
+                <DisplayUserMenuInfo onClick={() => sessionStore.logout()}
+                                     onReset={() => navigationStore.handleCloseMenu()}
+                                     label={'Se déconnecter'}/>
+            ]
     }
 
     const displayMenu = () => {
-            return (
-                <div className={navigationStore.menu} id={'menu'}>
-                    <Close className={'close'} onClick={() => hideMenu()}/>
-                    <ul>
-                        <NavButton route={routes.Home} label={'ACCUEIL'} onClick={() => hideMenu()}/>
-                        <NavButton route={routes.About} label={'A PROPOS'} onClick={() => hideMenu()}/>
-                        <NavButton route={routes.Contact} label={'CONTACT'} onClick={() => hideMenu()}/>
-                        {sessionStore.user && <NavButton route={routes.Requests} label={'DEMANDES'} onClick={() => hideMenu()}/>}
-                        {sessionStore.user && <NavButton route={routes.Syntheses} label={'SYNTHESES'} onClick={() => hideMenu()}/>}
-                        {sessionStore.user && <NavButton route={routes.Chat} label={'SALONS'} onClick={() => hideMenu()}/>}
-                    </ul>
-                </div>
-            )
+        return (
+            <div className={navigationStore.menu} id={'menu'}>
+                <Close className={'close'} onClick={() => hideMenu()}/>
+                <ul>
+                    <NavButton route={routes.Home} label={'ACCUEIL'} onClick={() => hideMenu()}/>
+                    <NavButton route={routes.About} label={'A PROPOS'} onClick={() => hideMenu()}/>
+                    <NavButton route={routes.Contact} label={'CONTACT'} onClick={() => hideMenu()}/>
+                    {sessionStore.user &&
+                        <NavButton route={routes.Requests} label={'DEMANDES'} onClick={() => hideMenu()}/>}
+                    {sessionStore.user &&
+                        <NavButton route={routes.Syntheses} label={'SYNTHESES'} onClick={() => hideMenu()}/>}
+                    {sessionStore.user && <NavButton route={routes.Chat} label={'SALONS'} onClick={() => hideMenu()}/>}
+                    {sessionStore.user &&
+                        <NavButton route={routes.Calendar} label={'PLANNING'} onClick={() => hideMenu()}/>}
+                </ul>
+            </div>
+        )
     }
 
     return (
@@ -59,12 +82,15 @@ function NavBar() {
                 <Menu className={'open'} onClick={() => showMenu()}/>
             </ul>
             <ul className={'center'}>
-                <TitleNavButton route={routes.Home} label={'STUDENTS FOR STUDENTS'} />
+                <TitleNavButton route={routes.Home} label={'STUDENTS FOR STUDENTS'}/>
             </ul>
             <ul className={'right'}>
                 {isConnected()}
             </ul>
             {displayMenu()}
+            <ObservedNotificationBar open={navigationStore.open} message={navigationStore.message}
+                                     severity={navigationStore.severity}
+                                     handleClose={() => navigationStore.hideNotification()}/>
         </nav>
     )/*
 

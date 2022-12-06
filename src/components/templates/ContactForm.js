@@ -6,6 +6,7 @@ import RightImage from "../../assets/images/tired.png";
 import TextAreaInputForm from "../molecules/TextAreaInputForm";
 import {sessionStore} from "../../stores/SessionStore";
 import HiddenInputForm from "../molecules/HiddenInputForm";
+import {Contacts} from "@mui/icons-material";
 
 function ContactForm({handleSubmit}) {
     const isConnected = () => {
@@ -20,6 +21,7 @@ function ContactForm({handleSubmit}) {
                 <InputForm id={'email'} label={'Adresse mail'}
                            value={sessionStore.user?.email} disabled={true}/>,
                 <HiddenInputForm id={'email'} value={sessionStore.user?.email}/>,
+                <InputForm id={'subject'} label={'Sujet'}/>,
                 <TextAreaInputForm id={'message'} label={'Votre message...'}/>,
                 <input type={'submit'} className={'btn-auth'} value={'ENVOYER'}/>
             ]
@@ -31,6 +33,7 @@ function ContactForm({handleSubmit}) {
                                value={sessionStore.user?.firstname}/>,
                 <InputForm id={'email'} label={'Adresse mail'}
                            value={sessionStore.user?.email}/>,
+                <InputForm id={'subject'} label={'Sujet'}/>,
                 <TextAreaInputForm id={'message'} label={'Votre message...'}/>,
                 <input type={'submit'} className={'btn-auth'} value={'ENVOYER'}/>
             ]
@@ -40,6 +43,7 @@ function ContactForm({handleSubmit}) {
         <div className={'auth-grid'}>
             <div className={'column'}>
                 <div className={'container-title-auth'}>
+                    <Contacts className={'icon-auth'}/>
                     <h1 className={'title-auth'}>CONTACTER UN ADMINISTRATEUR</h1>
                 </div>
                 <DisplayForm handleSubmit={handleSubmit}

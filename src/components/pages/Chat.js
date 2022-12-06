@@ -42,7 +42,7 @@ const Chat = () => {
 
     return (
         <div>
-            <ObservedNavBar />
+            <ObservedNavBar/>
             <div id='chat'>
                 <ChatSidebar
                     username={chatRoomStore.username}

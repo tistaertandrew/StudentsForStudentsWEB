@@ -1,8 +1,8 @@
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
-export default function HalfSelectInputForm({id, label, handleChange, inputs}) {
+export default function LessThanHalfSelectInputForm({id, label, handleChange, inputs}) {
     return (
-        <FormControl className={'half-input-auth'} sx={{margin: '1%'}}>
+        <FormControl className={'less-half-input-auth'} sx={{margin: '1%'}}>
             <InputLabel sx={{margin: '5px'}}>{label}</InputLabel>
             <Select
                 variant={'standard'}

@@ -111,14 +111,15 @@ class Api {
                 'Authorization': `bearer ${token}`
             }
         })
-            .then(resp => resp.status === 401 ? ({ error: true, unauthorized: true }) : resp.json())
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
     }
 
-    sendContactForm(lastname, firstname, email, message) {
+    sendContactForm(lastname, firstname, email, subject, message) {
         let data = JSON.stringify({
             lastname: lastname,
             firstname: firstname,
             email: email,
+            subject: subject,
             message: message
         })
         return fetch(`${this.base}/Contact`, {
@@ -134,6 +135,170 @@ class Api {
     fetchCoursesByCursusId(cursusId) {
         return fetch(`${this.base}/School/Courses/${cursusId}`)
             .then(resp => resp.json())
+    }
+
+    fetchCalendar(token) {
+        return fetch(`${this.base}/Calendar`, {
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+    }
+
+    updateCalendarLink(token, link) {
+        return fetch(`${this.base}/User/${link}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+    }
+
+    fetchRequests(type, token) {
+        return fetch(`${this.base}/Request/${type}`, {
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+    }
+
+    fetchPlaces(token) {
+        return fetch(`${this.base}/Place`, {
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+    }
+
+    fetchCourses(cursusId) {
+        return fetch(`${this.base}/School/Courses/${cursusId}`)
+            .then(resp => resp.json())
+        
+    }
+
+    acceptRequest(id, token) {
+        return fetch(`${this.base}/Request/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+    }
+
+    deleteRequest(id, token) {
+        return fetch(`${this.base}/Request/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+    }
+
+    addAddress(street, number, postalCode, locality, token) {
+        let data = JSON.stringify({
+            street: street,
+            number: number,
+            postalCode: postalCode,
+            locality: locality
+        })
+        return fetch(`${this.base}/Place`, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+    }
+
+    submitRequest(name, placeId, courseId, description, token) {
+        let data = JSON.stringify({
+            name: name,
+            placeId: placeId,
+            courseId: courseId,
+            description: description
+        })
+        return fetch(`${this.base}/Request`, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => resp.status === 401 ? ({error: true, unauthorized: true}) : resp.json())
+    }
+
+    fetchUsersCount() {
+        return fetch(`${this.base}/User/Count`)
+            .then(resp => resp.json())
+    }
+
+    fetchFilesCount() {
+        return fetch(`${this.base}/File/Count`)
+            .then(resp => resp.json())
+    }
+
+    fetchUsers(token) {
+        return fetch(`${this.base}/User/List`, {
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => {
+                if(resp.status === 401) return {error: true, unauthorized: true}
+                if (resp.status === 403) return {error: true, forbidden: true}
+                return resp.json()
+            })
+    }
+
+    updateBannedStatus(email, token) {
+        return fetch(`${this.base}/User/Status/${email}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => {
+                if(resp.status === 401) return {error: true, unauthorized: true}
+                if (resp.status === 403) return {error: true, forbidden: true}
+                return resp.json()
+            })
+    }
+
+    deleteUser(email, token) {
+        return fetch(`${this.base}/User/${email}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => {
+                if(resp.status === 401) return {error: true, unauthorized: true}
+                if (resp.status === 403) return {error: true, forbidden: true}
+                return resp.json()
+            })
+    }
+
+    UpdateUser(lastname, firstname, email, token) {
+        return fetch(`${this.base}/User/${email}/Username/${lastname} ${firstname}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `bearer ${token}`
+            }
+        })
+            .then(resp => {
+                if(resp.status === 401) return {error: true, unauthorized: true}
+                if (resp.status === 403) return {error: true, forbidden: true}
+                return resp.json()
+            })
     }
 }
 
