@@ -70,17 +70,17 @@ export function DisplayUser({firstname, lastname, email, isAdmin, isBanned, hand
                                                sx={{color: '#5D7052', width: '40px', height: '40px'}}/>
                             </Tooltip>
                         }
-                        {!isBanned && <Tooltip title={'Bloquer l\'utilisateur'}>
-                            <LockOutlined className={'icon-accordion'} onClick={() => handleBlock(email)}
-                                          sx={{color: '#C18845', width: '40px', height: '40px'}}/>
+                        {!isBanned && <Tooltip title={!isAdmin ? 'Bloquer l\'utilisateur' : 'Impossible de bloquer un administrateur'}>
+                            <LockOutlined className={'icon-accordion'} onClick={!isAdmin ? () => handleBlock(email) : null}
+                                          sx={{color: !isAdmin ? '#C18845' : 'grey', width: '40px', height: '40px'}}/>
                         </Tooltip>}
-                        {isBanned && <Tooltip title={'Débloquer l\'utilisateur'}>
-                            <LockOpenOutlined className={'icon-accordion'} onClick={() => handleBlock(email)}
-                                              sx={{color: '#C18845', width: '40px', height: '40px'}}/>
+                        {isBanned && <Tooltip title={!isAdmin ?'Débloquer l\'utilisateur' : 'Impossible de débloquer un administrateur'}>
+                            <LockOpenOutlined className={'icon-accordion'} onClick={!isAdmin ? () => handleBlock(email) : null}
+                                              sx={{color: !isAdmin ?'#C18845' : 'grey', width: '40px', height: '40px'}}/>
                         </Tooltip>}
-                        <Tooltip title={'Supprimer l\'utilisateur'}>
-                            <DeleteOutline className={'icon-accordion'} onClick={() => handleDelete(email)}
-                                           sx={{color: '#670000', width: '40px', height: '40px'}}/>
+                        <Tooltip title={!isAdmin ? 'Supprimer l\'utilisateur' : 'Impossible de supprimer un administrateur'}>
+                            <DeleteOutline className={'icon-accordion'} onClick={!isAdmin ? () => handleDelete(email) : null}
+                                           sx={{color: !isAdmin ? '#670000' : 'grey', width: '40px', height: '40px'}}/>
                         </Tooltip>
                     </div>
                 </div>
