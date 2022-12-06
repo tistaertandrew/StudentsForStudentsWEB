@@ -38,30 +38,34 @@ class ContactStore {
         this.handleContact(...data.values())
     }
 
-    handleContact(lastname, firstname, email, message) {
+    handleContact(lastname, firstname, email, subject, message) {
         const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
         if(lastname === '') {
-            this.handleErrorMessage('Le champ \"Nom de famille\" est obligatoire')
+            this.handleErrorMessage('Le champ "Nom de famille" est obligatoire')
             return
         }
         if(firstname === '') {
-            this.handleErrorMessage('Le champ \"Prénom\" est obligatoire')
+            this.handleErrorMessage('Le champ "Prénom" est obligatoire')
             return
         }
         if(email === '') {
-            this.handleErrorMessage('Le champ \"Adresse mail\" est obligatoire')
+            this.handleErrorMessage('Le champ "Adresse mail" est obligatoire')
             return
         }
         if(!email.match(emailRegex)) {
             this.handleErrorMessage('Veuillez encoder une adresse mail valide')
             return
         }
+        if(subject === '') {
+            this.handleErrorMessage('Le champ "Sujet" est obligatoire')
+            return
+        }
         if(message === '') {
-            this.handleErrorMessage('Le champ \"Message\" est obligatoire')
+            this.handleErrorMessage('Le champ "Message" est obligatoire')
             return
         }
 
-        api.sendContactForm(lastname, firstname, email, message)
+        api.sendContactForm(lastname, firstname, email, subject, message)
             .then(data => data.error ? this.handleErrorMessage(data.message) : this.handleSuccessMessage(data.message))
     }
 

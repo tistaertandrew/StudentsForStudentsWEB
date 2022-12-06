@@ -12,6 +12,11 @@ export class FileTransferApi {
         }
     }
 
+    fetchCourses(cursusId) {
+        return fetch(`${config.ApiUrl}/School/Courses/${cursusId}`)
+            .then(resp => resp.json())
+    }
+
     async getAvailableFiles(token) {
         return await fetch(`${this._base}`, {
             method: 'GET',
@@ -33,10 +38,10 @@ export class FileTransferApi {
         });
     }
 
-    async postFile(token, { content, filename, extension }) {
+    async postFile(token, { courseId, content, filename, extension }) {
         return await fetch(`${this._base}`, {
             method: 'POST',
-            body: JSON.stringify({ content, filename, extension }),
+            body: JSON.stringify({ courseId, content, filename, extension }),
             headers: this._header(token)
         });
     }

@@ -4,11 +4,16 @@ export default class User {
     _token
     _cursusId
 
-    constructor(username, email, token, cursusId) {
+    _isAdmin
+    _isBanned
+
+    constructor(username, email, token, cursusId, isAdmin, isBanned) {
         this.username = username
         this.email = email
         this.token = token
         this.cursusId = cursusId
+        this.isAdmin = isAdmin
+        this.isBanned = isBanned
     }
 
     set cursusId(cursusId) {
@@ -51,5 +56,21 @@ export default class User {
 
     get token() {
         return this._token
+    }
+
+    get isAdmin() {
+        return this._isAdmin
+    }
+
+    set isAdmin(isAdmin) {
+        this._isAdmin = isAdmin
+    }
+
+    get isBanned() {
+        return this._isBanned
+    }
+
+    set isBanned(isBanned) {
+        this._isBanned = isBanned
     }
 }

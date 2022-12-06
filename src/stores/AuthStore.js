@@ -1,8 +1,8 @@
-import { makeAutoObservable } from "mobx";
-import { sessionStore } from "./SessionStore";
+import {makeAutoObservable} from "mobx";
+import {sessionStore} from "./SessionStore";
 import Section from "../models/Section";
 import Cursus from "../models/Cursus";
-import { api } from '../repositories/Api'
+import {api} from '../repositories/Api'
 
 class AuthStore {
     _sections = []

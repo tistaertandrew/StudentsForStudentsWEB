@@ -15,6 +15,7 @@ function Authentication() {
 
     useEffect(() => {
         if (sessionStore.user) navigate(routes.Home)
+        authStore.onModeChange('signin')
     }, [sessionStore.user])
 
     const handleSubmit = (event) => {
