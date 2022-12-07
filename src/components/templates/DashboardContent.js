@@ -49,7 +49,7 @@ function DashboardContent({handleAdd, handleEdit, handleBlock, handleDelete, han
                 <div className={'popup-container'}>
                     <h1 className={'popup-title'}>FILTRER LES UTILISATEURS</h1>
                     <DisplayForm handleSubmit={handleFilterUsers} inputs={[
-                        <InputForm id={'email'} label={'Nom et/ou prénom'}/>,
+                        <InputForm id={'email'} label={'Nom/Prénom/Email'}/>,
                         <input type={'submit'} className={'btn-auth'} value={'FILTRER'}/>,
                     ]}/>
                     <RedirectLink label={'Retour'} handleMode={() => adminStore.closeFilterPopup()}/>

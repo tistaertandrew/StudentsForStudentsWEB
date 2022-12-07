@@ -14,7 +14,10 @@ import DisplaySynthese from "../molecules/DisplaySynthese";
 import EmptyContent from "../molecules/EmptyContent";
 import {Cached, Tune} from "@mui/icons-material";
 
+
 function Files() {
+    const [mode, setMode] = React.useState('courses');
+
     useEffect(() => {
         fileTransferStore.loadCourses(sessionStore.user.cursusId)
     }, [sessionStore.user])
@@ -23,6 +26,10 @@ function Files() {
         event.preventDefault()
         let data = new FormData(event.currentTarget)
         fileTransferStore.handleFileSubmit([...data.values()])
+    }
+
+    const handleMode = (id) => {
+        setMode(id)
     }
 
     const handleFilter = async (event) => {
@@ -76,10 +83,23 @@ function Files() {
                 <Dialog open={fileTransferStore.openFilter} onClose={() => fileTransferStore.closeFilterPopup()}>
                     <div className={'popup-container'}>
                         <h1 className={'popup-title'}>FILTRER LES SYNTHESES</h1>
-                        <DisplayForm handleSubmit={handleFilter} inputs={[
-                            <SelectInputForm id={'course'} label={'Cours concerné'} inputs={fileTransferStore.courses}/>,
-                            <input type={'submit'} className={'btn-auth'} value={'FILTRER'}/>
-                        ]}/>
+                        <div className={'filter-types'} id={'filters'}>
+                            <li id={'courses'} className={mode === 'courses' && 'active'}
+                                onClick={(e) => handleMode(e.target.id)}>Cours
+                            </li>
+                            <li id={'author'} className={mode === 'author' && 'active'}
+                                onClick={(e) => handleMode(e.target.id)}>Auteur
+                            </li>
+                            <li id={'date'} className={mode === 'date' && 'active'}
+                                onClick={(e) => handleMode(e.target.id)}>Date
+                            </li>
+                        </div>
+                        {mode === 'courses' &&
+                            <DisplayForm handleSubmit={handleFilter} inputs={[
+                                <SelectInputForm id={'course'} label={'Cours concerné'}
+                                                 inputs={fileTransferStore.courses}/>,
+                                <input type={'submit'} className={'btn-auth'} value={'FILTRER'}/>
+                            ]}/>}
                         <RedirectLink label={'Retour'} handleMode={() => fileTransferStore.closeFilterPopup()}/>
                     </div>
                 </Dialog>

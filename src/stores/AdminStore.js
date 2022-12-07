@@ -261,9 +261,9 @@ class AdminStore {
     }
 
     handleFilterUsers(data) {
-        let username = [...data.values()][0]
-        if(username === '') {
-            this.handleErrorMessage('Le champ "Nom et/ou prénom" est obligatoire')
+        let filterValue = [...data.values()][0]
+        if(filterValue === '') {
+            this.handleErrorMessage('Le champ "Nom/Prénom/Email" est obligatoire')
             return
         }
 
@@ -275,7 +275,7 @@ class AdminStore {
                     }
                 } else {
                     this.users = data
-                    this.users = this.users.filter(user => user.username.toLowerCase().includes(username.toLowerCase()))
+                    this.users = this.users.filter(user => user.username.toLowerCase().includes(filterValue.toLowerCase()) || user.email.toLowerCase().includes(filterValue.toLowerCase()))
                     this.closeFilterPopup()
                 }
             })

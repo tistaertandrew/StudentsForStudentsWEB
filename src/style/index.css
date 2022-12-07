@@ -745,6 +745,28 @@
     margin: 0 15%;
 }
 
+.filter-types {
+    display: flex;
+    width: 60%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.filter-types li {
+    list-style-type: none;
+    color: grey;
+    cursor: pointer;
+}
+
+.filter-types li:hover {
+    color: black;
+}
+
+.filter-types li.active {
+    color: black;
+    border-bottom: solid 1px black;
+}
+
 @keyframes anim-lineUp {
     0% {
         opacity: 0;

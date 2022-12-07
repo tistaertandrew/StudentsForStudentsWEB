@@ -1,14 +1,14 @@
-import { action, makeAutoObservable, observable, reaction } from "mobx";
-import { api } from "../repositories/Api";
-import { chatRoomRepository } from "../repositories/ChatRoomRepository";
+import {action, makeAutoObservable, observable, reaction} from "mobx";
+import {api} from "../repositories/Api";
+import {chatRoomRepository} from "../repositories/ChatRoomRepository";
 
 class ChatRoomStore {
 
     /**
-     * 
-     * @param {ChatRoomRepository} repository 
+     *
+     * @param {ChatRoomRepository} repository
      */
-    constructor({ repository }) {
+    constructor({repository}) {
         /**
          * Repository to access the remote data
          */
@@ -65,7 +65,8 @@ class ChatRoomStore {
          * command to unsubscribe from the remote active room's messages changes
          * @see {@link setActiveRoom}
          */
-        this.unsubscribeFromActiveRoomMessagesChange = () => { };
+        this.unsubscribeFromActiveRoomMessagesChange = () => {
+        };
 
         /**
          * Make the store observable
@@ -104,7 +105,10 @@ class ChatRoomStore {
      * @returns {Function} a function to unsubscribe from the snapchot
      */
     _onRemoteRoomsChangeSetLocalRooms() {
-        return this._repository.onRoomsChange({ collectionName: this.cursus.label, callback: rooms => this._setLocalRooms(rooms) });
+        return this._repository.onRoomsChange({
+            collectionName: this.cursus.label,
+            callback: rooms => this._setLocalRooms(rooms)
+        });
     }
 
     /**
@@ -126,11 +130,11 @@ class ChatRoomStore {
     }
 
     /**
-    * Whenever the local messages changes, set the observed messages with local messages. 
-    * It apply the additional properties to each message @see {@link definePropertiesToIncommingMessages}
-    * @To notify the observers of messages changes
-    * @returns {Function} a function to dispose from the reaction
-    */
+     * Whenever the local messages changes, set the observed messages with local messages.
+     * It apply the additional properties to each message @see {@link definePropertiesToIncommingMessages}
+     * @To notify the observers of messages changes
+     * @returns {Function} a function to dispose from the reaction
+     */
     _onLocalMessagesChangeSetObservedMessages = () => reaction(
         () => this._messages,
         (messages) => {
@@ -154,7 +158,7 @@ class ChatRoomStore {
      * Command to add properties to incoming rooms.
      * You can access the room in your function(room) properties
      * @param {String} properties an object that contains properties to append to the incoming rooms
-     * 
+     *
      */
     definePropertiesToIncomingRooms(properties = {}) {
         this._propertiesToAppendToIncomingRooms = properties;
@@ -183,13 +187,18 @@ class ChatRoomStore {
      * @returns true if the message was sent, otherwise false
      */
     sendMessage = async (message) => {
-        return await this._repository.sendMessage({ collectionName: this.cursus.label, room: this.activeRoom, message, username: this.username });
+        return await this._repository.sendMessage({
+            collectionName: this.cursus.label,
+            room: this.activeRoom,
+            message,
+            username: this.username
+        });
     }
 
     /**
      * Transforms a date to a string.
      * @param {Date} date the date to transform
-     * @returns the date as a string with the format "dd/mm/yyyy à hh:mm" 
+     * @returns the date as a string with the format "dd/mm/yyyy à hh:mm"
      * if the date is today, the string will be "Aujourd'hui à hh:mm"
      */
     getDateTimeString(date) {
@@ -207,11 +216,11 @@ class ChatRoomStore {
     }
 
     /**
-    * Set the active room and react to it's messages changes
-    * @SideEffect Unsubscribe from the previous room's messages and subscribe to the given room's messages
-    * @SideEffect Retrieve the messages of the given room
-    * @param {Room} room 
-    */
+     * Set the active room and react to it's messages changes
+     * @SideEffect Unsubscribe from the previous room's messages and subscribe to the given room's messages
+     * @SideEffect Retrieve the messages of the given room
+     * @param {Room} room
+     */
     setActiveRoom = async (room) => {
         this.unsubscribeFromActiveRoomMessagesChange();
         action(() => this.activeRoom = room)();
@@ -220,12 +229,12 @@ class ChatRoomStore {
     }
 
     /**
-    * Whenever the remote room's messages changes, set the local messages with remote messages
-    * @To keep the tracked room's messages up to date
-    * @returns {Function} a function to unsubscribe from the snapchot
-    */
+     * Whenever the remote room's messages changes, set the local messages with remote messages
+     * @To keep the tracked room's messages up to date
+     * @returns {Function} a function to unsubscribe from the snapchot
+     */
     _onRemoteActiveRoomMessagesChangeSetLocalMessages(room) {
-        return this._repository.onRoomMessagesChange({ room, callback: messages => this._setLocalMessages(messages) });
+        return this._repository.onRoomMessagesChange({room, callback: messages => this._setLocalMessages(messages)});
     }
 
     /**
@@ -241,7 +250,7 @@ class ChatRoomStore {
      * @To know which cursus and courses to retrieve
      * @sideEffect it retrieves the user's cursus and courses
      * @sideEffect it retrieves the user's rooms
-     * @param {Object} user 
+     * @param {Object} user
      */
     async setActiveUser(user) {
         this.setUsername(user);
@@ -275,7 +284,7 @@ class ChatRoomStore {
 
     /**
      * set the username of current user
-     * @param {Object} user 
+     * @param {Object} user
      */
     setUsername(user) {
         action(() => this.username = user.username)();
@@ -283,7 +292,7 @@ class ChatRoomStore {
 
     /**
      * Set the local rooms with the given rooms
-     * @param {[Room]} rooms 
+     * @param {[Room]} rooms
      */
     _setLocalRooms(rooms) {
         action(() => this._rooms = rooms)();
@@ -291,13 +300,13 @@ class ChatRoomStore {
 
     /**
      * Set the local messages as action to be able to react to it
-     * @param {String} messages 
+     * @param {String} messages
      */
     _setLocalMessages = (messages) => action(() => this._messages = messages)();
 
     /**
      * Set the local loading state
-     * @param {Boolean} loading 
+     * @param {Boolean} loading
      */
     _setLocalLoading = (loading) => action(() => this._loading = loading)();
 
@@ -318,7 +327,7 @@ class ChatRoomStore {
     }
 }
 
-export const chatRoomStore = new ChatRoomStore({ repository: chatRoomRepository });
+export const chatRoomStore = new ChatRoomStore({repository: chatRoomRepository});
 
 function getDatetimeString(date) {
     if (isToday(date)) return `${getTodayString()} à ${getFullTimeString(date)}`
