@@ -14,7 +14,7 @@ import DisplaySynthese from "../molecules/DisplaySynthese";
 import EmptyContent from "../molecules/EmptyContent";
 import {Cached, Tune} from "@mui/icons-material";
 import InputForm from "../molecules/InputForm";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DesktopDatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import dayjs from 'dayjs';
 import {fr} from 'date-fns/locale'
@@ -129,14 +129,23 @@ function Files() {
                         {mode === 'date' &&
                             <DisplayForm handleSubmit={handleFilterDate} inputs={[
                                 <LocalizationProvider adapterLocale={fr} dateAdapter={AdapterDateFns}>
-                                        <DesktopDatePicker
-                                            className={'date-picker'}
-                                            label="Date concernée *"
-                                            inputFormat="dd/MM/yyyy"
-                                            value={date}
-                                            onChange={handleChangeDate}
-                                            renderInput={(params) => <TextField variant={'standard'} {...params}/>}
-                                        />
+                                    <DesktopDatePicker
+                                        className={'date-picker'}
+                                        label="Date concernée *"
+                                        inputFormat="dd/MM/yyyy"
+                                        value={date}
+                                        onChange={handleChangeDate}
+                                        renderInput={(params) =>
+                                            <TextField
+                                                // La méthode ci-dessous permet de vérouiller la modification de la date
+                                                // via le clavier (on ne peut que la modifier via le calendrier car aussi non
+                                                // un décalage de 1 jour est constaté)
+                                                onKeyDown={(e) => e.preventDefault()}
+                                                variant={'standard'}
+                                                sx={{margin: '1%'}}
+                                                {...params}
+                                            />}
+                                    />
                                 </LocalizationProvider>,
                                 <input type={'submit'} className={'btn-auth'} value={'FILTRER'}/>
                             ]}/>}
