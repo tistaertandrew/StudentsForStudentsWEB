@@ -135,12 +135,12 @@ class ChatRoomStore {
         () => this._messages,
         (messages) => {
             this.messages = []
-            // setTimeout(() => {
-            this.messages = messages.map(message => {
-                this._appendAdditionalProperties(message, this._propertiesToAppendToIncommingMessages);
-                return message
-            });
-            // }, 100);
+            setTimeout(() => {
+                this.messages = messages.map(message => {
+                    this._appendAdditionalProperties(message, this._propertiesToAppendToIncommingMessages);
+                    return message
+                });
+            }, 100);
         }
     );
 
