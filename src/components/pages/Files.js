@@ -54,7 +54,8 @@ function Files() {
         let data = new FormData(event.currentTarget)
         await fileTransferStore.filterRequestsByAuthor([...data.values()])
     }
-    const handleFilterDate = async () => {
+    const handleFilterDate = async (event) => {
+        event.preventDefault()
         await fileTransferStore.filterRequestsByDate(date)
     }
 
@@ -134,7 +135,7 @@ function Files() {
                                             inputFormat="dd/MM/yyyy"
                                             value={date}
                                             onChange={handleChangeDate}
-                                            renderInput={(params) => <TextField id={'date'} {...params}/>}
+                                            renderInput={(params) => <TextField variant={'standard'} {...params}/>}
                                         />
                                 </LocalizationProvider>,
                                 <input type={'submit'} className={'btn-auth'} value={'FILTRER'}/>
