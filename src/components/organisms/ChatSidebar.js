@@ -1,7 +1,7 @@
 import React from 'react'
 import ChatList from '../templates/ChatList'
 
-const ChatSidebar = ({ username, rooms, activeRoom }) => {
+const ChatSidebar = ({ rooms, activeRoom }) => {
     return (
         <div className='chat_sidebar'>
             <ChatList rooms={rooms} activeRoom={activeRoom} />

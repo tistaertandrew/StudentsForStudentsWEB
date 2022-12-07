@@ -52,9 +52,9 @@ export class ChatRoomRepository {
             if (!room) return undefined;
             return this._chatRoomSource.getSnapchotOnRoomMessages({
                 roomId: room.uid,
-                onNext: (snapchot) => {
+                onNext: async (snapchot) => {
                     const messages = snapchot.data().messages.map(message => RoomMessage.fromObject(message));
-                    callback && callback(messages);
+                    callback && await callback(messages);
                 },
                 onError: (error) => console.error("Error on listening room messages: ", error)
             });

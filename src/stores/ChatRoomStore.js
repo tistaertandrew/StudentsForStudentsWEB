@@ -1,6 +1,6 @@
-import {action, makeAutoObservable, observable, reaction} from "mobx";
-import {api} from "../repositories/Api";
-import {chatRoomRepository} from "../repositories/ChatRoomRepository";
+import { action, makeAutoObservable, observable, reaction } from "mobx";
+import { api } from "../repositories/Api";
+import { chatRoomRepository } from "../repositories/ChatRoomRepository";
 
 class ChatRoomStore {
 
@@ -8,7 +8,7 @@ class ChatRoomStore {
      *
      * @param {ChatRoomRepository} repository
      */
-    constructor({repository}) {
+    constructor({ repository }) {
         /**
          * Repository to access the remote data
          */
@@ -65,8 +65,7 @@ class ChatRoomStore {
          * command to unsubscribe from the remote active room's messages changes
          * @see {@link setActiveRoom}
          */
-        this.unsubscribeFromActiveRoomMessagesChange = () => {
-        };
+        this.unsubscribeFromActiveRoomMessagesChange = () => { };
 
         /**
          * Make the store observable
@@ -138,13 +137,10 @@ class ChatRoomStore {
     _onLocalMessagesChangeSetObservedMessages = () => reaction(
         () => this._messages,
         (messages) => {
-            this.messages = []
-            setTimeout(() => {
-                this.messages = messages.map(message => {
-                    this._appendAdditionalProperties(message, this._propertiesToAppendToIncommingMessages);
-                    return message
-                });
-            }, 100);
+            this.messages = messages.map(message => {
+                this._appendAdditionalProperties(message, this._propertiesToAppendToIncommingMessages);
+                return message
+            });
         }
     );
 
@@ -223,6 +219,7 @@ class ChatRoomStore {
      */
     setActiveRoom = async (room) => {
         this.unsubscribeFromActiveRoomMessagesChange();
+        action(() => this.messages = [])();
         action(() => this.activeRoom = room)();
         this.unsubscribeFromActiveRoomMessagesChange = this._onRemoteActiveRoomMessagesChangeSetLocalMessages(this.activeRoom);
         await this._retrieveActiveRoomMessagesOnce();
@@ -234,7 +231,7 @@ class ChatRoomStore {
      * @returns {Function} a function to unsubscribe from the snapchot
      */
     _onRemoteActiveRoomMessagesChangeSetLocalMessages(room) {
-        return this._repository.onRoomMessagesChange({room, callback: messages => this._setLocalMessages(messages)});
+        return this._repository.onRoomMessagesChange({ room, callback: messages => this._setLocalMessages(messages) });
     }
 
     /**
@@ -327,7 +324,7 @@ class ChatRoomStore {
     }
 }
 
-export const chatRoomStore = new ChatRoomStore({repository: chatRoomRepository});
+export const chatRoomStore = new ChatRoomStore({ repository: chatRoomRepository });
 
 function getDatetimeString(date) {
     if (isToday(date)) return `${getTodayString()} à ${getFullTimeString(date)}`

@@ -42,10 +42,9 @@ const Chat = () => {
 
     return (
         <div>
-            <ObservedNavBar/>
+            <ObservedNavBar />
             <div id='chat'>
                 <ChatSidebar
-                    username={chatRoomStore.username}
                     rooms={chatRoomStore.rooms}
                     activeRoom={chatRoomStore.activeRoom?.uid}
                 />
