@@ -8,15 +8,26 @@ import {ObservedSnackBar} from "../molecules/SnackBar";
 import DisplayForm from "../organisms/DisplayForm";
 import SelectInputForm from "../molecules/SelectInputForm";
 import RedirectLink from "../molecules/RedirectLink";
-import {Dialog, Tooltip} from "@mui/material";
+import {Dialog, TextField, Tooltip} from "@mui/material";
 import {DropzoneArea} from "material-ui-dropzone";
 import DisplaySynthese from "../molecules/DisplaySynthese";
 import EmptyContent from "../molecules/EmptyContent";
 import {Cached, Tune} from "@mui/icons-material";
+import InputForm from "../molecules/InputForm";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import {DesktopDatePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import dayjs from 'dayjs';
+import {fr} from 'date-fns/locale'
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 
 
 function Files() {
-    const [mode, setMode] = React.useState('courses');
+    const [mode, setMode] = React.useState('courses')
+    const [date, setDate] = React.useState(new Date())
+
+    const handleChangeDate = (newDate) => {
+        setDate(newDate)
+    };
 
     useEffect(() => {
         fileTransferStore.loadCourses(sessionStore.user.cursusId)
@@ -32,10 +43,19 @@ function Files() {
         setMode(id)
     }
 
-    const handleFilter = async (event) => {
+    const handleFilterCourse = async (event) => {
         event.preventDefault()
         let data = new FormData(event.currentTarget)
-        await fileTransferStore.filterRequests([...data.values()])
+        await fileTransferStore.filterRequestsByCourse([...data.values()])
+    }
+
+    const handleFilterAuthor = async (event) => {
+        event.preventDefault()
+        let data = new FormData(event.currentTarget)
+        await fileTransferStore.filterRequestsByAuthor([...data.values()])
+    }
+    const handleFilterDate = async () => {
+        await fileTransferStore.filterRequestsByDate(date)
     }
 
     const handleResetFilter = async () => {
@@ -95,9 +115,28 @@ function Files() {
                             </li>
                         </div>
                         {mode === 'courses' &&
-                            <DisplayForm handleSubmit={handleFilter} inputs={[
-                                <SelectInputForm id={'course'} label={'Cours concerné'}
+                            <DisplayForm handleSubmit={handleFilterCourse} inputs={[
+                                <SelectInputForm id={'course'} label={'Cours concerné *'}
                                                  inputs={fileTransferStore.courses}/>,
+                                <input type={'submit'} className={'btn-auth'} value={'FILTRER'}/>
+                            ]}/>}
+                        {mode === 'author' &&
+                            <DisplayForm handleSubmit={handleFilterAuthor} inputs={[
+                                <InputForm id={'author'} label={'Auteur concerné'}/>,
+                                <input type={'submit'} className={'btn-auth'} value={'FILTRER'}/>
+                            ]}/>}
+                        {mode === 'date' &&
+                            <DisplayForm handleSubmit={handleFilterDate} inputs={[
+                                <LocalizationProvider adapterLocale={fr} dateAdapter={AdapterDateFns}>
+                                        <DesktopDatePicker
+                                            className={'date-picker'}
+                                            label="Date concernée *"
+                                            inputFormat="dd/MM/yyyy"
+                                            value={date}
+                                            onChange={handleChangeDate}
+                                            renderInput={(params) => <TextField id={'date'} {...params}/>}
+                                        />
+                                </LocalizationProvider>,
                                 <input type={'submit'} className={'btn-auth'} value={'FILTRER'}/>
                             ]}/>}
                         <RedirectLink label={'Retour'} handleMode={() => fileTransferStore.closeFilterPopup()}/>

@@ -67,7 +67,7 @@ class FileTransferStore {
     }
 
     set file(file) {
-        if(file) {
+        if (file) {
             this._file = file
             console.log(file)
         }
@@ -128,13 +128,13 @@ class FileTransferStore {
     }
 
     onInputFileChange(courseId) {
-        if(courseId === '') {
+        if (courseId === '') {
             this._setErrors({message: 'Le champ "Cours concerné" est obligatoire'})
             this.handleErrorMessage()
             return
         }
 
-        if(!this.file) {
+        if (!this.file) {
             this._setErrors({message: 'La synthèse à ajouter est obligatoire'})
             this.handleErrorMessage()
             return
@@ -285,15 +285,36 @@ class FileTransferStore {
         this.onInputFileChange(...data.values())
     }
 
-    async filterRequests(data) {
+    async filterRequestsByCourse(data) {
         let id = parseInt([...data.values()][0])
         if(isNaN(id)) {
             this._setErrors({message: 'Le champ "Cours concerné" est obligatoire'})
             this.handleErrorMessage()
+            return
         }
 
         await this._loadFiles(sessionStore.user?.token)
         this._files = this._files.filter(file => file.course.id === id)
+        this.closeFilterPopup()
+    }
+
+    async filterRequestsByDate(date) {
+        await this._loadFiles(sessionStore.user?.token)
+        this._files = this._files.filter(file => file.creationDate === date.toISOString().substring(0, 10))
+        this.closeFilterPopup()
+
+    }
+
+    async filterRequestsByAuthor(data) {
+        let author = [...data.values()][0]
+        if(author === '') {
+            this._setErrors({message: 'Le champ "Auteur concerné" est obligatoire'})
+            this.handleErrorMessage()
+            return
+        }
+
+        await this._loadFiles(sessionStore.user?.token)
+        this._files = this._files.filter(file => file.owner.toLowerCase().includes(author.toLowerCase()))
         this.closeFilterPopup()
     }
 
