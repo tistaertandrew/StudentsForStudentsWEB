@@ -16,7 +16,7 @@ class Api {
     }
 
     loadSections() {
-        return fetch(`${this.base}/School/Sections`)
+        return fetch(`${this.base}/School/Section`)
             .then(resp => resp.json())
     }
 
@@ -133,7 +133,7 @@ class Api {
     }
 
     fetchCoursesByCursusId(cursusId) {
-        return fetch(`${this.base}/School/Courses/${cursusId}`)
+        return fetch(`${this.base}/School/Course/${cursusId}`)
             .then(resp => resp.json())
     }
 
@@ -175,7 +175,7 @@ class Api {
     }
 
     fetchCourses(cursusId) {
-        return fetch(`${this.base}/School/Courses/${cursusId}`)
+        return fetch(`${this.base}/School/Course/${cursusId}`)
             .then(resp => resp.json())
         
     }
@@ -260,7 +260,7 @@ class Api {
     }
 
     updateBannedStatus(email, token) {
-        return fetch(`${this.base}/User/Status/${email}`, {
+        return fetch(`${this.base}/User/${email}/Status`, {
             method: 'PUT',
             headers: {
                 'Authorization': `bearer ${token}`

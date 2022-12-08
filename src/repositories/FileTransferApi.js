@@ -25,7 +25,7 @@ export class FileTransferApi {
     }
 
     async deleteFileByName(filename, token) {
-        return await fetch(`${this._base}?filename=${filename}`, {
+        return await fetch(`${this._base}/${filename}`, {
             method: 'DELETE',
             headers: this._header(token)
         });
