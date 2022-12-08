@@ -13,7 +13,7 @@ export class FileTransferApi {
     }
 
     fetchCourses(cursusId) {
-        return fetch(`${config.ApiUrl}/School/Courses/${cursusId}`)
+        return fetch(`${config.ApiUrl}/School/Course/${cursusId}`)
             .then(resp => resp.json())
     }
 
