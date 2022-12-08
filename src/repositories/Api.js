@@ -288,10 +288,15 @@ class Api {
     }
 
     UpdateUser(lastname, firstname, email, token) {
-        return fetch(`${this.base}/User/${email}/Username/${lastname} ${firstname}`, {
+        let data = JSON.stringify({
+            username: `${lastname} ${firstname}`,
+        })
+        return fetch(`${this.base}/User/${email}/Username/`, {
             method: 'PUT',
+            body: data,
             headers: {
-                'Authorization': `bearer ${token}`
+                'Authorization': `bearer ${token}`,
+                'Content-Type': 'application/json'
             }
         })
             .then(resp => {
