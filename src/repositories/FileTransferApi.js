@@ -34,8 +34,8 @@ export class FileTransferApi {
     async getFileByName(filename, token) {
         return await fetch(`${this._base}/${filename}`, {
             method: 'GET',
-            headers: this._header(token)
-        });
+            headers: this._header(token),
+        })
     }
 
     async postFile(token, { courseId, content, filename, extension }) {

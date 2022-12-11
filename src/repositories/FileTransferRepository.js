@@ -1,4 +1,4 @@
-import {FileTransferApi} from "./FileTransferApi";
+import { FileTransferApi } from "./FileTransferApi";
 import Course from "../models/Course";
 import Cursus from "../models/Cursus";
 import Section from "../models/Section";

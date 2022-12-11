@@ -1,9 +1,10 @@
-import {action, makeAutoObservable, reaction} from "mobx";
-import {fileTransferRepository} from "../repositories/FileTransferRepository";
-import {sessionStore} from "./SessionStore";
+import { action, makeAutoObservable, reaction } from "mobx";
+import { fileTransferRepository } from "../repositories/FileTransferRepository";
+import { sessionStore } from "./SessionStore";
 import Course from "../models/Course";
 import Cursus from "../models/Cursus";
 import Section from "../models/Section";
+import { Buffer } from 'buffer';
 
 class FileTransferStore {
     _openFileAdd = false
@@ -11,10 +12,10 @@ class FileTransferStore {
     _courses = []
     _file = undefined
 
-    constructor({repository}) {
+    constructor({ repository }) {
         this._repository = repository;
         this._fileReader = new FileReader();
-        this._content = {courseId: "", text: "", name: "", extension: ""};
+        this._content = { courseId: "", text: "", name: "", extension: "" };
         this._errors = [];
         this._isLoading = false;
         this._files = [];
@@ -25,7 +26,6 @@ class FileTransferStore {
         this.errors = [];
         this.isError = false;
 
-
         makeAutoObservable(this);
 
         this._onLocalFilesChanges();
@@ -33,7 +33,6 @@ class FileTransferStore {
         this._onLocalContentChanges();
         this._onLocalErrorsChanges();
         this._onLocalErrorChange();
-
     }
 
     get openFileAdd() {
@@ -69,7 +68,7 @@ class FileTransferStore {
     set file(file) {
         if (file) {
             this._file = file
-            console.log(file)
+            console.info(file)
         }
     }
 
@@ -81,12 +80,12 @@ class FileTransferStore {
         }, 2500)
     }
 
-    async init({token}) {
+    async init({ token }) {
         try {
             this._setLoading(true);
             this._loadFiles(token);
         } catch (e) {
-            console.log("Error on file transfer init", e);
+            console.error("Error on file transfer init", e);
             this._setErrors(e);
             this._setIsError(true)
         } finally {
@@ -98,25 +97,11 @@ class FileTransferStore {
         await this._loadFiles(token)
     }
 
-    async onDownloadFile(file, token) {
-        try {
-            this._setLoading(true);
-            const content = await this._repository.getFileContent({name: file.name}, token);
-            this._download(content, file.name + '.txt', "text/plain");
-        } catch (e) {
-            console.error("Error on file download", e);
-            this._setErrors(e);
-            this._setIsError(true)
-        } finally {
-            this._setLoading(false);
-        }
-    }
-
     async onDeleteFile(file, token) {
         try {
             this._setLoading(true);
-            console.log(file);
-            await this._repository.deleteFile({name: file.name}, token);
+            console.info(file);
+            await this._repository.deleteFile({ name: file.name }, token);
             //this._loadFiles(token);
         } catch (e) {
             console.error("Error on file delete", e);
@@ -129,28 +114,71 @@ class FileTransferStore {
 
     onInputFileChange(courseId) {
         if (courseId === '') {
-            this._setErrors({message: 'Le champ "Cours concerné" est obligatoire'})
+            this._setErrors({ message: 'Le champ "Cours concerné" est obligatoire' })
             this.handleErrorMessage()
             return
         }
 
         if (!this.file) {
-            this._setErrors({message: 'La synthèse à ajouter est obligatoire'})
+            this._setErrors({ message: 'La synthèse à ajouter est obligatoire' })
             this.handleErrorMessage()
             return
         }
         this.closeFileAddPopup()
         try {
-            this._fileReader.onload = () => {
-                this._setLocalContent({courseId: courseId, text: this._fileReader.result, name: this.file.name});
+            this._fileReader.onloadend = () => {
+                const text = this._fileReader.result;
+                this._setLocalContent({ courseId: courseId, text, name: this.file.name });
             }
-            this._fileReader.readAsText(this.file);
 
+            this._fileReader.readAsArrayBuffer(this.file);
+            // loadFile(this.file, console.log)
         } catch (e) {
             console.error("Error on file input listener", e);
             this._setErrors(e);
             this._setIsError(true)
         }
+    }
+
+    async onDownloadFile(file, token) {
+        try {
+            this._setLoading(true);
+            const content = await this._repository.getFileContent({ name: file.name }, token);
+            this._download(content, file.name + '.pdf', "application/pdf");
+        } catch (e) {
+            console.error("Error on file download", e);
+            this._setErrors(e);
+            this._setIsError(true)
+        } finally {
+            this._setLoading(false);
+        }
+    }
+
+    _onLocalContentChanges() {
+        return reaction(() => this._content, async (content) => {
+            try {
+                this._setLoading(true);
+                // Create file in server
+                await this._repository.createFile({
+                    courseId: content.courseId,
+                    name: content.name,
+                    content: Buffer.from(content.text).toString('base64'),
+                    extension: content.extension
+                }, sessionStore.user?.token);
+            } catch (e) {
+                console.error("Error on file upload", e);
+                this._setErrors(e);
+                this._setIsError(true)
+            } finally {
+                this._setLoading(false);
+            }
+        });
+    }
+
+    _setLocalContent({ courseId, text, name }) {
+        const extension = name.substring(name.lastIndexOf(".") + 1)
+        const newName = name.substring(name.lastIndexOf('\\') + 1, name.lastIndexOf('.'));
+        action(() => this._content = { courseId, text, name: newName, extension })();
     }
 
     async _loadFiles(token) {
@@ -185,42 +213,16 @@ class FileTransferStore {
         });
     }
 
-    _onLocalContentChanges() {
-        return reaction(() => this._content, async (content) => {
-            try {
-                this._setLoading(true);
-                await this._repository.createFile({
-                    courseId: content.courseId,
-                    name: content.name,
-                    content: content.text,
-                    extension: content.extension
-                }, sessionStore.user?.token);
-                //this._loadFiles(sessionStore.user?.token);
-            } catch (e) {
-                console.error("Error on file upload", e);
-                this._setErrors(e);
-                this._setIsError(true)
-            } finally {
-                this._setLoading(false);
-            }
-        });
-    }
-
-    _setLocalContent({courseId, text, name}) {
-        const extension = name.substring(name.lastIndexOf(".") + 1)
-        const newName = name.substring(name.lastIndexOf('\\') + 1, name.lastIndexOf('.'));
-        action(() => this._content = {courseId, text, name: newName, extension})();
-    }
-
     _download(data, filename, type) {
+        console.log(data)
         try {
             this._setLoading(true);
-            var file = new Blob([data], {type: type});
+            let file = new Blob([data], { type: type });
             if (window.navigator.msSaveOrOpenBlob) // IE10+
                 window.navigator.msSaveOrOpenBlob(file, filename);
             else { // Others
-                var a = document.createElement("a"),
-                    url = URL.createObjectURL(file);
+                let a = document.createElement("a"),
+                    url = `data:application/pdf;base64,${data}`;
                 a.href = url;
 
                 a.download = filename;
@@ -287,8 +289,8 @@ class FileTransferStore {
 
     async filterRequestsByCourse(data) {
         let id = parseInt([...data.values()][0])
-        if(isNaN(id)) {
-            this._setErrors({message: 'Le champ "Cours concerné" est obligatoire'})
+        if (isNaN(id)) {
+            this._setErrors({ message: 'Le champ "Cours concerné" est obligatoire' })
             this.handleErrorMessage()
             return
         }
@@ -302,13 +304,12 @@ class FileTransferStore {
         await this._loadFiles(sessionStore.user?.token)
         this._files = this._files.filter(file => file.creationDate === date.toISOString().substring(0, 10))
         this.closeFilterPopup()
-
     }
 
     async filterRequestsByAuthor(data) {
         let author = [...data.values()][0]
-        if(author === '') {
-            this._setErrors({message: 'Le champ "Auteur concerné" est obligatoire'})
+        if (author === '') {
+            this._setErrors({ message: 'Le champ "Auteur concerné" est obligatoire' })
             this.handleErrorMessage()
             return
         }
@@ -324,4 +325,4 @@ class FileTransferStore {
 }
 
 export const
-    fileTransferStore = new FileTransferStore({repository: fileTransferRepository});
+    fileTransferStore = new FileTransferStore({ repository: fileTransferRepository });
