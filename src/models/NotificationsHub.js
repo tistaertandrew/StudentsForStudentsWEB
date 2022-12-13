@@ -1,5 +1,5 @@
 import * as signalR from "@microsoft/signalr";
-import config from "../config.json";
+import config from "../env/config.json";
 import {homeStore} from "../stores/HomeStore";
 import {sessionStore} from "../stores/SessionStore";
 import {fileTransferStore} from "../stores/FileTransferStore";

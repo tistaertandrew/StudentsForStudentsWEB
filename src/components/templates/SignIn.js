@@ -4,7 +4,7 @@ import RedirectLink from "../molecules/RedirectLink";
 import DisplayForm from "../organisms/DisplayForm";
 import DisplayProviders from "../organisms/DisplayProviders";
 import LeftImage from '../../assets/images/peace.png'
-import config from '../../config.json'
+import config from '../../env/config.json'
 import DisplayGoogleProvider from "../molecules/DisplayGoogleProvider";
 import {authStore} from "../../stores/AuthStore";
 import {observer} from "mobx-react";

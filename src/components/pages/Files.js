@@ -159,7 +159,7 @@ function Files() {
                             <SelectInputForm id={'course'} label={'Cours concerné*'}
                                 inputs={fileTransferStore.courses} />,
                             <div style={{ width: '82%' }}>
-                                <DropzoneArea dropzoneText={'Ajouter un fichier'} acceptedFiles={['.pdf']}
+                                <DropzoneArea dropzoneText={'Ajouter un fichier PDF'} acceptedFiles={['.pdf']}
                                     filesLimit={1} showAlerts={false} showPreviews={true}
                                     showPreviewsInDropzone={false} useChipsForPreview
                                     previewGridProps={{ container: { spacing: 1, direction: 'row' } }}

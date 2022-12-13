@@ -11,7 +11,7 @@ import {
     updateDoc,
 } from "firebase/firestore";
 
-import {db} from "../firebase";
+import {db} from "../env/firebase";
 
 const CHAT_COLLECTION_NAME = "chats";
 
