@@ -1,4 +1,4 @@
-import config from '../env/config.json'
+import config from '../config.json'
 
 class Api {
     _base

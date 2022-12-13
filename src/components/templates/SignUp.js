@@ -6,7 +6,7 @@ import DisplayProviders from "../organisms/DisplayProviders";
 import HalfInputForm from "../molecules/HalfInputForm";
 import HalfSelectInputForm from "../molecules/HalfSelectInputForm";
 import RightImage from '../../assets/images/students.png'
-import config from "../../env/config.json";
+import config from "../../config.json";
 import DisplayGoogleProvider from "../molecules/DisplayGoogleProvider";
 import {authStore} from "../../stores/AuthStore";
 import {observer} from "mobx-react";
