@@ -6,7 +6,7 @@ const ChatDialogue = ({ messages, onSendMessage, }) => {
     return (
         <div className='chat_dialogue'>
             <ChatMessages messages={messages} />
-            <ChatInput onSubmit={onSendMessage} isDisabled={messages && messages.length > 0} />
+            <ChatInput onSubmit={onSendMessage} isEnabled={messages && messages.length > 0} />
         </div>
     )
 }

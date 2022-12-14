@@ -1,7 +1,7 @@
 import {Send} from '@mui/icons-material'
 import React, {useState} from 'react'
 
-const ChatInput = ({ onSubmit }) => {
+const ChatInput = ({ onSubmit, isEnabled }) => {
 
     const [text, setText] = useState()
 
@@ -11,6 +11,11 @@ const ChatInput = ({ onSubmit }) => {
         setText('');
     }
 
+    if(!isEnabled) {
+        return (
+            <div></div>
+        )
+    }
     return (
         <div className='chat_input'>
             <form id='chat_submit_message' className='chat_input__form' onSubmit={handleSubmit}>

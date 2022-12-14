@@ -1,10 +1,10 @@
-import { action, makeAutoObservable, reaction } from "mobx";
-import { fileTransferRepository } from "../repositories/FileTransferRepository";
-import { sessionStore } from "./SessionStore";
+import {action, makeAutoObservable, reaction} from "mobx";
+import {fileTransferRepository} from "../repositories/FileTransferRepository";
+import {sessionStore} from "./SessionStore";
 import Course from "../models/Course";
 import Cursus from "../models/Cursus";
 import Section from "../models/Section";
-import { Buffer } from 'buffer';
+import {Buffer} from 'buffer';
 
 class FileTransferStore {
     _openFileAdd = false

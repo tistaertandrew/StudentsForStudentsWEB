@@ -1,24 +1,22 @@
-import React, { useEffect } from 'react'
+import React, {useEffect} from 'react'
 import "../../style/files.scss"
-import { ObservedNavBar } from "../templates/NavBar";
-import { fileTransferStore } from '../../stores/FileTransferStore';
-import { observer } from "mobx-react";
-import { sessionStore } from '../../stores/SessionStore';
-import { ObservedSnackBar } from "../molecules/SnackBar";
+import {ObservedNavBar} from "../templates/NavBar";
+import {fileTransferStore} from '../../stores/FileTransferStore';
+import {observer} from "mobx-react";
+import {sessionStore} from '../../stores/SessionStore';
+import {ObservedSnackBar} from "../molecules/SnackBar";
 import DisplayForm from "../organisms/DisplayForm";
 import SelectInputForm from "../molecules/SelectInputForm";
 import RedirectLink from "../molecules/RedirectLink";
-import { Dialog, TextField, Tooltip } from "@mui/material";
-import { DropzoneArea } from "material-ui-dropzone";
+import {Dialog, TextField, Tooltip} from "@mui/material";
+import {DropzoneArea} from "material-ui-dropzone";
 import DisplaySynthese from "../molecules/DisplaySynthese";
 import EmptyContent from "../molecules/EmptyContent";
-import { Cached, Tune } from "@mui/icons-material";
+import {Cached, Tune} from "@mui/icons-material";
 import InputForm from "../molecules/InputForm";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import dayjs from 'dayjs';
-import { fr } from 'date-fns/locale'
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import {DesktopDatePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {fr} from 'date-fns/locale'
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 
 
 function Files() {
