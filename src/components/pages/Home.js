@@ -32,7 +32,7 @@ function Home() {
             <div className={'home-main-container'}>
                 <div className={'column'} style={{justifyContent: 'center'}}>
                     <h1 className={'home-main-title'}>Students for Students.</h1>
-                    <h2 className={'home-main-p'}>Une plateforme pour les étudiants, faites par les étudiants.</h2>
+                    <h2 className={'home-main-p'}>Une plateforme pour les étudiants, faite par les étudiants.</h2>
                     <div className={'row'}>
                         <div className={'column'}>
                             <h1 className={'home-main-key'}>{homeStore.filesCount < 9 ? `0${homeStore.filesCount}` :
