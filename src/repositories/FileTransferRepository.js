@@ -28,7 +28,6 @@ export class FileTransferRepository {
     }
 
     async deleteFile({ name }, token) {
-        console.log(name);
         const response = await this._api.deleteFileByName(name, token);
         const data = await response.json();
         if (data.isError) {

@@ -132,7 +132,6 @@ class FileTransferStore {
             }
 
             this._fileReader.readAsArrayBuffer(this.file);
-            // loadFile(this.file, console.log)
         } catch (e) {
             console.error("Error on file input listener", e);
             this._setErrors(e);
@@ -208,13 +207,11 @@ class FileTransferStore {
 
     _onLocalLoadingChanges() {
         return reaction(() => this._isLoading, (loading) => {
-            console.log("loading", loading);
             action(() => this.isLoading = loading)();
         });
     }
 
     _download(data, filename, type) {
-        console.log(data)
         try {
             this._setLoading(true);
             let file = new Blob([data], { type: type });
